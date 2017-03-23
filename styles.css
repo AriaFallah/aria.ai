@@ -6,6 +6,10 @@ html, body {
   height: 100%;
 }
 
+a {
+  display: block;
+}
+
 body {
   display: flex;
   align-items: center;
@@ -14,8 +18,8 @@ body {
 }
 
 ul {
-  padding: none;
   list-style: none;
+  padding-left: 0;
 }
 
 img {
@@ -31,6 +35,20 @@ img {
   display: flex;
 }
 
+.social a {
+  color: black;
+  text-decoration: none;
+}
+
 .social li {
   padding: 10px;
+  font-size: 1.5em;
+}
+
+.social li:first-child {
+  padding-left: 0;
+}
+
+.social li:last-child {
+  padding-right: 0;
 }
