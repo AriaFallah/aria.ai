@@ -2,22 +2,52 @@
 <html>
 <head>
   <title>Aria Fallah</title>
-  <style>
-  * {
-    margin: 0;
-  }
-  html, body {
-    height: 100%;
-  }
-  body {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-  }
-  </style>
+  <meta name="description" content="Aria Fallah's Personal Website">
+
+  <!-- misc -->
+  <meta charset="utf-8">
+  <meta http-equiv="cache-control" content="max-age=0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- mobile -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="icon" type="image/png" href="/favicon.ico?1">
 </head>
 <body>
-  <p style="font-size: 1em">🙃</p>
+  <div>
+    <img alt="profile" class="profile" src="/me.png" />
+    <ul class="social">
+      <li>
+        <a href="https://blog.aria.ai">Blog</a>
+      </li>
+      <li>
+        <a href="https://github.com/ariafallah">GitHub</a>
+      </li>
+      <li>
+        <a href="https://linkedin.com/in/ariafallah">LinkedIn</a>
+      </li>
+      <li>
+        <a href="http://stackoverflow.com/users/3772221/ar7">StackOverflow</a>
+      </li>
+      <li>
+        <a href="https://twitter.com/_AriaFallah">Twitter</a>
+      </li>
+    </ul>
+  </div>
+
+  <script>
+    if (location.hostname !== "localhost" && location.hostname !== "127.0.0.1") {
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-79031036-1', 'auto');
+      ga('send', 'pageview');
+    }
+  </script>
 </body>
 </html>

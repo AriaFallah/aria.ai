@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+ul {
+  padding: none;
+  list-style: none;
+}
+
+img {
+  display: block;
+  margin: 0 auto;
+}
+
+.profile {
+  border-radius: 50%;
+}
+
+.social {
+  display: flex;
+}
+
+.social li {
+  padding: 10px;
+}
