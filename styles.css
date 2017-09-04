@@ -10,6 +10,7 @@ body {
 
 a {
   display: block;
+  text-decoration: none;
 }
 
 body {
@@ -40,19 +41,21 @@ img {
   justify-content: center;
 }
 
-.social a {
-  text-decoration: none;
-}
-
-.social li {
+.social__link {
   padding: 10px;
   font-size: 1.5em;
 }
 
-.social li:first-child {
+.social__link:first-child {
   padding-left: 0;
 }
 
-.social li:last-child {
+.social__link:last-child {
   padding-right: 0;
+}
+
+.social__link > a > span {
+  font-size: 0;
+  line-height: 0;
+  color: transparent;
 }
