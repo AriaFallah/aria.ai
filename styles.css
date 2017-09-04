@@ -1,8 +1,10 @@
 * {
   margin: 0;
+  font-family: 'Open Sans', sans-serif;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -28,15 +30,17 @@ img {
 }
 
 .profile {
+  width: 100px;
   border-radius: 50%;
 }
 
 .social {
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .social a {
-  color: black;
   text-decoration: none;
 }
 
