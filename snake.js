@@ -13,56 +13,6 @@ const scoreEl = document.getElementById('score');
 scaleCanvas(canvas, ctx, config.width, config.height);
 document.addEventListener('keydown', move);
 
-function paint() {
-  const { height, width } = config;
-  const { interval, moves, snake } = game;
-  const { body, direction } = snake;
-  const head = body[0];
-  let { x, y } = head;
-
-  if (moves.length > 0) {
-    snake.direction = moves.shift();
-  }
-
-  if (direction === 'right') {
-    x++;
-  } else if (direction === 'left') {
-    x--;
-  } else if (direction === 'up') {
-    y--;
-  } else if (direction === 'down') {
-    y++;
-  }
-
-  if (didLose(body, config, { x, y })) {
-    clearInterval(interval);
-    game.gameOver = true;
-    return;
-  }
-
-  let tail = {};
-  if (x === game.food.x && y === game.food.y) {
-    tail = { x, y };
-    game.score++;
-    scoreEl.innerHTML = game.score;
-    game.food = createFood(config);
-  } else {
-    tail = snake.body.pop();
-    tail.x = x;
-    tail.y = y;
-  }
-  snake.body.unshift(tail);
-
-  ctx.fillStyle = 'white';
-  ctx.fillRect(0, 0, width, height);
-
-  for (const bodyCell of body) {
-    paintCell(config, ctx, bodyCell);
-  }
-
-  paintCell(config, ctx, game.food);
-}
-
 function collidingWithSelf(head, body) {
   const { x, y } = head;
 
@@ -112,7 +62,7 @@ function isOutOfBounds(config, pos) {
 }
 
 function move(e) {
-  const { gameOver, moves, snake } = game;
+  const { gameOver, moves } = game;
   if (gameOver) {
     game = createGame();
     scoreEl.innerHTML = game.score;
@@ -122,15 +72,68 @@ function move(e) {
     return;
   }
 
-  if (e.keyCode === 37 && snake.direction !== 'right') {
+  if (e.keyCode === 37) {
     moves.push('left');
-  } else if (e.keyCode === 38 && snake.direction !== 'down') {
+  } else if (e.keyCode === 38) {
     moves.push('up');
-  } else if (e.keyCode === 39 && snake.direction !== 'left') {
+  } else if (e.keyCode === 39) {
     moves.push('right');
-  } else if (e.keyCode === 40 && snake.direction !== 'up') {
+  } else if (e.keyCode === 40) {
     moves.push('down');
   }
+}
+
+function paint() {
+  const { height, width } = config;
+  const { interval, moves, snake } = game;
+  const { body, direction } = snake;
+  const head = body[0];
+  let { x, y } = head;
+
+  if (moves.length > 0) {
+    const nextDir = moves.shift();
+    if (validMove(snake.direction, nextDir)) {
+      snake.direction = nextDir;
+    }
+  }
+
+  if (direction === 'right') {
+    x++;
+  } else if (direction === 'left') {
+    x--;
+  } else if (direction === 'up') {
+    y--;
+  } else if (direction === 'down') {
+    y++;
+  }
+
+  if (didLose(body, config, { x, y })) {
+    clearInterval(interval);
+    game.gameOver = true;
+    return;
+  }
+
+  let tail = {};
+  if (x === game.food.x && y === game.food.y) {
+    tail = { x, y };
+    game.score++;
+    scoreEl.innerHTML = game.score;
+    game.food = createFood(config);
+  } else {
+    tail = snake.body.pop();
+    tail.x = x;
+    tail.y = y;
+  }
+  snake.body.unshift(tail);
+
+  ctx.fillStyle = 'white';
+  ctx.fillRect(0, 0, width, height);
+
+  for (const bodyCell of body) {
+    paintCell(config, ctx, bodyCell);
+  }
+
+  paintCell(config, ctx, game.food);
 }
 
 function paintCell(config, ctx, pos) {
@@ -170,4 +173,24 @@ function scaleCanvas(canvas, context, width, height) {
   }
 
   context.scale(ratio, ratio);
+}
+
+function validMove(curDir, nextDir) {
+  if (curDir === 'right' && nextDir === 'left') {
+    return false;
+  }
+
+  if (curDir === 'left' && nextDir === 'right') {
+    return false;
+  }
+
+  if (curDir === 'up' && nextDir === 'down') {
+    return false;
+  }
+
+  if (curDir === 'down' && nextDir === 'up') {
+    return false;
+  }
+
+  return true;
 }
