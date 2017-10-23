@@ -103,7 +103,9 @@ export default class Game {
       this.init();
       return;
     }
-    this.snake.queueMove(e.keyCode);
+    if (!e.repeat) {
+      this.snake.queueMove(e.keyCode);
+    }
   };
 
   render() {

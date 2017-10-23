@@ -60,7 +60,6 @@ export default class Frac {
     return this.numerator / this.denominator;
   }
 }
-(Frac: any).lcd = memoize(Frac.lcd);
 (Frac: any).gcd = memoize(Frac.gcd);
 
 function memoize<T: Function>(f: T): T {
