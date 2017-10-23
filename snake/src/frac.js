@@ -8,9 +8,11 @@ export default class Frac {
     if (a.denominator === b.denominator) {
       return new Frac(a.numerator + b.numerator, a.denominator);
     }
-
-    const [a1, b1] = Frac.lcd(a, b);
-    return Frac.add(a1, b1);
+    const lcd = Frac.lcd(a.denominator, b.denominator);
+    return Frac.add(
+      new Frac(a.numerator * (lcd / a.denominator), lcd),
+      new Frac(b.numerator * (lcd / b.denominator), lcd)
+    );
   }
 
   static ceil(a: Frac): Frac {
@@ -23,37 +25,30 @@ export default class Frac {
     return new Frac(a.val() % 1 === 0 ? val - 1 : Math.floor(val), 1);
   }
 
-  static lcd(a: Frac, b: Frac): [Frac, Frac] {
-    const f1 = factors(a.denominator);
-    const f2 = factors(b.denominator);
+  static lcd(a: number, b: number): number {
+    return a * b / Frac.gcd(a, b);
+  }
 
-    let aMul = b.denominator;
-    let bMul = a.denominator;
-    let minD = a.denominator * b.denominator;
-
-    for (const factor of Object.keys(f1)) {
-      if (f2[factor]) {
-        const newD = a.denominator * f2[factor];
-        if (newD < minD) {
-          minD = newD;
-          aMul = f2[factor];
-          bMul = f1[factor];
-        }
+  static gcd(a: number, b: number): number {
+    while (b != 0) {
+      if (a > b) {
+        a = a - b;
+      } else {
+        b = b - a;
       }
     }
-
-    const a1 = new Frac(a.numerator * aMul, minD);
-    const b1 = new Frac(b.numerator * bMul, minD);
-    return [a1, b1];
+    return a;
   }
 
   static sub(a: Frac, b: Frac): Frac {
     if (a.denominator === b.denominator) {
       return new Frac(a.numerator - b.numerator, a.denominator);
     }
-
-    const [a1, b1] = Frac.lcd(a, b);
-    return Frac.sub(a1, b1);
+    const lcd = Frac.lcd(a.denominator, b.denominator);
+    return Frac.sub(
+      new Frac(a.numerator * (lcd / a.denominator), lcd),
+      new Frac(b.numerator * (lcd / b.denominator), lcd)
+    );
   }
 
   constructor(n: number, d: number) {
@@ -65,20 +60,21 @@ export default class Frac {
     return this.numerator / this.denominator;
   }
 }
+(Frac: any).lcd = memoize(Frac.lcd);
+(Frac: any).gcd = memoize(Frac.gcd);
 
-const mem = {};
-function factors(x: number): Object {
-  if (mem[x]) {
-    return mem[x];
-  }
+function memoize<T: Function>(f: T): T {
+  const cache = {};
 
-  const f = {};
-  for (let i = 2; i <= x; ++i) {
-    if (x % i === 0 && !f[x / i]) {
-      f[i] = x / i;
+  function m(...args) {
+    const k = JSON.stringify(args);
+    if (cache[k]) {
+      return cache[k];
     }
+    const result = f(...args);
+    cache[k] = result;
+    return result;
   }
 
-  mem[x] = f;
-  return f;
+  return ((m: any): T);
 }
