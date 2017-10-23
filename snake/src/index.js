@@ -5,12 +5,15 @@ import Game from './game';
 import { scaleCanvas } from './util';
 import type { Config, Pos, Direction } from './types';
 
+const { clientHeight, clientWidth } = (document.body: any);
+const size = Math.min(clientHeight, clientWidth) * 0.75;
+
 const config: Config = {
   cellWidth: 10,
-  height: (document.body: any).clientHeight * 0.5,
+  height: size,
   snakeColor: '#0074D9',
-  speed: new Frac(3, 10),
-  width: (document.body: any).clientWidth * 0.5,
+  speed: new Frac(1, 10),
+  width: size,
 };
 
 const canvas: HTMLCanvasElement = (document.getElementById('canvas'): any);

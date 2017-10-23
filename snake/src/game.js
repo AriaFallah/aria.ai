@@ -66,16 +66,24 @@ export default class Game {
   ctx: CanvasRenderingContext2D;
   food: Pos;
   gameOver: boolean;
+  highScoreElement: HTMLElement;
+  highScore: number;
   interval: number;
   score: number;
   scoreElement: HTMLElement;
   snake: Snake;
+  speed: Frac;
+  speedup: Frac;
 
   constructor(config: Config, ctx: CanvasRenderingContext2D) {
     this.config = config;
     this.ctx = ctx;
+    this.highScore = parseInt(localStorage.getItem('highScore')) || 0;
+    this.highScoreElement = nullThrows(document.getElementById('high-score'));
     this.scoreElement = nullThrows(document.getElementById('score'));
     this.init();
+    this.highScoreElement.innerHTML = `${this.highScore}`;
+    this.speedup = new Frac(1, this.config.speed.denominator * 10);
   }
 
   init(): void {
@@ -83,8 +91,9 @@ export default class Game {
     this.gameOver = false;
     this.setScore(0);
     this.snake = new Snake();
+    this.speed = this.config.speed;
     this.interval = setInterval(() => {
-      this.update(this.config.speed);
+      this.update(this.speed);
       this.render();
     }, 16);
   }
@@ -116,6 +125,11 @@ export default class Game {
   setScore(newScore: number): void {
     this.score = newScore;
     this.scoreElement.innerHTML = `${this.score}`;
+    if (this.score > this.highScore) {
+      this.highScore = this.score;
+      this.highScoreElement.innerHTML = `${this.highScore}`;
+      localStorage.setItem('highScore', `${this.highScore}`);
+    }
   }
 
   update(speed: Frac): void {
@@ -189,6 +203,7 @@ export default class Game {
       this.setScore(this.score + 1);
       this.food = createFood(this.config);
       this.snake.body.push({ didPivot: false, direction, x, y });
+      this.speed = Frac.add(this.speed, this.speedup);
     }
   }
 }
