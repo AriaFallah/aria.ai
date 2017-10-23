@@ -1,5 +1,6 @@
 // @flow
 
+import Frac from './frac';
 import type { Config, Direction, Pos, Segment } from './types';
 
 export function createFood(config: Config) {
@@ -11,7 +12,10 @@ export function createFood(config: Config) {
 }
 
 export function didLose(body: Array<Segment>, config: Config, head: Segment) {
-  return isOutOfBounds(config, head) || collidingWithSelf(head, body);
+  return (
+    isOutOfBounds(config, { x: head.x.val(), y: head.y.val() }) ||
+    collidingWithSelf(head, body)
+  );
 }
 
 export function nullThrows<T>(x: ?T): T {
@@ -86,14 +90,14 @@ function collidingWithSelf(head: Segment, body: Array<Segment>) {
   const { x, y } = head;
 
   for (const bodyCell of body.slice(1)) {
-    if (x === bodyCell.x && y === bodyCell.y) {
+    if (x.val() === bodyCell.x.val() && y.val() === bodyCell.y.val()) {
       return true;
     }
   }
   return false;
 }
 
-function isOutOfBounds(config, pos) {
+function isOutOfBounds(config: Config, pos: Pos) {
   const { x, y } = pos;
   const { width, height, cellWidth } = config;
   return x < 0 || y < 0 || x >= width / cellWidth || y >= height / cellWidth;

@@ -1,5 +1,6 @@
 // @flow
 
+import Frac from './frac';
 import Game from './game';
 import { scaleCanvas } from './util';
 import type { Config, Pos, Direction } from './types';
@@ -8,7 +9,7 @@ const config: Config = {
   cellWidth: 10,
   height: (document.body: any).clientHeight * 0.5,
   snakeColor: '#0074D9',
-  speed: 1 / 16,
+  speed: new Frac(3, 10),
   width: (document.body: any).clientWidth * 0.5,
 };
 

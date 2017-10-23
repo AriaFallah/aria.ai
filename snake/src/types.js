@@ -1,12 +1,12 @@
 // @flow
 
-type Exact<T> = T & $Shape<T>;
+import Frac from './frac';
 
 export type Config = {|
   cellWidth: number,
   height: number,
   snakeColor: string,
-  speed: number,
+  speed: Frac,
   width: number,
 |};
 
@@ -18,8 +18,8 @@ export type Pos = {
 };
 
 export type Segment = {
-  x: number,
-  y: number,
+  x: Frac,
+  y: Frac,
   didPivot: boolean,
   direction: Direction,
 };
