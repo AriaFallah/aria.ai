@@ -1,5 +1,6 @@
 // @flow
 
+import Hammer from 'hammerjs';
 import Frac from './frac';
 import type { Config, Direction, Pos, Segment } from './types';
 import {
@@ -24,7 +25,7 @@ class Snake {
     .reverse();
   moves: Array<Direction> = [];
 
-  queueMove(keycode: number): void {
+  queueMove(nextDir: Direction): void {
     if (this.moves.length >= 3) {
       return;
     }
@@ -33,29 +34,8 @@ class Snake {
         ? this.moves[this.moves.length - 1]
         : this.body[0].direction;
 
-    switch (keycode) {
-      case 37:
-        if (validMove(curDir, 'left')) {
-          this.moves.push('left');
-        }
-        break;
-      case 38:
-        if (validMove(curDir, 'up')) {
-          this.moves.push('up');
-        }
-        break;
-      case 39:
-        if (validMove(curDir, 'right')) {
-          this.moves.push('right');
-        }
-        break;
-      case 40:
-        if (validMove(curDir, 'down')) {
-          this.moves.push('down');
-        }
-        break;
-      default:
-        return;
+    if (validMove(curDir, nextDir)) {
+      this.moves.push(nextDir);
     }
   }
 }
@@ -98,20 +78,29 @@ export default class Game {
     }, 16);
   }
 
-  onKeyDown = (e: KeyboardEvent): void => {
+  onEvent = (e: Object): void => {
     if (this.gameOver) {
       this.init();
       return;
     }
-    if (!e.repeat) {
-      this.snake.queueMove(e.keyCode);
+    let dir = null;
+    if (e instanceof KeyboardEvent) {
+      if (!e.repeat) {
+        dir = getDirection(e.keyCode);
+      }
+    } else {
+      dir = getDirection(e.direction);
+    }
+
+    if (dir) {
+      this.snake.queueMove(dir);
     }
   };
 
   render() {
     const { height, width } = this.config;
 
-    this.ctx.fillStyle = 'white';
+    this.ctx.fillStyle = 'black';
     this.ctx.fillRect(0, 0, width, height);
 
     for (const bodyCell of this.snake.body) {
@@ -207,5 +196,24 @@ export default class Game {
       this.snake.body.push({ didPivot: false, direction, x, y });
       this.speed = Frac.add(this.speed, this.speedup);
     }
+  }
+}
+
+function getDirection(code: number): ?Direction {
+  switch (code) {
+    case Hammer.DIRECTION_LEFT:
+    case 37:
+      return 'left';
+    case Hammer.DIRECTION_UP:
+    case 38:
+      return 'up';
+    case Hammer.DIRECTION_RIGHT:
+    case 39:
+      return 'right';
+    case Hammer.DIRECTION_DOWN:
+    case 40:
+      return 'down';
+    default:
+      return null;
   }
 }

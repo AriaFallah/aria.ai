@@ -17,8 +17,11 @@
   "name": "aria.ai",
   "private": true,
   "scripts": {
-    "dev": "webpack-dev-server --config webpack.config.dev.js",
+    "dev": "webpack-dev-server --config webpack.config.dev.js --host 0.0.0.0",
     "build": "webpack --config webpack.config.prod.js"
   },
-  "version": "1.0.0"
+  "version": "1.0.0",
+  "dependencies": {
+    "hammerjs": "^2.0.8"
+  }
 }
