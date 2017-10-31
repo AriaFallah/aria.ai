@@ -15,7 +15,7 @@ const config: Config = {
   cellWidth: 10,
   height: size,
   snakeColor: '#fff',
-  speed: new Frac(1, 10),
+  speed: new Frac(2, 10),
   width: size,
 };
 
