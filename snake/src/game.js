@@ -12,13 +12,11 @@ import {
   validMove,
 } from './util';
 
-const ONE = new Frac(1, 1);
-
 class Snake {
   body: Array<Segment> = seq(5)
     .map(i => ({
-      x: new Frac(i, 1),
-      y: new Frac(0, 1),
+      x: new Frac(i),
+      y: new Frac(0),
       didPivot: false,
       direction: 'right',
     }))
@@ -41,7 +39,7 @@ class Snake {
 }
 
 export default class Game {
-  accumulator: Frac = new Frac(0, 1);
+  accumulator: Frac = new Frac(0);
   config: Config;
   ctx: CanvasRenderingContext2D;
   food: Pos;
@@ -63,7 +61,7 @@ export default class Game {
     this.scoreElement = nullThrows(document.getElementById('score'));
     this.init();
     this.highScoreElement.innerHTML = `${this.highScore}`;
-    this.speedup = new Frac(1, this.config.speed.denominator * 10);
+    this.speedup = new Frac(Math.floor(this.config.speed.val() / 100));
   }
 
   init(): void {
@@ -124,7 +122,9 @@ export default class Game {
   }
 
   update(speed: Frac): void {
-    const { height, width } = this.config;
+    const { cellWidth, height, width } = this.config;
+    const logicalWidth = Math.floor(width / cellWidth);
+    const logicalHeight = Math.floor(height / cellWidth);
 
     this.accumulator = Frac.add(this.accumulator, speed);
     for (let i = this.snake.body.length - 1; i >= 0; --i) {
@@ -150,6 +150,18 @@ export default class Game {
         }
       }
 
+      if (this.snake.body[i].x.val() === logicalWidth + 1) {
+        this.snake.body[i].x = new Frac(-1);
+      } else if (this.snake.body[i].x.val() === -1) {
+        this.snake.body[i].x = new Frac(logicalWidth + 1);
+      }
+
+      if (this.snake.body[i].y.val() === logicalHeight + 1) {
+        this.snake.body[i].y = new Frac(-1);
+      } else if (this.snake.body[i].y.val() === -1) {
+        this.snake.body[i].y = new Frac(logicalHeight + 1);
+      }
+
       if (
         this.accumulator.val() >= 1 &&
         i !== 0 &&
@@ -161,7 +173,15 @@ export default class Game {
       }
     }
 
-    if (this.accumulator.val() >= 1 && this.snake.moves.length > 0) {
+    const head = this.snake.body[0];
+    if (
+      this.accumulator.val() >= 1 &&
+      this.snake.moves.length > 0 &&
+      head.x.val() < logicalWidth &&
+      head.x.val() >= 0 &&
+      head.y.val() < logicalHeight &&
+      head.y.val() >= 0
+    ) {
       this.snake.body[0].direction = this.snake.moves.shift();
       this.snake.body[0].didPivot = true;
     }
@@ -169,7 +189,7 @@ export default class Game {
     if (this.accumulator.val() < 1) {
       return;
     }
-    this.accumulator = new Frac(0, 1);
+    this.accumulator = new Frac(0);
 
     if (didLose(this.snake.body, this.config, this.snake.body[0])) {
       this.gameOver = true;
@@ -183,13 +203,13 @@ export default class Game {
     ) {
       let { direction, x, y } = this.snake.body[this.snake.body.length - 1];
       if (direction === 'right') {
-        x = Frac.sub(x, ONE);
+        x = Frac.sub(x, new Frac(1));
       } else if (direction === 'left') {
-        x = Frac.add(x, ONE);
+        x = Frac.add(x, new Frac(1));
       } else if (direction === 'up') {
-        y = Frac.add(y, ONE);
+        y = Frac.add(y, new Frac(1));
       } else if (direction === 'down') {
-        y = Frac.sub(y, ONE);
+        y = Frac.sub(y, new Frac(1));
       }
       this.setScore(this.score + 1);
       this.food = createFood(this.config);

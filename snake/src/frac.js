@@ -51,7 +51,7 @@ export default class Frac {
     );
   }
 
-  constructor(n: number, d: number) {
+  constructor(n: number, d?: number = 1) {
     this.numerator = n;
     this.denominator = d;
   }

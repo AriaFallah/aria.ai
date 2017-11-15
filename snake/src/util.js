@@ -12,10 +12,7 @@ export function createFood(config: Config) {
 }
 
 export function didLose(body: Array<Segment>, config: Config, head: Segment) {
-  return (
-    isOutOfBounds(config, { x: head.x.val(), y: head.y.val() }) ||
-    collidingWithSelf(head, body)
-  );
+  return collidingWithSelf(head, body);
 }
 
 export function nullThrows<T>(x: ?T): T {

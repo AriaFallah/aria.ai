@@ -7,16 +7,17 @@ import { scaleCanvas } from './util';
 import type { Config, Pos, Direction } from './types';
 
 const { clientHeight, clientWidth } = (document.body: any);
-const size =
-  Math.ceil(Math.min(clientHeight, clientWidth) * 0.75 / 10 + 1) * 10;
+const size = Math.round(Math.min(clientHeight, clientWidth) * 0.75);
+const cellWidth = Math.round(size / 25);
+const roundedSize = Math.ceil(size / cellWidth + 1) * cellWidth;
 
 // Global config
 const config: Config = {
-  cellWidth: 10,
-  height: size,
+  cellWidth,
+  height: roundedSize,
   snakeColor: '#fff',
-  speed: new Frac(2, 10),
-  width: size,
+  speed: new Frac(1, 10),
+  width: roundedSize,
 };
 
 // Set up canvas
