@@ -59,3 +59,7 @@ img {
   line-height: 0;
   color: transparent;
 }
+
+.play img {
+  width: 30px;
+}
