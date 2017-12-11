@@ -1,16 +1,17 @@
 * {
   margin: 0;
-  font-family: 'Open Sans', sans-serif;
+  box-sizing: border-box;
+}
+
+html {
+  font: 100%/1.45em 'georgia', serif;
 }
 
 html,
 body {
   height: 100%;
-}
-
-a {
-  display: block;
-  text-decoration: none;
+  width: 800px;
+  margin: 0 auto;
 }
 
 body {
@@ -20,46 +21,55 @@ body {
   flex-direction: column;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 1.45rem;
+  font-family: -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  font-weight: bold;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  display: block;
+  text-decoration: none;
+  color: rgba(26, 13, 171, 0.85);
+  border-bottom: 2px solid rgba(26, 13, 171, 0.85);
+}
+
+a:visited {
+  color: rgba(102, 0, 153, 0.8) !important;
+  border-bottom: 2px solid rgba(102, 0, 153, 0.8);
+}
+
+p > a {
+  display: inline;
+}
+
 ul {
   list-style: none;
   padding-left: 0;
 }
 
-img {
-  display: block;
-  margin: 0 auto;
-}
-
-.profile {
-  width: 100px;
-  border-radius: 50%;
-}
-
 .social {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-content: center;
+  margin: 15px 0;
 }
 
-.social__link {
-  padding: 10px;
-  font-size: 1.5em;
+.social a {
+  padding-right: 20px;
+  border-bottom: none;
 }
-
-.social__link:first-child {
-  padding-left: 0;
-}
-
-.social__link:last-child {
+.social a:last-child {
   padding-right: 0;
 }
 
-.social__link > a > span {
-  font-size: 0;
-  line-height: 0;
-  color: transparent;
-}
-
-.play img {
-  width: 30px;
+.social img {
+  width: 25px;
 }
