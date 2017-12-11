@@ -10,15 +10,16 @@ html {
 html,
 body {
   height: 100%;
-  width: 800px;
   margin: 0 auto;
 }
 
 body {
+  max-width: 800px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  padding: 1em;
 }
 
 h1,
