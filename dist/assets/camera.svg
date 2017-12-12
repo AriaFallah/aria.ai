@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-labelledby="title"
+aria-describedby="desc" role="img" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <title>Camera</title>
+  <desc>A color styled icon from Orion Icon Library.</desc>
+  <path data-name="layer4"
+  d="M59 17H46.6L40 9H24l-6.6 8H5a3 3 0 0 0-3 3v30a3 3 0 0 0 3 3h54a3 3 0 0 0 3-3V20a3 3 0 0 0-3-3z"
+  fill="#7b8baf"></path>
+  <circle data-name="layer2" cx="54" cy="25" r="1" fill="#78d1f4"></circle>
+  <path data-name="layer3" d="M32 19a14 14 0 1 0 14 14 14 14 0 0 0-14-14z"
+  fill="#8fa9d8"></path>
+  <path data-name="opacity" d="M32 47a14 14 0 0 1-11.7-21.7 14 14 0 1 0 19.4 19.4A13.9 13.9 0 0 1 32 47z"
+  fill="#000064" opacity=".2"></path>
+  <circle data-name="layer2" cx="32" cy="33" r="6" fill="#78d1f4"></circle>
+  <circle data-name="layer1" cx="33" cy="32" r="2" fill="#fff"></circle>
+  <path data-name="stroke" d="M59 17H46.6L40 9H24l-6.6 8H5a3 3 0 0 0-3 3v30a3 3 0 0 0 3 3h54a3 3 0 0 0 3-3V20a3 3 0 0 0-3-3z"
+  fill="none" stroke="#2e4369" stroke-linecap="round" stroke-miterlimit="10"
+  stroke-width="2" stroke-linejoin="miter"></path>
+  <circle data-name="stroke" cx="32" cy="33" r="14" fill="none" stroke="#2e4369"
+  stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke-linejoin="miter"></circle>
+  <circle data-name="stroke" cx="54" cy="25" r="1" fill="none"
+  stroke="#2e4369" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"
+  stroke-linejoin="miter"></circle>
+  <circle data-name="stroke" cx="32" cy="33" r="6" fill="none"
+  stroke="#2e4369" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"
+  stroke-linejoin="miter"></circle>
+</svg>

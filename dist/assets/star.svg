@@ -1,0 +1,19 @@
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-labelledby="title"
+aria-describedby="desc" role="img" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <title>Star Medal</title>
+  <desc>A color styled icon from Orion Icon Library.</desc>
+  <path d="M50.973 1H11v12h39.996l-.023-12z"
+  fill="#64738f" data-name="layer3"></path>
+  <path fill="#f2605c" d="M47 23c1.947-1.947 4-4 4-8v-2H11v2c0 4 2.037 6.055 3.986 8L28.2 36.218l2.79-5.654 2.884 5.845.044-.041z"
+  data-name="layer2"></path>
+  <path d="M46.986 42.189L35.93 40.583l-2.06-4.174-2.884-5.845-2.789 5.654-2.154 4.365-11.057 1.606 8 7.799-1.888 11.01 9.888-5.198 9.889 5.198-1.889-11.01 8-7.799z"
+  fill="#fc6" data-name="layer1"></path>
+  <path opacity=".15" data-name="opacity" d="M33.986 52.8l-9.888 5.198 1.888-11.01-5.711-5.567-5.289.768 8 7.799-1.888 11.01 9.888-5.198 9.889 5.198-.863-5.031-6.026-3.167zM18 1h-7v14c0 4 2.037 6.055 3.986 8L28.2 36.218l1.673-3.392C26.753 28.67 18 16.986 18 16z"
+  fill="#000064"></path>
+  <path stroke-width="2" stroke-linejoin="miter" stroke-linecap="round"
+  stroke="#2e4369" fill="none" d="M33.912 36.368L47 23c1.947-1.947 4-4 4-8l-.027-14h-40v14c0 4 2.051 6.055 4 8l13.246 13.247M10.973 13.002h40"
+  data-name="stroke"></path>
+  <path d="M30.986 55.8l-9.888 5.198 1.888-11.01-8-7.799 11.057-1.606 4.943-10.019 4.944 10.019 11.056 1.606-8 7.799 1.889 11.01-9.889-5.198z"
+  stroke-width="2" stroke-linejoin="miter" stroke-linecap="round" stroke="#2e4369"
+  fill="none" data-name="stroke"></path>
+</svg>

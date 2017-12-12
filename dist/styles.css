@@ -15,10 +15,6 @@ body {
 
 body {
   max-width: 800px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
   padding: 1em;
 }
 
@@ -28,7 +24,7 @@ h3,
 h4,
 h5,
 h6 {
-  margin-bottom: 1.45rem;
+  margin-bottom: 1rem;
   font-family: -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto',
     'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -36,8 +32,11 @@ h6 {
   text-rendering: optimizeLegibility;
 }
 
+h1 {
+  font-size: 2em;
+}
+
 a {
-  display: block;
   text-decoration: none;
   color: rgba(26, 13, 171, 0.85);
   border-bottom: 2px solid rgba(26, 13, 171, 0.85);
@@ -48,13 +47,37 @@ a:visited {
   border-bottom: 2px solid rgba(102, 0, 153, 0.8);
 }
 
-p > a {
-  display: inline;
+img {
+  width: 25px;
+  vertical-align: middle;
+}
+
+span {
+  vertical-align: middle;
+}
+
+section {
+  margin-bottom: 2.3em;
+}
+
+p {
+  margin-bottom: 1em;
+}
+
+li {
+  padding-top: 0.2em;
 }
 
 ul {
-  list-style: none;
-  padding-left: 0;
+  margin-left: 1em;
+}
+
+section > section {
+  margin-left: 1.45em;
+}
+
+section > h3 {
+  margin-bottom: 0.5em;
 }
 
 .social {
@@ -71,6 +94,6 @@ ul {
   padding-right: 0;
 }
 
-.social img {
-  width: 25px;
+.play a {
+  border-bottom: none;
 }

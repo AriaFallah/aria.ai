@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-labelledby="title"
+aria-describedby="desc" role="img" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <title>Info Help</title>
+  <desc>A color styled icon from Orion Icon Library.</desc>
+  <circle data-name="layer1"
+  cx="32" cy="32" r="30" fill="#49bcff"></circle>
+  <path data-name="opacity" d="M36 58A30 30 0 0 1 12.882 8.881 30 30 0 1 0 55.118 51.12 29.883 29.883 0 0 1 36 58z"
+  fill="#000028" opacity=".15"></path>
+  <circle data-name="stroke" cx="32" cy="32" r="30" fill="none" stroke="#2e4369"
+  stroke-linecap="round" stroke-linejoin="miter" stroke-width="2"></circle>
+  <path data-name="stroke" fill="none" stroke="#2e4369" stroke-linecap="round"
+  stroke-linejoin="miter" stroke-width="2" d="M28 26h4v22m-4 .008h8"></path>
+  <circle data-name="stroke" cx="31" cy="19" r="2" fill="none" stroke="#2e4369"
+  stroke-linecap="round" stroke-linejoin="miter" stroke-width="2"></circle>
+</svg>
