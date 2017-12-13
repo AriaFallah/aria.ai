@@ -15,6 +15,9 @@ body {
 
 body {
   max-width: 800px;
+}
+
+main {
   padding: 1em;
 }
 
@@ -68,8 +71,12 @@ li {
   padding-top: 0.2em;
 }
 
-ul {
+section > ul {
   margin-left: 1em;
+}
+
+ul ul {
+  padding-left: 1em;
 }
 
 section > section {
