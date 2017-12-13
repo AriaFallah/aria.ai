@@ -97,3 +97,7 @@ section > h3 {
 .play a {
   border-bottom: none;
 }
+
+h1 a {
+  border-bottom: none;
+}
