@@ -67,24 +67,8 @@ p {
   margin-bottom: 1em;
 }
 
-li {
-  padding-top: 0.2em;
-}
-
-section > ul {
-  margin-left: 1em;
-}
-
-ul ul {
-  padding-left: 1em;
-}
-
-section > section {
-  margin-left: 1.45em;
-}
-
-section > h3 {
-  margin-bottom: 0.5em;
+ul > li {
+  margin-bottom: 0.2em;
 }
 
 .social {
