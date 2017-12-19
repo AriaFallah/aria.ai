@@ -4,7 +4,9 @@
 }
 
 html {
-  font: 100%/1.45em 'georgia', serif;
+  font-family: 'Source Serif Pro', serif;
+  font-size: 100%;
+  line-height: 1.45em;
 }
 
 html,
