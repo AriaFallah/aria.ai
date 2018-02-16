@@ -2,7 +2,6 @@ import * as fs from 'fs-extra';
 import * as path from 'path';
 import * as util from 'util';
 import * as MarkdownIt from 'markdown-it';
-import * as yaml from 'js-yaml';
 import * as React from 'react';
 import { Prism } from './prism';
 import { makePage } from './util';

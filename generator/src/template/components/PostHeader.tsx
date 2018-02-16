@@ -10,12 +10,12 @@ export class PostHeader extends React.Component<Props> {
     const { frontMatter } = this.props;
     return (
       <header className="post-header">
-        <h2>
+        <h1>
           <a href={`/blog/posts/${frontMatter.slug}.html`}>
             {frontMatter.title}
           </a>
-        </h2>
-        <h5>{frontMatter.description}</h5>
+        </h1>
+        <h4>{frontMatter.description}</h4>
         <time>{frontMatter.date.toDateString()}</time>
       </header>
     );

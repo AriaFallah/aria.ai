@@ -12,14 +12,14 @@ body {
   flex-direction: column;
   height: 100%;
   margin: 0;
-  color: rgba(0, 0, 0, 0.9);
+  color: rgba(0, 0, 0, 0.85);
   word-wrap: break-word;
   font-kerning: normal;
-  background-color: #f7f7f7;
+  background-color: #fcfcfc;
 }
 
 h1 {
-  font-size: 2em;
+  font-size: 1.5em;
 }
 
 h1,
@@ -28,9 +28,15 @@ h3,
 h4,
 h5,
 h6 {
-  margin-bottom: 1.45rem;
+  margin-top: 0;
+  line-height: 1.25em;
+  margin-bottom: 0.75rem;
   font-weight: bold;
   text-rendering: optimizeLegibility;
+}
+
+hr {
+  border: 1px solid #ddd;
 }
 
 a {
@@ -49,7 +55,7 @@ a:hover {
   outline-width: 0;
 }
 
-h2 a {
+.post-header a {
   border-bottom: none;
 }
 
@@ -59,7 +65,7 @@ code {
 }
 
 blockquote {
-  color: #888;
+  color: #777;
   border-left: 0.25em solid #ddd;
   padding: 0 1em;
   margin-left: 0;
@@ -111,9 +117,9 @@ span.line-number::before {
 
 .content {
   display: block;
-  max-width: 850px;
+  max-width: 800px;
   margin: 0 auto;
-  padding: 10px;
+  padding: 1em;
   width: 100%;
   flex: 1 0 auto;
 }
@@ -128,10 +134,9 @@ span.line-number::before {
   margin-bottom: 1em;
 }
 
-.post-header h2,
-.post-header h5 {
+.post-header h1,
+.post-header h4 {
   margin: 0;
-  line-height: 1.25em !important;
 }
 
 .article-preview {

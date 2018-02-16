@@ -13,7 +13,7 @@ export class Home extends React.Component<Props> {
           <title>Aria's Website</title>
         </Helmet>
 
-        <h1>Aria Fallah</h1>
+        <h1 style={{fontSize: '2em'}}>Aria Fallah</h1>
         <section className="social">
           <a href="https://github.com/ariafallah">
             <img src="/assets/icons/github.svg" alt="github logo" />
@@ -86,12 +86,12 @@ export class Home extends React.Component<Props> {
           </h2>
           <ul>
             <li>
-              Download them from{' '}
-              <a href="https://unsplash.com/@m0meni">Unsplash.</a>
-            </li>
-            <li>
               Like them on{' '}
               <a href="https://www.instagram.com/m0meni/">Instagram.</a>
+            </li>
+            <li>
+              Download them from{' '}
+              <a href="https://unsplash.com/@m0meni">Unsplash.</a>
             </li>
           </ul>
         </section>
