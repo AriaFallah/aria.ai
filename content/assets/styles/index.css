@@ -1,0 +1,148 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font: 100%/1.45em 'Source Serif Pro', serif;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+  color: rgba(0, 0, 0, 0.9);
+  word-wrap: break-word;
+  font-kerning: normal;
+  background-color: #f7f7f7;
+}
+
+h1 {
+  font-size: 2em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-bottom: 1.45rem;
+  font-weight: bold;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: rgba(26, 13, 171, 0.85);
+  text-decoration: none;
+  border-bottom: 2px solid rgba(26, 13, 171, 0.85);
+}
+
+a:visited {
+  color: rgba(102, 0, 153, 0.8) !important;
+  border-bottom: 2px solid rgba(102, 0, 153, 0.8);
+}
+
+a:active,
+a:hover {
+  outline-width: 0;
+}
+
+h2 a {
+  border-bottom: none;
+}
+
+code {
+  font-family: 'Fira Mono', monospace !important;
+  font-size: 14px;
+}
+
+blockquote {
+  color: #888;
+  border-left: 0.25em solid #ddd;
+  padding: 0 1em;
+  margin-left: 0;
+}
+
+pre {
+  margin-left: 1.45em;
+  counter-reset: line;
+  overflow-x: auto;
+}
+
+span.line-number::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  padding: 0 0.5em;
+  margin-right: 0.5em;
+  color: #888;
+}
+
+.post-header {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.nav {
+  display: flex;
+  height: 60px;
+  align-items: center;
+}
+
+.nav a {
+  color: rgba(26, 13, 171, 0.85) !important;
+  margin-right: 1em;
+  border-bottom: 0;
+}
+
+.nav a.active {
+  background-color: black;
+  color: white !important;
+  padding-left: 5px;
+  padding-right: 8px;
+  font-style: italic;
+}
+
+.nav a img {
+  width: 30px;
+  margin-bottom: 0;
+}
+
+.content {
+  display: block;
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 10px;
+  width: 100%;
+  flex: 1 0 auto;
+}
+
+.footer {
+  flex-shrink: 0;
+  padding-left: 1em;
+  padding-bottom: 1em;
+}
+
+.post-header {
+  margin-bottom: 1em;
+}
+
+.post-header h2,
+.post-header h5 {
+  margin: 0;
+  line-height: 1.25em !important;
+}
+
+.article-preview {
+  margin-bottom: 2em;
+}
+
+.social a {
+  border-bottom: none;
+}
+
+.social a img {
+  width: 25px;
+  margin-right: 1em;
+}

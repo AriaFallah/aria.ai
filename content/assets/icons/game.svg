@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-labelledby="title"
+aria-describedby="desc" role="img" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <title>Gamepad</title>
+  <desc>A color styled icon from Orion Icon Library.</desc>
+  <path data-name="layer2"
+  fill="#d7e0f1" d="M2 34h60v28H2z"></path>
+  <circle data-name="layer1" cx="48" cy="42" r="2" fill="#f25b7c"></circle>
+  <circle data-name="layer1" cx="42" cy="48" r="2" fill="#f25b7c"></circle>
+  <circle data-name="layer1" cx="54" cy="48" r="2" fill="#f25b7c"></circle>
+  <circle data-name="layer1" cx="48" cy="54" r="2" fill="#f25b7c"></circle>
+  <circle data-name="opacity" cx="46" cy="44" r="2" fill="#000064"
+  opacity=".15"></circle>
+  <circle data-name="opacity" cx="40" cy="50" r="2" fill="#000064"
+  opacity=".15"></circle>
+  <circle data-name="opacity" cx="52" cy="50" r="2" fill="#000064"
+  opacity=".15"></circle>
+  <circle data-name="opacity" cx="46" cy="56" r="2" fill="#000064"
+  opacity=".15"></circle>
+  <path data-name="opacity" fill="#000064" opacity=".15" d="M2 34h5v28H2z"></path>
+  <path data-name="stroke" fill="none" stroke="#2e4369" stroke-linecap="round"
+  stroke-linejoin="miter" stroke-width="2" d="M2 34h60v28H2z"></path>
+  <circle data-name="stroke" cx="48" cy="42" r="2" fill="none" stroke="#2e4369"
+  stroke-linecap="round" stroke-linejoin="miter" stroke-width="2"></circle>
+  <circle data-name="stroke" cx="42" cy="48" r="2" fill="none"
+  stroke="#2e4369" stroke-linecap="round" stroke-linejoin="miter" stroke-width="2"></circle>
+  <circle data-name="stroke" cx="54" cy="48" r="2" fill="none"
+  stroke="#2e4369" stroke-linecap="round" stroke-linejoin="miter" stroke-width="2"></circle>
+  <circle data-name="stroke" cx="48" cy="54" r="2" fill="none"
+  stroke="#2e4369" stroke-linecap="round" stroke-linejoin="miter" stroke-width="2"></circle>
+  <path data-name="stroke" fill="none" stroke="#2e4369" stroke-linecap="round"
+  stroke-linejoin="miter" stroke-width="2" d="M14 42v12m-6-6h12m12-14v-7a9 9 0 0 1 9-9h5a8 8 0 0 0 8-8V2"></path>
+</svg>

@@ -1,0 +1,25 @@
+{
+  "name": "generator",
+  "version": "1.0.0",
+  "dependencies": {
+    "fs-extra": "^4.0.3",
+    "html-minifier": "^3.5.7",
+    "markdown-it": "^8.4.0",
+    "prismjs": "^1.9.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-helmet": "^5.2.0",
+    "typescript": "^2.6.2"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^4.0.5",
+    "@types/html-minifier": "^1.1.30",
+    "@types/markdown-it": "^0.0.4",
+    "@types/node": "^8.0.53",
+    "@types/prismjs": "^1.6.5",
+    "@types/react": "^16.0.25",
+    "@types/react-dom": "^16.0.3",
+    "@types/react-helmet": "^5.0.3"
+  },
+  "private": true
+}
