@@ -65,7 +65,7 @@ export class Home extends React.Component<Props> {
               </li>
               <li>
                 A{' '}
-                <a href="https://github.com/AriaFallah/blog/tree/master/generator">
+                <a href="https://github.com/AriaFallah/aria.ai/tree/master/generator">
                   static site generator
                 </a>{' '}
                 built on top of React and written in TypeScript.

@@ -46,7 +46,7 @@ async function main() {
   fs.copySync(ASSETS_SRC_DIR, ASSETS_OUT_DIR);
 
   const indexCSS = fs.readFileSync(
-    path.join(ASSETS_SRC_DIR, 'styles', 'index.css'),
+    path.join(__dirname, 'template', 'styles', 'index.css'),
     'utf8'
   );
 
