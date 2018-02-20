@@ -44,7 +44,7 @@ export class Site extends React.Component<Props> {
         </div>
 
         <footer className="footer">
-          <div>Aria Fallah ©</div>
+          <div>Aria Fallah <a href="/snake.html">©</a></div>
           <div>All Rights Reserved - {CURRENT_YEAR}</div>
         </footer>
       </>

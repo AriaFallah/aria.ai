@@ -143,11 +143,19 @@ span.line-number::before {
   margin-bottom: 2em;
 }
 
+.social {
+  margin-bottom: 1em;
+}
+
 .social a {
   border-bottom: none;
+  margin-right: 1em;
+}
+
+.social a:last-child {
+  margin-right: 0;
 }
 
 .social a img {
   width: 25px;
-  margin-right: 1em;
 }

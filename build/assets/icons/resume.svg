@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" aria-labelledby="title"
+aria-describedby="desc" role="img" xmlns:xlink="http://www.w3.org/1999/xlink"
+width="16" height="16">
+  <title>Letter</title>
+  <desc>A color styled icon from Orion Icon Library.</desc>
+  <path data-name="layer1"
+  fill="#e5ebf4" d="M2 2h60v60H2z"></path>
+  <path data-name="opacity" fill="#000064" opacity=".15" d="M8 6v52h54v4H2V2l6 4z"></path>
+  <path data-name="opacity" fill="#fff" opacity=".25" d="M62 6H8L2 2h60v4z"></path>
+  <path data-name="stroke" fill="none" stroke="#2e4369" stroke-linecap="butt"
+  stroke-miterlimit="10" stroke-width="2" d="M2 2h60v60H2zm10 12h32M12 26h40m-40 8h40m-40 8h40m-40 8h18"
+  stroke-linejoin="miter"></path>
+</svg>
