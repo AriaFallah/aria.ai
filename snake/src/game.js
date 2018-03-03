@@ -17,7 +17,7 @@ export class Game {
   score: number;
   scoreElement: HTMLElement;
   snake: Snake;
-  steps = 13;
+  steps = 6;
   stepSize = 1;
   t: number = 0;
 
