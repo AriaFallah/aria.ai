@@ -1,4 +1,5 @@
 [ignore]
+.*/node_modules/config-chain
 
 [include]
 
@@ -6,6 +7,8 @@
 
 [lints]
 all=warn
+unclear-type=off
+untyped-import=off
 
 [options]
 include_warnings=true

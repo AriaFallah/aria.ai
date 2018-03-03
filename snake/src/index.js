@@ -1,35 +1,35 @@
 // @flow
 
-import Hammer from 'hammerjs';
-import Frac from './frac';
-import Game from './game';
-import { scaleCanvas } from './util';
-import type { Config, Pos, Direction } from './types';
+import { type Point, type Direction } from './types';
 
-const { clientHeight, clientWidth } = (document.body: any);
+import { Canvas } from './canvas';
+import { Game } from './game';
+import { nullThrows } from './util';
+
+const { clientHeight, clientWidth } = nullThrows(document.body);
 const size = Math.round(Math.min(clientHeight, clientWidth) * 0.75);
-const cellWidth = Math.round(size / 25);
-const roundedSize = Math.ceil(size / cellWidth + 1) * cellWidth;
-
-// Global config
-const config: Config = {
-  cellWidth,
-  height: roundedSize,
-  snakeColor: '#fff',
-  speed: new Frac(1, 10),
-  width: roundedSize,
-};
+const cellSize = Math.round(size / 25);
+const canvasSize = Math.ceil(size / cellSize + 1) * cellSize;
 
 // Set up canvas
-const canvas: HTMLCanvasElement = (document.getElementById('canvas'): any);
-const ctx = canvas.getContext('2d');
-scaleCanvas(canvas, ctx, config.width, config.height);
+const canvas = new Canvas(
+  (document.getElementById('canvas'): any),
+  canvasSize,
+  cellSize
+);
 
 // Create game and add events
-const game = new Game(config, ctx);
-const hammer = new Hammer(document);
-hammer
-  .get('swipe')
-  .set({ direction: Hammer.DIRECTION_ALL, threshold: 1, velocity: 0.1 });
-hammer.on('swipe', game.onEvent);
+const game = new Game(canvas);
 document.addEventListener('keydown', game.onEvent);
+
+const left = nullThrows(document.getElementById('left'));
+left.addEventListener('click', () => game.queueMove('left'));
+
+const right = nullThrows(document.getElementById('right'));
+right.addEventListener('click', () => game.queueMove('right'));
+
+const up = nullThrows(document.getElementById('up'));
+up.addEventListener('click', () => game.queueMove('up'));
+
+const down = nullThrows(document.getElementById('down'));
+down.addEventListener('click', () => game.queueMove('down'));

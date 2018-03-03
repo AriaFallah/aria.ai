@@ -30,12 +30,18 @@
 
     body {
       margin: 0;
+      background-color: #1B1D2B;
+      touch-action: none;
+      overflow-y: hidden;
+    }
+
+    main {
+      margin: 10px;
+      padding: 10px;
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
-      background-color: #1B1D2B;
-      touch-action: none;
     }
 
     canvas {
@@ -45,6 +51,63 @@
     .scores {
       display: flex;
       justify-content: space-between;
+      width: 50%;
+    }
+
+    @media (min-width: 960px) {
+      .controls {
+        display: none;
+      }
+    }
+
+    .controls {
+      border: 1px solid white;
+      position: relative;
+      width: 150px;
+      height: 150px;
+      margin: 0 auto;
+      margin-top: 1em;
+    }
+
+    .controls>div {
+      width: 50px;
+      height: 30px;
+      background-color: white;
+      color: black;
+      line-height: 30px;
+      text-align: center;
+    }
+
+    #left {
+      position: absolute;
+      top: 0;
+      left: 5px;
+      bottom: 0;
+      margin: auto;
+    }
+
+    #right {
+      position: absolute;
+      top: 0;
+      right: 5px;
+      bottom: 0;
+      margin: auto;
+    }
+
+    #up {
+      position: absolute;
+      top: 5px;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+
+    #down {
+      position: absolute;
+      right: 0;
+      left: 0;
+      bottom: 5px;
+      margin: auto;
     }
   </style>
 </head>
@@ -61,7 +124,16 @@
       </h2>
     </div>
     <canvas id="canvas"></canvas>
+
+    <div class="controls">
+      <div id="left">left</div>
+      <div id="right">right</div>
+      <div id="up">up</div>
+      <div id="down">down</div>
+    </div>
   </main>
+
+  <script src="./index.js"></script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-79031036-1"></script>
   <script>
     if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
