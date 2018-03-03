@@ -82,7 +82,7 @@ export class Game {
     this.gameLoop = setInterval(() => {
       this.draw();
       this.update();
-    }, 8);
+    }, 17);
   }
 
   update() {

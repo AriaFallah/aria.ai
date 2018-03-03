@@ -61,16 +61,12 @@ export class Snake implements Drawable {
       for (const segment of this.body) {
         segment.updatePosition(t);
 
-        if (segment.x === this.boardSize + 1) {
-          segment.x = -1;
-        } else if (segment.x === -1) {
-          segment.x = this.boardSize + 1;
+        if (segment.x > this.boardSize + 1 || segment.x < -1) {
+          segment.x = this.boardSize - segment.x;
         }
 
-        if (segment.y === this.boardSize + 1) {
-          segment.y = -1;
-        } else if (segment.y === -1) {
-          segment.y = this.boardSize + 1;
+        if (segment.y > this.boardSize + 1 || segment.y < -1) {
+          segment.y = this.boardSize - segment.y;
         }
       }
       return;
