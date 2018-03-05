@@ -63,14 +63,18 @@ export class Game {
     if (e instanceof KeyboardEvent && !e.repeat) {
       const dir = getDirection(e.keyCode);
       if (dir) {
-        this.queueMove(dir);
+        this.snake.queueMove(dir);
       }
     }
   };
 
-  queueMove(dir: Direction) {
+  onTap = (dir: Direction) => {
+    if (this.gameOver) {
+      this.startNewGame();
+      return;
+    }
     this.snake.queueMove(dir);
-  }
+  };
 
   setScore(newScore: number) {
     this.score = newScore;

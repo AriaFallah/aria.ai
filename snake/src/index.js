@@ -23,13 +23,13 @@ const game = new Game(canvas);
 document.addEventListener('keydown', game.onEvent);
 
 const left = nullThrows(document.getElementById('left'));
-left.addEventListener('click', () => game.queueMove('left'));
+left.addEventListener('click', () => game.onTap('left'));
 
 const right = nullThrows(document.getElementById('right'));
-right.addEventListener('click', () => game.queueMove('right'));
+right.addEventListener('click', () => game.onTap('right'));
 
 const up = nullThrows(document.getElementById('up'));
-up.addEventListener('click', () => game.queueMove('up'));
+up.addEventListener('click', () => game.onTap('up'));
 
 const down = nullThrows(document.getElementById('down'));
-down.addEventListener('click', () => game.queueMove('down'));
+down.addEventListener('click', () => game.onTap('down'));
