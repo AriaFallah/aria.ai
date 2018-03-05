@@ -51,17 +51,26 @@
     .scores {
       display: flex;
       justify-content: space-between;
-      width: 50%;
+      width: 100%;
+    }
+
+    .scores h2 {
+      font-size: 1em;
     }
 
     @media (min-width: 960px) {
       .controls {
         display: none;
       }
+      .scores {
+        width: 50%;
+      }
+      .scores h2 {
+        font-size: 1.5em;
+      }
     }
 
     .controls {
-      border: 1px solid white;
       position: relative;
       width: 150px;
       height: 150px;
@@ -70,11 +79,11 @@
     }
 
     .controls>div {
-      width: 50px;
-      height: 30px;
+      width: 60px;
+      height: 40px;
       background-color: white;
       color: black;
-      line-height: 30px;
+      line-height: 40px;
       text-align: center;
     }
 
@@ -96,7 +105,7 @@
 
     #up {
       position: absolute;
-      top: 5px;
+      top: 10px;
       left: 0;
       right: 0;
       margin: auto;
@@ -106,7 +115,7 @@
       position: absolute;
       right: 0;
       left: 0;
-      bottom: 5px;
+      bottom: 10px;
       margin: auto;
     }
   </style>
