@@ -20,6 +20,9 @@ const canvas = new Canvas(
 
 // Create game and add events
 const game = new Game(canvas);
+if (clientWidth < 960) {
+  game.steps = 10;
+}
 document.addEventListener('keydown', game.onEvent);
 
 const left = nullThrows(document.getElementById('left'));
