@@ -13,7 +13,6 @@ export class Game {
   gameOver: boolean;
   highScoreElement: HTMLElement;
   highScore: number;
-  gameLoop: IntervalID;
   score: number;
   scoreElement: HTMLElement;
   snake: Snake;
@@ -44,6 +43,15 @@ export class Game {
       }
     }
     return point;
+  }
+
+  gameLoop() {
+    if (this.gameOver) {
+      return;
+    }
+    this.draw();
+    this.update();
+    requestAnimationFrame(() => this.gameLoop());
   }
 
   onEvent = (e: Object) => {
@@ -79,10 +87,7 @@ export class Game {
     this.gameOver = false;
     this.setScore(0);
     this.snake = new Snake(this.canvas.canvasSize / this.canvas.cellSize);
-    this.gameLoop = setInterval(() => {
-      this.draw();
-      this.update();
-    }, 17);
+    requestAnimationFrame(() => this.gameLoop());
   }
 
   update() {
@@ -90,7 +95,6 @@ export class Game {
 
     if (this.snake.isCollidingWithSelf()) {
       this.gameOver = true;
-      clearInterval(this.gameLoop);
       return;
     }
 
