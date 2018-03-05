@@ -89,6 +89,15 @@
       text-align: center;
     }
 
+    .noselect {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
     #left {
       position: absolute;
       top: 0;
@@ -137,10 +146,10 @@
     <canvas id="canvas"></canvas>
 
     <div class="controls">
-      <div id="left">left</div>
-      <div id="right">right</div>
-      <div id="up">up</div>
-      <div id="down">down</div>
+      <div class="noselect" id="left">left</div>
+      <div class="noselect" id="right">right</div>
+      <div class="noselect" id="up">up</div>
+      <div class="noselect" id="down">down</div>
     </div>
   </main>
 
