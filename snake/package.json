@@ -1,24 +1,25 @@
 {
-  "babel": {
-    "presets": ["env", "stage-2", "flow"]
+  "dependencies": {
+    "html-webpack-plugin": "^3.0.6",
+    "rollup": "^0.57.0",
+    "rollup-plugin-node-resolve": "^3.2.0",
+    "rollup-plugin-uglify": "^3.0.0",
+    "roughjs": "^2.0.0",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12",
+    "webpack-dev-server": "^3.1.1"
   },
-  "browserslist": "> 5%",
-  "dependencies": {},
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-flow": "^6.23.0",
-    "babel-preset-stage-2": "^6.24.1",
-    "flow-bin": "^0.66.0",
-    "html-webpack-plugin": "^2.30.1",
-    "webpack": "^3.8.1",
-    "webpack-dev-server": "^2.9.3"
+    "bs-platform": "^2.2.2",
+    "bs-webapi": "^0.8.3"
   },
-  "name": "snake",
+  "name": "snake-reason",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server --config webpack.config.dev.js --host 0.0.0.0",
-    "build": "webpack --config webpack.config.prod.js"
-  }
+    "build": "bsb -make-world && NODE_ENV=production rollup -c",
+    "clean": "bsb -clean-world",
+    "start": "webpack-dev-server --config webpack.config.js --host 0.0.0.0",
+    "watch": "bsb -make-world -w"
+  },
+  "version": "0.0.1"
 }
