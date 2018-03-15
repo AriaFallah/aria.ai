@@ -111,16 +111,26 @@ let restartGameIfOver = (game: t) =>
     run(game);
   };
 
+let getDirectionFromKey = (keyName: string) =>
+  switch (keyName) {
+  | "ArrowLeft"
+  | "KeyA" => Some(Left)
+  | "ArrowRight"
+  | "KeyD" => Some(Right)
+  | "ArrowUp"
+  | "KeyW" => Some(Up)
+  | "ArrowDown"
+  | "KeyS" => Some(Down)
+  | _ => None
+  };
+
 let handleInput = (game: t) => {
   Element.addKeyDownEventListener(
     e => {
       if (! KeyboardEvent.repeat(e)) {
-        switch (KeyboardEvent.code(e)) {
-        | "ArrowLeft" => Snake.queueMove(game.snake, Left)
-        | "ArrowRight" => Snake.queueMove(game.snake, Right)
-        | "ArrowUp" => Snake.queueMove(game.snake, Up)
-        | "ArrowDown" => Snake.queueMove(game.snake, Down)
-        | _ => ()
+        switch (e |> KeyboardEvent.code |> getDirectionFromKey) {
+        | Some(d) => Snake.queueMove(game.snake, d)
+        | None => ()
         };
       };
       restartGameIfOver(game);

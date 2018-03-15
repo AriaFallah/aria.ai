@@ -16,7 +16,8 @@
   "name": "snake-reason",
   "private": true,
   "scripts": {
-    "build": "bsb -make-world && NODE_ENV=production rollup -c",
+    "build":
+      "bsb -make-world && NODE_ENV=production rollup -c && cp src/snake.html dist/snake.js ../build",
     "clean": "bsb -clean-world",
     "start": "webpack-dev-server --config webpack.config.js --host 0.0.0.0",
     "watch": "bsb -make-world -w"
