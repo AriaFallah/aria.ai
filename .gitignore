@@ -2,3 +2,5 @@
 node_modules
 dist
 .cache
+*error.log
+stats.json
