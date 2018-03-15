@@ -101,6 +101,16 @@ let newGame = (~canvas) => {
   gameOver: false,
 };
 
+let restartGameIfOver = (game: t) =>
+  if (game.gameOver) {
+    let {food, snake, score, gameOver} = newGame(~canvas=game.canvas);
+    game.food = food;
+    game.snake = snake;
+    game.gameOver = gameOver;
+    setScore(game, score);
+    run(game);
+  };
+
 let handleInput = (game: t) => {
   Element.addKeyDownEventListener(
     e => {
@@ -113,14 +123,7 @@ let handleInput = (game: t) => {
         | _ => ()
         };
       };
-      if (game.gameOver) {
-        let {food, snake, score, gameOver} = newGame(~canvas=game.canvas);
-        game.food = food;
-        game.snake = snake;
-        game.gameOver = gameOver;
-        setScore(game, score);
-        run(game);
-      };
+      restartGameIfOver(game);
     },
     Document.documentElement(document),
   );
@@ -129,19 +132,31 @@ let handleInput = (game: t) => {
   let upElement = document |> Document.getElementById("up") |> L.unwrap;
   let downElement = document |> Document.getElementById("down") |> L.unwrap;
   Element.addClickEventListener(
-    (_) => Snake.queueMove(game.snake, Left),
+    (_) => {
+      Snake.queueMove(game.snake, Left);
+      restartGameIfOver(game);
+    },
     leftElement,
   );
   Element.addClickEventListener(
-    (_) => Snake.queueMove(game.snake, Right),
+    (_) => {
+      Snake.queueMove(game.snake, Right);
+      restartGameIfOver(game);
+    },
     rightElement,
   );
   Element.addClickEventListener(
-    (_) => Snake.queueMove(game.snake, Up),
+    (_) => {
+      Snake.queueMove(game.snake, Up);
+      restartGameIfOver(game);
+    },
     upElement,
   );
   Element.addClickEventListener(
-    (_) => Snake.queueMove(game.snake, Down),
+    (_) => {
+      Snake.queueMove(game.snake, Down);
+      restartGameIfOver(game);
+    },
     downElement,
   );
 };
