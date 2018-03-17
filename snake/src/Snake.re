@@ -2,8 +2,6 @@ open Types;
 
 open Belt;
 
-open Webapi.Dom;
-
 module Segment = {
   type t = {
     position: point,

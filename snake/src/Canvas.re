@@ -2,22 +2,33 @@ open Types;
 
 open Webapi.Canvas;
 
-open Webapi.Dom;
-
 module Rough = {
   type t;
   type canvas;
   type options = {
     .
-    "fill": string,
-    "stroke": string,
-    "roughness": float,
-    "strokeWidth": float,
-    "fillStyle": string,
-    "hachureAngle": float,
+    "fill": Js.undefined(string),
+    "stroke": Js.undefined(string),
+    "roughness": Js.undefined(float),
+    "strokeWidth": Js.undefined(float),
+    "fillStyle": Js.undefined(string),
+    "hachureAngle": Js.undefined(float),
   };
-  [@bs.module "roughjs"] external roughjs : t = "default";
-  [@bs.send] external canvas : (t, Dom.element) => canvas = "";
+  [@bs.obj]
+  external makeOptions :
+    (
+      ~fill: string=?,
+      ~stroke: string=?,
+      ~roughness: float=?,
+      ~strokeWidth: float=?,
+      ~fillStyle: string=?,
+      ~hachureAngle: float=?,
+      unit
+    ) =>
+    _ =
+    "";
+  [@bs.module "roughjs"] [@bs.scope "default"]
+  external canvas : Dom.element => canvas = "";
   [@bs.send]
   external rectangle :
     (canvas, ~x: float, ~y: float, ~w: float, ~h: float, ~options: options) =>
@@ -41,7 +52,7 @@ let make = (~canvasElement, ~canvasSize, ~cellSize) : t => {
   canvasSize,
   cellSize,
   ctx: CanvasElement.getContext2d(canvasElement),
-  roughCtx: Rough.canvas(Rough.roughjs, canvasElement),
+  roughCtx: Rough.canvas(canvasElement),
 };
 
 let drawBackground = (canvas: t) => {
@@ -51,7 +62,7 @@ let drawBackground = (canvas: t) => {
   ctx |> Canvas2d.fillRect(~x=0., ~y=0., ~w=canvasSize, ~h=canvasSize);
 };
 
-let paintCell = (canvas: t, color: string, point: point) => {
+let paintCell = (canvas: t, color: string, point) => {
   let {x, y} = point;
   let {cellSize, roughCtx} = canvas;
   let cellSize = float(cellSize);
@@ -61,14 +72,8 @@ let paintCell = (canvas: t, color: string, point: point) => {
     ~y=y *. cellSize,
     ~w=cellSize,
     ~h=cellSize,
-    ~options={
-      "fill": color,
-      "fillStyle": "hachure",
-      "stroke": "black",
-      "roughness": 1.2,
-      "strokeWidth": 1.,
-      "hachureAngle": (-41.),
-    },
+    ~options=
+      Rough.makeOptions(~fill=color, ~stroke="black", ~roughness=1.2, ()),
   );
 };
 
@@ -79,6 +84,7 @@ let randomPoint = (canvas: t) : point => {
 };
 
 let scaleCanvas = (canvas: t) => {
+  open Webapi.Dom;
   let {canvasSize, canvasElement, ctx} = canvas;
   let canvasSizeStr = {j|$(canvasSize)px|j};
   let dpr =
