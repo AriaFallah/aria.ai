@@ -8,5 +8,5 @@ export default {
     format: 'iife',
     name: 'bundle',
   },
-  plugins: [resolve(), uglify()],
+  plugins: [resolve({ jsnext: true }), uglify()],
 };

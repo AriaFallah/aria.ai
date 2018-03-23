@@ -7,11 +7,11 @@ module Segment = {
     position: point,
     didPivot: bool,
     direction,
+    getImage: unit => Rough.drawable,
   };
-  let make = (~position, ~direction=Right, ~didPivot=false, ()) => {
-    position,
-    didPivot,
-    direction,
+  let make = (~canvas, ~position, ~direction=Right, ~didPivot=false, ()) => {
+    let cell = Canvas.Cell.make(~canvas, ~position, ~color="blue");
+    {position, didPivot, direction, getImage: cell.getImage};
   };
 };
 
@@ -43,17 +43,17 @@ let queueMove = (snake: t, nextDir: direction) => {
   };
 };
 
-let make = (boardSize: int) => {
+let make = (canvas: Canvas.t) => {
   body:
     List.makeBy(
       5,
       x => {
         let x = 4. -. L.float(x);
-        Segment.make(~position={x, y: 0.}, ());
+        Segment.make(~canvas, ~position={x, y: 0.}, ());
       },
     ),
   moveQueue: MutableQueue.make(),
-  boardSize,
+  boardSize: canvas.canvasSize / canvas.cellSize,
 };
 
 let updatePosition = (segment: Segment.t, boardSize: int) => {
@@ -102,7 +102,7 @@ let draw = (snake: t, canvas: Canvas.t, dt: float) =>
   List.forEach(snake.body, (segment: Segment.t) =>
     Canvas.paintCell(
       canvas,
-      "blue",
+      segment.getImage(),
       approximatePosition(segment, snake.boardSize, dt),
     )
   );
@@ -160,7 +160,7 @@ let moveSnake = (snake: t) => {
     ),
 };
 
-let grow = (snake: t) => {
+let grow = (snake: t, canvas: Canvas.t) => {
   let last = List.getExn(snake.body, List.length(snake.body) - 1);
   let position =
     switch (last.direction) {
@@ -174,7 +174,7 @@ let grow = (snake: t) => {
     body:
       List.concat(
         snake.body,
-        [Segment.make(~position, ~direction=last.direction, ())],
+        [Segment.make(~canvas, ~position, ~direction=last.direction, ())],
       ),
   };
 };

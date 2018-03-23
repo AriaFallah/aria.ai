@@ -2,57 +2,28 @@ open Types;
 
 open Webapi.Canvas;
 
-module Rough = {
-  type t;
-  type canvas;
-  type options = {
-    .
-    "fill": Js.undefined(string),
-    "stroke": Js.undefined(string),
-    "roughness": Js.undefined(float),
-    "strokeWidth": Js.undefined(float),
-    "fillStyle": Js.undefined(string),
-    "hachureAngle": Js.undefined(float),
-  };
-  [@bs.obj]
-  external makeOptions :
-    (
-      ~fill: string=?,
-      ~stroke: string=?,
-      ~roughness: float=?,
-      ~strokeWidth: float=?,
-      ~fillStyle: string=?,
-      ~hachureAngle: float=?,
-      unit
-    ) =>
-    _ =
-    "";
-  [@bs.module "roughjs"] [@bs.scope "default"]
-  external canvas : Dom.element => canvas = "";
-  [@bs.send]
-  external rectangle :
-    (canvas, ~x: float, ~y: float, ~w: float, ~h: float, ~options: options) =>
-    unit =
-    "";
-};
-
 type t = {
   canvasElement: Dom.element,
   ctx: Canvas2d.t,
   canvasSize: int,
   cellSize: int,
   roughCtx: Rough.canvas,
+  generator: Rough.Generator.t,
 };
 
 [@bs.val] [@bs.return nullable] [@bs.scope "window"]
 external devicePixelRatio : option(float) = "devicePixelRatio";
 
 let make = (~canvasElement, ~canvasSize, ~cellSize) : t => {
-  canvasElement,
-  canvasSize,
-  cellSize,
-  ctx: CanvasElement.getContext2d(canvasElement),
-  roughCtx: Rough.canvas(canvasElement),
+  let roughCtx = Rough.canvas(canvasElement);
+  {
+    canvasElement,
+    canvasSize,
+    cellSize,
+    ctx: CanvasElement.getContext2d(canvasElement),
+    roughCtx,
+    generator: Rough.Generator.make(roughCtx),
+  };
 };
 
 let drawBackground = (canvas: t) => {
@@ -62,19 +33,35 @@ let drawBackground = (canvas: t) => {
   ctx |> Canvas2d.fillRect(~x=0., ~y=0., ~w=canvasSize, ~h=canvasSize);
 };
 
-let paintCell = (canvas: t, color: string, point) => {
-  let {x, y} = point;
-  let {cellSize, roughCtx} = canvas;
-  let cellSize = float(cellSize);
-  Rough.rectangle(
-    roughCtx,
-    ~x=x *. cellSize,
-    ~y=y *. cellSize,
+let makeCell = (canvas: t, color: string) => {
+  let {cellSize, generator} = canvas;
+  let cellSize = L.float(cellSize);
+  Rough.Generator.rectangle(
+    generator,
+    ~x=0.,
+    ~y=0.,
     ~w=cellSize,
     ~h=cellSize,
     ~options=
-      Rough.makeOptions(~fill=color, ~stroke="black", ~roughness=1.2, ()),
+      Rough.makeOptions(
+        ~fill=color,
+        ~stroke="black",
+        ~roughness=1.1,
+        ~strokeWidth=1.4,
+        ~bowing=0.,
+        (),
+      ),
   );
+};
+
+let paintCell = (canvas: t, image: Rough.drawable, point) => {
+  let {x, y} = point;
+  let {cellSize, roughCtx} = canvas;
+  let cellSize = float(cellSize);
+  canvas.ctx |> Canvas2d.save;
+  canvas.ctx |> Canvas2d.translate(~x=x *. cellSize, ~y=y *. cellSize);
+  Rough.draw(roughCtx, image);
+  canvas.ctx |> Canvas2d.restore;
 };
 
 let randomPoint = (canvas: t) : point => {
@@ -106,4 +93,23 @@ let scaleCanvas = (canvas: t) => {
     canvasElement |> Element.setAttribute("height", canvasSizeStr);
   };
   ctx |> Canvas2d.scale(~x=dpr, ~y=dpr);
+};
+
+module Cell = {
+  type t = {
+    position: point,
+    getImage: unit => Rough.drawable,
+  };
+  let make = (~canvas, ~position, ~color) => {
+    let calls = ref(0);
+    let image = ref(makeCell(canvas, color));
+    let getImage = () => {
+      calls := calls^ + 1;
+      if (calls^ mod 3 == 0) {
+        image := makeCell(canvas, color);
+      };
+      image^;
+    };
+    {position, getImage};
+  };
 };

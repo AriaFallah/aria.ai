@@ -13,7 +13,7 @@ type t = {
   canvas: Canvas.t,
   highScoreElement: Dom.element,
   scoreElement: Dom.element,
-  mutable food: point,
+  mutable food: Canvas.Cell.t,
   mutable gameOver: bool,
   mutable highScore: int,
   mutable score: int,
@@ -22,7 +22,7 @@ type t = {
 };
 
 type gameState = {
-  food: point,
+  food: Canvas.Cell.t,
   gameOver: bool,
   score: int,
   snake: Snake.t,
@@ -40,23 +40,24 @@ let setScore = (game: t, score: int) => {
 };
 
 let spawnFood = (game: t) => {
-  let rec loop = food => {
-    let containsFood =
+  let rec loop = pos => {
+    let containsPos =
       game.snake.body
       |> List.map(_, segment => segment.position)
-      |> List.has(_, food, (==));
-    if (containsFood) {
+      |> List.has(_, pos, (==));
+    if (containsPos) {
       loop(Canvas.randomPoint(game.canvas));
     } else {
-      food;
+      pos;
     };
   };
-  loop(Canvas.randomPoint(game.canvas));
+  let position = loop(Canvas.randomPoint(game.canvas));
+  {...game.food, position};
 };
 
 let render = (game: t, dt: float) => {
   Canvas.drawBackground(game.canvas);
-  Canvas.paintCell(game.canvas, "red", game.food);
+  Canvas.paintCell(game.canvas, game.food.getImage(), game.food.position);
   Snake.draw(game.snake, game.canvas, dt);
 };
 
@@ -67,9 +68,9 @@ let update = (game: t) => {
     game;
   } else {
     let head = List.headExn(game.snake.body);
-    if (head.position == game.food) {
+    if (head.position == game.food.position) {
       setScore(game, game.score + 1);
-      game.snake = Snake.grow(game.snake);
+      game.snake = Snake.grow(game.snake, game.canvas);
       game.food = spawnFood(game);
     };
     game;
@@ -95,8 +96,13 @@ let run = (initialGame: t) => {
 };
 
 let newGame = (~canvas) => {
-  food: Canvas.randomPoint(canvas),
-  snake: Snake.make(canvas.canvasSize / canvas.cellSize),
+  food:
+    Canvas.Cell.make(
+      ~canvas,
+      ~position=Canvas.randomPoint(canvas),
+      ~color="red",
+    ),
+  snake: Snake.make(canvas),
   score: 0,
   gameOver: false,
 };
