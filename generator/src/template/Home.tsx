@@ -26,7 +26,10 @@ export class Home extends React.Component<Props> {
             <img src="/assets/icons/github.svg" alt="github logo" />
           </a>
           <a href="http://stackoverflow.com/users/3772221">
-            <img src="/assets/icons/stackexchange.svg" alt="stackoverflow logo" />
+            <img
+              src="/assets/icons/stackexchange.svg"
+              alt="stackoverflow logo"
+            />
           </a>
           <a href="https://linkedin.com/in/ariafallah">
             <img src="/assets/icons/linkedin.svg" alt="linkedin logo" />
@@ -50,18 +53,25 @@ export class Home extends React.Component<Props> {
             <h2>Projects</h2>
             <ul>
               <li>
-                An extremely fast <a href="https://github.com/AriaFallah/csv-parser">CSV parser</a>{' '}
+                An extremely fast{' '}
+                <a href="https://github.com/AriaFallah/csv-parser">
+                  CSV parser
+                </a>{' '}
                 written in C++11.
               </li>
               <li>
                 An HTML5 canvas{' '}
-                <a href="https://github.com/AriaFallah/aria.ai/tree/master/snake">snake game</a>{' '}
-                written in JavaScript + Flow. <a href="/snake.html">Play here!</a>
+                <a href="https://github.com/AriaFallah/aria.ai/tree/master/snake">
+                  snake game
+                </a>{' '}
+                written in ReasonML. <a href="/snake.html">Play here!</a>
               </li>
               <li>
                 A comprehensive beginner's{' '}
-                <a href="https://github.com/AriaFallah/WebpackTutorial">webpack tutorial</a> with
-                over 2000 stars on github.
+                <a href="https://github.com/AriaFallah/WebpackTutorial">
+                  webpack tutorial
+                </a>{' '}
+                with over 2000 stars on github.
               </li>
               <li>
                 A{' '}
@@ -79,10 +89,12 @@ export class Home extends React.Component<Props> {
             </h2>
             <ul>
               <li>
-                Like them on <a href="https://www.instagram.com/m0meni/">Instagram.</a>
+                Like them on{' '}
+                <a href="https://www.instagram.com/m0meni/">Instagram.</a>
               </li>
               <li>
-                Download them from <a href="https://unsplash.com/@m0meni">Unsplash.</a>
+                Download them from{' '}
+                <a href="https://unsplash.com/@m0meni">Unsplash.</a>
               </li>
             </ul>
           </section>

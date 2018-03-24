@@ -22,7 +22,7 @@ export function makePage(
       <link
         rel="shortcut icon"
         type="image/png"
-        href=/assets/icons/favicon.ico?${Math.random()}
+        href=/assets/icons/favicon.ico
       />
       <style>
         ${css}

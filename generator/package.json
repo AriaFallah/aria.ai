@@ -1,6 +1,4 @@
 {
-  "name": "generator",
-  "version": "1.0.0",
   "dependencies": {
     "fs-extra": "^4.0.3",
     "html-minifier": "^3.5.7",
@@ -19,7 +17,13 @@
     "@types/prismjs": "^1.6.5",
     "@types/react": "^16.0.25",
     "@types/react-dom": "^16.0.3",
-    "@types/react-helmet": "^5.0.3"
+    "@types/react-helmet": "^5.0.3",
+    "ts-node": "^5.0.1"
   },
-  "private": true
+  "name": "generator",
+  "private": true,
+  "scripts": {
+    "build": "ts-node src/index.tsx"
+  },
+  "version": "1.0.0"
 }
