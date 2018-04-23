@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "html-webpack-plugin": "^3.0.6",
-    "rollup": "^0.57.0",
+    "rollup": "^0.58.0",
     "rollup-plugin-node-resolve": "^3.2.0",
     "rollup-plugin-uglify": "^3.0.0",
     "roughjs": "^2.0.0",

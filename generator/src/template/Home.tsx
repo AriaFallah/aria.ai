@@ -83,7 +83,7 @@ export class Home extends React.Component<Props> {
             </ul>
           </section>
 
-          <section>
+          <section style={{ marginTop: '2em' }}>
             <h2>
               <span>Photos</span>
             </h2>
