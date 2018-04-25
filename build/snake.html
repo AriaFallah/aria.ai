@@ -52,7 +52,9 @@
     .scores {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       width: 100%;
+      text-align: center;
     }
 
     .scores h2 {
@@ -110,11 +112,13 @@
 <body>
   <main>
     <div class="scores">
-      <h2 style="text-align: center">Score:
+      <h2>
+        Score:
         <span id="score">0</span>
       </h2>
-      <span style="flex-basis: 33%"></span>
-      <h2 style="text-align: center">High Score:
+      <a style="font-size: 0.8em" href="/">Made by Aria Fallah</a>
+      <h2>
+        High Score:
         <span id="highScore">0</span>
       </h2>
     </div>
@@ -129,10 +133,6 @@
         <div class="noselect control" id="down">down</div>
         <div class="noselect control" id="right">right</div>
       </div>
-    </div>
-
-    <div class="credit">
-      <a href="/">Made by Aria Fallah</a>
     </div>
   </main>
 
