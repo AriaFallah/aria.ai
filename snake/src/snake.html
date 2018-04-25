@@ -74,12 +74,16 @@
     .controls {
       position: relative;
       width: 200px;
-      height: 150px;
       margin: 0 auto;
       margin-top: 1em;
     }
 
-    .controls>div {
+    .row {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .control {
       width: 60px;
       height: 40px;
       border: 1px solid black;
@@ -94,38 +98,6 @@
       -moz-user-select: none;
       -ms-user-select: none;
       user-select: none;
-    }
-
-    #left {
-      position: absolute;
-      top: 0;
-      left: 0px;
-      bottom: 0;
-      margin: auto;
-    }
-
-    #right {
-      position: absolute;
-      top: 0;
-      right: 0px;
-      bottom: 0;
-      margin: auto;
-    }
-
-    #up {
-      position: absolute;
-      top: 10px;
-      left: 0;
-      right: 0;
-      margin: auto;
-    }
-
-    #down {
-      position: absolute;
-      right: 0;
-      left: 0;
-      bottom: 55px;
-      margin: auto;
     }
 
     .credit {
@@ -149,10 +121,14 @@
     <canvas id="canvas"></canvas>
 
     <div class="controls">
-      <div class="noselect" id="left">left</div>
-      <div class="noselect" id="right">right</div>
-      <div class="noselect" id="up">up</div>
-      <div class="noselect" id="down">down</div>
+      <div class="row" style="justify-content: center; margin-bottom: 10px">
+        <div class="noselect control" id="up">up</div>
+      </div>
+      <div class="row">
+        <div class="noselect control" id="left">left</div>
+        <div class="noselect control" id="down">down</div>
+        <div class="noselect control" id="right">right</div>
+      </div>
     </div>
 
     <div class="credit">
