@@ -1,5 +1,8 @@
+/* @jsx jsx */
+import { jsx } from '@emotion/core';
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
+import * as Styles from './styles/Site.styles';
 
 const CURRENT_YEAR = new Date().getFullYear();
 
@@ -12,7 +15,7 @@ export class Site extends React.Component<Props> {
     const { activeTab } = this.props;
 
     return (
-      <>
+      <React.Fragment>
         <Helmet>
           <meta name="HandheldFriendly" content="True" />
           <meta http-equiv="cache-control" content="max-age=0" />
@@ -27,29 +30,26 @@ export class Site extends React.Component<Props> {
           />
         </Helmet>
 
-        <div className="content">
-          <nav className="nav">
-            <a href="/" className={activeTab === 'home' ? 'active' : undefined}>
+        <div css={Styles.content}>
+          <nav css={Styles.nav}>
+            <Styles.NavLink active={activeTab === 'home'} href="/">
               Home
-            </a>
-            <a
-              href="/blog"
-              className={activeTab === 'blog' ? 'active' : undefined}
-            >
+            </Styles.NavLink>
+            <Styles.NavLink active={activeTab === 'blog'} href="/blog">
               Blog
-            </a>
+            </Styles.NavLink>
           </nav>
 
-          <main className="main">{this.props.children}</main>
+          <main css={Styles.main}>{this.props.children}</main>
         </div>
 
-        <footer className="footer">
+        <footer css={Styles.footer}>
           <div>
             Aria Fallah <a href="/snake.html">©</a>
           </div>
           <div>All Rights Reserved - {CURRENT_YEAR}</div>
         </footer>
-      </>
+      </React.Fragment>
     );
   }
 }

@@ -1,92 +1,107 @@
+/* @jsx jsx */
+
+import { jsx } from '@emotion/core';
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
-import { PostHeader } from './components/PostHeader';
+import * as Styles from './styles/Home.styles';
 
 interface Props {}
+
+const socialLinks = [
+  {
+    link: 'https://github.com/ariafallah',
+    img: '/assets/icons/github.svg',
+    alt: 'github logo',
+  },
+  {
+    link: 'http://stackoverflow.com/users/3772221',
+    img: '/assets/icons/stackexchange.svg',
+    alt: 'stackoverflow logo',
+  },
+  {
+    link: 'https://linkedin.com/in/ariafallah',
+    img: '/assets/icons/linkedin.svg',
+    alt: 'linkedin logo',
+  },
+  {
+    link: '/assets/ariafallah_resume.pdf',
+    img: '/assets/icons/resume.svg',
+    alt: 'resume logo',
+  },
+  {
+    link: 'https://facebook.com/m0meni',
+    img: '/assets/icons/facebook.svg',
+    alt: 'facebook logo',
+  },
+  {
+    link: 'https://instagram.com/m0meni',
+    img: '/assets/icons/instagram.svg',
+    alt: 'instagram logo',
+  },
+  {
+    link: 'https://twitter.com/m0meni',
+    img: '/assets/icons/twitter.svg',
+    alt: 'twitter logo',
+  },
+];
+
+const projects = [
+  <React.Fragment>
+    An extremely fast{' '}
+    <a href="https://github.com/AriaFallah/csv-parser">CSV parser</a> written in
+    C++11.
+  </React.Fragment>,
+  <React.Fragment>
+    An HTML5 canvas{' '}
+    <a href="https://github.com/AriaFallah/aria.ai/tree/master/snake">
+      snake game
+    </a>{' '}
+    written in ReasonML. <a href="/snake.html">Play here!</a>
+  </React.Fragment>,
+  <React.Fragment>
+    A comprehensive beginner's{' '}
+    <a href="https://github.com/AriaFallah/WebpackTutorial">webpack tutorial</a>{' '}
+    with over 2000 stars on github.
+  </React.Fragment>,
+  <React.Fragment>
+    A{' '}
+    <a href="https://github.com/AriaFallah/aria.ai/tree/master/generator">
+      static site generator
+    </a>{' '}
+    built on top of React and written in TypeScript.
+  </React.Fragment>,
+];
 
 export class Home extends React.Component<Props> {
   render() {
     return (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}
-      >
+      <div css={Styles.pageContainer}>
         <Helmet>
           <meta name="description" content="Aria Fallah's Personal Website" />
           <title>Aria's Website</title>
         </Helmet>
 
-        <h1 style={{ fontSize: '2em' }}>Aria Fallah</h1>
-        <section className="social">
-          <a href="https://github.com/ariafallah">
-            <img src="/assets/icons/github.svg" alt="github logo" />
-          </a>
-          <a href="http://stackoverflow.com/users/3772221">
-            <img
-              src="/assets/icons/stackexchange.svg"
-              alt="stackoverflow logo"
-            />
-          </a>
-          <a href="https://linkedin.com/in/ariafallah">
-            <img src="/assets/icons/linkedin.svg" alt="linkedin logo" />
-          </a>
-          <a href="/assets/ariafallah_resume.pdf">
-            <img src="/assets/icons/resume.svg" alt="resume logo" />
-          </a>
-          <a href="https://facebook.com/m0meni">
-            <img src="/assets/icons/facebook.svg" alt="facebook logo" />
-          </a>
-          <a href="https://instagram.com/m0meni">
-            <img src="/assets/icons/instagram.svg" alt="instagram logo" />
-          </a>
-          <a href="https://twitter.com/m0meni">
-            <img src="/assets/icons/twitter.svg" alt="twitter logo" />
-          </a>
+        <h1 css={Styles.pageHeader}>Aria Fallah</h1>
+        <section css={Styles.socialContainer}>
+          {socialLinks.map(l => (
+            <a css={Styles.socialLink} key={l.alt} href={l.link}>
+              <img src={l.img} alt={l.alt} />
+            </a>
+          ))}
         </section>
 
         <div>
           <section>
             <h2>Projects</h2>
             <ul>
-              <li>
-                An extremely fast{' '}
-                <a href="https://github.com/AriaFallah/csv-parser">
-                  CSV parser
-                </a>{' '}
-                written in C++11.
-              </li>
-              <li>
-                An HTML5 canvas{' '}
-                <a href="https://github.com/AriaFallah/aria.ai/tree/master/snake">
-                  snake game
-                </a>{' '}
-                written in ReasonML. <a href="/snake.html">Play here!</a>
-              </li>
-              <li>
-                A comprehensive beginner's{' '}
-                <a href="https://github.com/AriaFallah/WebpackTutorial">
-                  webpack tutorial
-                </a>{' '}
-                with over 2000 stars on github.
-              </li>
-              <li>
-                A{' '}
-                <a href="https://github.com/AriaFallah/aria.ai/tree/master/generator">
-                  static site generator
-                </a>{' '}
-                built on top of React and written in TypeScript.
-              </li>
+              {projects.map((p, i) => (
+                <li key={i}>{p}</li>
+              ))}
             </ul>
           </section>
 
           <section style={{ marginTop: '2em' }}>
-            <h2>
-              <span>Photos</span>
-            </h2>
+            <h2>Photos</h2>
             <ul>
               <li>
                 Like them on{' '}

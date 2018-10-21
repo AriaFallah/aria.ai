@@ -1,6 +1,9 @@
+/* @jsx jsx */
+import { jsx } from '@emotion/core';
 import * as React from 'react';
 import { Helmet } from 'react-helmet';
 import { PostHeader } from './components/PostHeader';
+import * as Styles from './styles/Blog.styles';
 
 interface Props {
   posts: Post[];
@@ -10,7 +13,7 @@ export class Blog extends React.Component<Props> {
   render() {
     const posts = this.props.posts.slice();
     return (
-      <>
+      <React.Fragment>
         <Helmet>
           <meta
             name="description"
@@ -25,7 +28,7 @@ export class Blog extends React.Component<Props> {
             return bDate.getTime() - aDate.getTime();
           })
           .map(p => (
-            <section className="article-preview" key={p.frontMatter.title}>
+            <section css={Styles.articlePreview} key={p.frontMatter.title}>
               <PostHeader frontMatter={p.frontMatter} />
               <div>
                 <article dangerouslySetInnerHTML={{ __html: p.excerpt }} />
@@ -35,7 +38,7 @@ export class Blog extends React.Component<Props> {
               </div>
             </section>
           ))}
-      </>
+      </React.Fragment>
     );
   }
 }

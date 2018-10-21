@@ -1,6 +1,5 @@
 import * as fs from 'fs-extra';
 import * as path from 'path';
-import * as util from 'util';
 import * as MarkdownIt from 'markdown-it';
 import * as React from 'react';
 import { Prism } from './prism';
@@ -45,11 +44,6 @@ async function main() {
   fs.mkdirpSync(POST_OUT_DIR);
   fs.copySync(ASSETS_SRC_DIR, ASSETS_OUT_DIR);
 
-  const indexCSS = fs.readFileSync(
-    path.join(__dirname, 'template', 'styles', 'index.css'),
-    'utf8'
-  );
-
   // Create post pages
   const postFiles = fs.readdirSync(POST_SRC_DIR);
   const posts = (await Promise.all(
@@ -84,13 +78,12 @@ async function main() {
 
   // Write pages to output paths
   const otherPages = [
-    makePage(<Home />, indexCSS, { activeTab: 'home' }),
-    makePage(<Blog posts={posts} />, indexCSS, { activeTab: 'blog' }),
+    makePage(<Home />, { activeTab: 'home' }),
+    makePage(<Blog posts={posts} />, { activeTab: 'blog' }),
   ];
   const postPages = posts.map(p =>
     makePage(
       <Post frontMatter={p.frontMatter} postHtml={{ __html: p.body }} />,
-      indexCSS,
       { activeTab: 'blog' }
     )
   );
