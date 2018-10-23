@@ -10,3 +10,8 @@ type Post = {
   body: string;
   excerpt: string;
 };
+
+type Thought = {
+  frontMatter: { date: Date };
+  body: string;
+};

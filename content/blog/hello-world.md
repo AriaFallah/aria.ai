@@ -50,8 +50,8 @@ function memoize<T: Function>(f: T): T {
 
 Lists
 
-* Ignore blog
-* Stop ignoring blog
+- Ignore blog
+- Stop ignoring blog
 
 1. Make unordered list
 2. Make ordered list

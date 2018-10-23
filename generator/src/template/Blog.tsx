@@ -1,9 +1,9 @@
 /* @jsx jsx */
-import { jsx } from '@emotion/core';
-import * as React from 'react';
-import { Helmet } from 'react-helmet';
-import { PostHeader } from './components/PostHeader';
-import * as Styles from './styles/Blog.styles';
+import { jsx } from "@emotion/core";
+import * as React from "react";
+import { Helmet } from "react-helmet";
+import { PostHeader } from "./components/PostHeader";
+import * as Styles from "./styles/Blog.styles";
 
 interface Props {
   posts: Post[];

@@ -1,5 +1,5 @@
-import { css } from '@emotion/core';
-import styled from '@emotion/styled';
+import { css } from "@emotion/core";
+import styled from "@emotion/styled";
 
 interface NavLinkProps {
   active: boolean;
@@ -9,11 +9,11 @@ export const NavLink = styled.a`
   border-bottom: 0;
   margin-right: 1em;
 
-  background-color: ${(props: NavLinkProps) => (!props.active ? '' : 'black')};
-  color: ${props => (!props.active ? 'black' : 'white')} !important;
-  padding-left: ${props => (!props.active ? '0' : '5px')};
-  padding-right: ${props => (!props.active ? '0' : '8px')};
-  font-style: ${props => (!props.active ? 'normal' : 'italic')};
+  background-color: ${(props: NavLinkProps) => (!props.active ? "" : "black")};
+  color: ${props => (!props.active ? "black" : "white")} !important;
+  padding-left: ${props => (!props.active ? "0" : "5px")};
+  padding-right: ${props => (!props.active ? "0" : "8px")};
+  font-style: ${props => (!props.active ? "normal" : "italic")};
 `;
 
 export const content = css`

@@ -1,8 +1,68 @@
-import * as React from 'react';
-import { minify } from 'html-minifier';
-import { Helmet } from 'react-helmet';
-import { renderToStaticMarkup } from 'react-dom/server';
-import { Site } from './template/Site';
+import * as React from "react";
+import * as MarkdownIt from "markdown-it";
+import { minify } from "html-minifier";
+import { Helmet } from "react-helmet";
+import { renderToStaticMarkup } from "react-dom/server";
+import { Site } from "./template/Site";
+import { Prism } from "./prism";
+
+const FRONT_MATTER_REGEX = /---([\s\S]*?)---\S*/;
+const MD = new MarkdownIt("default", {
+  html: true,
+  linkify: true,
+  highlight(str, lang) {
+    if (!str || !lang) {
+      return str;
+    }
+
+    if (!Prism.languages[lang]) {
+      throw new Error(`${lang} is not supported by the highlighter!`);
+    }
+
+    const lines = Prism.highlight(str, Prism.languages[lang])
+      .split(/\n/)
+      .slice(0, -1);
+
+    return lines.length > 1
+      ? lines.map(s => `<span class="line-number">${s}</span>`).join("\n")
+      : lines.join("\n");
+  }
+});
+
+export function extractFrontMatter(
+  file: string,
+  s: string
+): { body: string; frontMatter: FrontMatter } {
+  const matches = s.match(FRONT_MATTER_REGEX);
+  if (matches === null) {
+    throw new Error(`${file} needs to have front matter`);
+  }
+  const frontMatter = JSON.parse(matches[1]);
+  frontMatter.date = new Date(frontMatter.date);
+  return {
+    body: s.replace(FRONT_MATTER_REGEX, ""),
+    frontMatter
+  };
+}
+
+export function extractExcerpt(
+  file: string,
+  s: string
+): { body: string; excerpt: string } {
+  const moreIndex = s.indexOf("<!--more-->");
+  if (moreIndex === -1) {
+    throw new Error(`${file} needs to have a <!--more--> tag`);
+  }
+
+  return {
+    body: s.replace("<!--more-->", ""),
+    excerpt: s.slice(0, moreIndex)
+  };
+}
+
+export function renderMarkdown(s: string): string {
+  return MD.render(s);
+}
 
 export function makePage(
   pageContent: React.ReactElement<any>,

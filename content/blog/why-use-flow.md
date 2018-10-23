@@ -17,9 +17,9 @@ According to flow's homepage:
 
 > Flow can catch common bugs in JavaScript programs before they run, including
 >
-> * silent type conversions,
-> * null dereferences,
-> * and the dreaded undefined is not a function.
+> - silent type conversions,
+> - null dereferences,
+> - and the dreaded undefined is not a function.
 
 and
 
@@ -95,7 +95,7 @@ console.log({} + {}); // NaN
 console.log({} + []); // 0
 console.log([] + []); // ''
 console.log({} + 2); // [object Object]2
-console.log({} + 'hello'); // [object Object]hello
+console.log({} + "hello"); // [object Object]hello
 ```
 
 I think you can imagine all the possible problems that arise from all this
@@ -109,8 +109,8 @@ breakdown of the benefits of each; instead, I'll just be giving a brief
 introduction of both. If you want to see a bit more debate which is better, the
 following are great discussions
 
-* [Is type safety worth the trade-offs?](http://programmers.stackexchange.com/questions/59606/is-type-safety-worth-the-trade-offs)
-* [What is the supposed productivity gain of dynamic typing?](http://programmers.stackexchange.com/questions/122205/what-is-the-supposed-productivity-gain-of-dynamic-typing)
+- [Is type safety worth the trade-offs?](http://programmers.stackexchange.com/questions/59606/is-type-safety-worth-the-trade-offs)
+- [What is the supposed productivity gain of dynamic typing?](http://programmers.stackexchange.com/questions/122205/what-is-the-supposed-productivity-gain-of-dynamic-typing)
 
 Now given that disclaimer:
 
@@ -144,12 +144,12 @@ cannot add a `String` type to an `int` type.
 
 Note that:
 
-* The error is caught at compile-time instead of at run-time, which means you
+- The error is caught at compile-time instead of at run-time, which means you
   can't even run the code until you fix the errors.
-* If you're using an IDE, you'd get a message saying that `add(x, s)` isn't
+- If you're using an IDE, you'd get a message saying that `add(x, s)` isn't
   possible. Because you specified your types in advance, your code can be
   analyzed at a higher level without compiling to find mistakes.
-* If the function was instead called `sfjkasjf` instead of `add`, you'd still
+- If the function was instead called `sfjkasjf` instead of `add`, you'd still
   know that it takes in two integers and returns an integer, which is useful
   information.
 
@@ -221,15 +221,15 @@ JavaScript.
 
 Note that
 
-* The code is more concise
-* There is no type inference going on. In dynamically typed languages variables
+- The code is more concise
+- There is no type inference going on. In dynamically typed languages variables
   are just containers for values, and have no other special properties.
   `add(x, s)` fails because during run-time you try to add an `int` and a
   `string` not because the interpreter figured out in advance `x` and `s` are
   not compatible.
-* You can't really tell what the type of `a` and `b` are. `int`, `string`,
+- You can't really tell what the type of `a` and `b` are. `int`, `string`,
   `float`, `etc.` are all possibilities.
-* It still throws an error when you run it, albeit at run-time rather than
+- It still throws an error when you run it, albeit at run-time rather than
   compile-time, which is a big distinction. This means testing is more crucial
   for dynamically typed languages because they will run just fine even if the
   code contains type errors.
@@ -249,7 +249,7 @@ This mishmash of weak and dynamic is pretty unfortunate as you can see in
 following example and countless others that criticize these qualities of the
 language.
 
-* [wat](https://www.destroyallsoftware.com/talks/wat)
+- [wat](https://www.destroyallsoftware.com/talks/wat)
 
 The solution to most of these problems is flow, which through static typing and
 type inference, addresses a lot of the pain points of the language like the one
@@ -274,7 +274,7 @@ console.log({} + {}); // NaN
 console.log({} + []); // 0
 console.log([] + []); // ''
 console.log({} + 2); // [object Object]2
-console.log({} + 'hello'); // [object Object]hello
+console.log({} + "hello"); // [object Object]hello
 ```
 
 Immediately **every single line** becomes a type error similar to the one below.
@@ -303,7 +303,7 @@ such as
 type Person = {
   age: number,
   name: string,
-  gender: 'male' | 'female',
+  gender: "male" | "female"
 };
 ```
 
@@ -370,7 +370,7 @@ function xyz(x: number, y: number, z: number): number {
   return x + y + z;
 }
 
-xyz(1, 2, '');
+xyz(1, 2, "");
 ```
 
 Error:
@@ -448,10 +448,10 @@ Code:
 type Person = {
   age: number,
   name: string,
-  gender: 'male' | 'female',
+  gender: "male" | "female"
 };
 
-const person: Person = { name: 'joe', age: 10 };
+const person: Person = { name: "joe", age: 10 };
 ```
 
 Error:
@@ -474,10 +474,10 @@ Code:
 type Person = {
   age: number,
   name: string,
-  gender: 'male' | 'female',
+  gender: "male" | "female"
 };
 
-const person: Person = { name: 'joe', age: 10, gender: 'male' };
+const person: Person = { name: "joe", age: 10, gender: "male" };
 console.log(person.job);
 ```
 
@@ -504,13 +504,13 @@ conceptualized as a type.
 the more advanced things that you can do with flow that allow you to make sure
 every part of your code is working as intended.
 
-* You can use types to check if user input has been validated in
+- You can use types to check if user input has been validated in
   [Phantom Types with Flow](https://medium.com/@gcanti/phantom-types-with-flow-828aff73232b#.su86baahz)
-* You can create types with built in constraints in
+- You can create types with built in constraints in
   [Refinement Types with Flow](https://medium.com/@gcanti/refinements-with-flow-9c7eeae8478b#.e2ik0oqgs)
-* You can create higher kinded types in
+- You can create higher kinded types in
   [Higher Kinded Types with Flow](https://medium.com/@gcanti/higher-kinded-types-in-flow-275b657992b7#.1oa0j4u1a)
-* You can express the side effects of your code as types in
+- You can express the side effects of your code as types in
   [The Eff Monad Implemented in Flow](https://medium.com/@gcanti/the-eff-monad-implemented-in-flow-40803670c3eb#.i067byfnq)
 
 He also has authored
@@ -521,7 +521,7 @@ mind blowing.
 
 TL;DR:
 
-* JavaScript is weakly and dynamically typed, which is error prone and a big
+- JavaScript is weakly and dynamically typed, which is error prone and a big
   reason for the bad rep of the language.
-* With little upfront cost and with the ability to opt-in slowly, Flow fixes
+- With little upfront cost and with the ability to opt-in slowly, Flow fixes
   both of these things by adding a type system to JavaScript.

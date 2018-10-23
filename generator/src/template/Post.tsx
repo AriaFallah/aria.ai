@@ -1,9 +1,9 @@
 /* @jsx jsx */
-import { jsx, Global } from '@emotion/core';
-import * as React from 'react';
-import { Helmet } from 'react-helmet';
-import { PostHeader } from './components/PostHeader';
-import * as Styles from './styles/Post.styles';
+import { jsx, Global } from "@emotion/core";
+import * as React from "react";
+import { Helmet } from "react-helmet";
+import { PostHeader } from "./components/PostHeader";
+import * as Styles from "./styles/Post.styles";
 
 interface Props {
   postHtml: { __html: string };

@@ -1,8 +1,8 @@
-import { css } from '@emotion/core';
+import { css } from "@emotion/core";
 
 export const global = css`
   code {
-    font-family: 'Fira Mono', monospace !important;
+    font-family: "Fira Mono", monospace !important;
     font-size: 14px;
   }
 

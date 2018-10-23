@@ -7,7 +7,7 @@ import * as Styles from './styles/Site.styles';
 const CURRENT_YEAR = new Date().getFullYear();
 
 interface Props {
-  activeTab: 'home' | 'blog';
+  activeTab: 'home' | 'blog' | 'thoughts';
 }
 
 export class Site extends React.Component<Props> {
@@ -37,6 +37,9 @@ export class Site extends React.Component<Props> {
             </Styles.NavLink>
             <Styles.NavLink active={activeTab === 'blog'} href="/blog">
               Blog
+            </Styles.NavLink>
+            <Styles.NavLink active={activeTab === 'thoughts'} href="/thoughts">
+              Thoughts
             </Styles.NavLink>
           </nav>
 

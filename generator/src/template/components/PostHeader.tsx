@@ -1,7 +1,7 @@
 /* @jsx jsx */
-import { jsx } from '@emotion/core';
-import * as React from 'react';
-import * as Styles from '../styles/PostHeader.styles';
+import { jsx } from "@emotion/core";
+import * as React from "react";
+import * as Styles from "../styles/PostHeader.styles";
 
 interface Props {
   frontMatter: FrontMatter;

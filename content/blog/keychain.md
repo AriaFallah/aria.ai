@@ -75,12 +75,12 @@ command in your terminal.
 We're going to be using the `security` command. Specifically, we're going to be
 using these commands:
 
-* `security create-keychain`
-* `security set-keychain-settings`
-* `security add-generic-password`
-* `security find-generic-password`
-* `security delete-generic-password`
-* `security delete-keychain`
+- `security create-keychain`
+- `security set-keychain-settings`
+- `security add-generic-password`
+- `security find-generic-password`
+- `security delete-generic-password`
+- `security delete-keychain`
 
 First we'll run
 
@@ -200,8 +200,8 @@ As for whether that's a problem worth solving, it's for you to decide. Also
 there's probably better, more cross platform choices for a secrets managing CLI
 such as
 
-* https://www.passwordstore.org/
-* https://github.com/lastpass/lastpass-cli
+- https://www.passwordstore.org/
+- https://github.com/lastpass/lastpass-cli
 
 or others that I'm unaware of, but having a simple, native solution is what I
 like about the keychain.
