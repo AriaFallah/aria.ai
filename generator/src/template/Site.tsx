@@ -1,13 +1,13 @@
 /* @jsx jsx */
-import { jsx } from '@emotion/core';
-import * as React from 'react';
-import { Helmet } from 'react-helmet';
-import * as Styles from './styles/Site.styles';
+import { jsx } from "@emotion/core";
+import * as React from "react";
+import { Helmet } from "react-helmet";
+import * as Styles from "./styles/Site.styles";
 
 const CURRENT_YEAR = new Date().getFullYear();
 
 interface Props {
-  activeTab: 'home' | 'blog' | 'thoughts';
+  activeTab: "home" | "blog" | "thoughts";
 }
 
 export class Site extends React.Component<Props> {
@@ -32,13 +32,16 @@ export class Site extends React.Component<Props> {
 
         <div css={Styles.content}>
           <nav css={Styles.nav}>
-            <Styles.NavLink active={activeTab === 'home'} href="/">
+            <a css={Styles.navIcon} href="/">
+              <img src="/assets/icons/logo.svg" alt="site logo" />
+            </a>
+            <Styles.NavLink active={activeTab === "home"} href="/">
               Home
             </Styles.NavLink>
-            <Styles.NavLink active={activeTab === 'blog'} href="/blog">
+            <Styles.NavLink active={activeTab === "blog"} href="/blog">
               Blog
             </Styles.NavLink>
-            <Styles.NavLink active={activeTab === 'thoughts'} href="/thoughts">
+            <Styles.NavLink active={activeTab === "thoughts"} href="/thoughts">
               Thoughts
             </Styles.NavLink>
           </nav>

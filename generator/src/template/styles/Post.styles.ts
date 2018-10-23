@@ -14,7 +14,6 @@ export const global = css`
   }
 
   pre {
-    margin-left: 1.45em;
     counter-reset: line;
     overflow-x: auto;
   }

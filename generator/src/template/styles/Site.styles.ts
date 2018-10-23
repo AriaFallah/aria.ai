@@ -16,6 +16,15 @@ export const NavLink = styled.a`
   font-style: ${props => (!props.active ? "normal" : "italic")};
 `;
 
+export const navIcon = css`
+  border-bottom: 0;
+  margin-right: 1em;
+
+  img {
+    width: 35px;
+  }
+`;
+
 export const content = css`
   max-width: 800px;
   display: block;
@@ -28,12 +37,12 @@ export const nav = css`
   border-bottom: 4px solid black;
   margin: 0 auto;
   display: flex;
-  height: 50px;
   align-items: center;
   margin-bottom: 1em;
+  padding: 5px 0;
 
   @media (max-width: 800px) {
-    padding: 0 10px;
+    padding: 5px 10px;
   }
 `;
 
