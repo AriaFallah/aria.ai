@@ -16,8 +16,9 @@ let main = () => {
       ~canvasElement=Document.getElementById("canvas", document) |> L.unwrap,
       ~canvasSize=L.int(L.roundToNearest(size, cellSize)),
       ~cellSize=L.int(cellSize),
-    );
-  Canvas.scaleCanvas(canvas);
+    )
+    |> Canvas.scaleCanvas;
+
   let game = Game.make(~canvas, ~msPerUpdate=150.);
   Game.run(game);
 };

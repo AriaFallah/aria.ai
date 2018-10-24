@@ -1,9 +1,6 @@
 type t;
-
 type canvas;
-
 type drawable;
-
 type options = {
   .
   "fill": Js.undefined(string),
@@ -17,7 +14,7 @@ type options = {
 };
 
 [@bs.obj]
-external makeOptions :
+external makeOptions:
   (
     ~fill: string=?,
     ~stroke: string=?,
@@ -33,22 +30,12 @@ external makeOptions :
   "";
 
 [@bs.module "roughjs"] [@bs.scope "default"]
-external canvas : Dom.element => canvas = "";
+external canvas: Dom.element => canvas = "";
+[@bs.get] external make: canvas => t = "generator";
 
+[@bs.send] external draw: (canvas, drawable) => unit = "";
 [@bs.send]
-external rectangle :
-  (canvas, ~x: float, ~y: float, ~w: float, ~h: float, ~options: options) =>
-  unit =
+external rectangle:
+  (t, ~x: float, ~y: float, ~w: float, ~h: float, ~options: options) =>
+  drawable =
   "";
-
-[@bs.send] external draw : (canvas, drawable) => unit = "";
-
-module Generator = {
-  type t;
-  [@bs.get] external make : canvas => t = "generator";
-  [@bs.send]
-  external rectangle :
-    (t, ~x: float, ~y: float, ~w: float, ~h: float, ~options: options) =>
-    drawable =
-    "";
-};

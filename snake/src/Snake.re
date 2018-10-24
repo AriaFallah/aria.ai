@@ -1,44 +1,32 @@
 open Types;
 
-open Belt;
-
-module Segment = {
-  type t = {
-    position: point,
-    didPivot: bool,
-    direction,
-    getImage: unit => Rough.drawable,
-  };
-  let make = (~canvas, ~position, ~direction=Right, ~didPivot=false, ()) => {
-    let cell = Canvas.Cell.make(~canvas, ~position, ~color="blue");
-    {position, didPivot, direction, getImage: cell.getImage};
-  };
-};
+module List = Belt.List;
+module MQ = Belt.MutableQueue;
 
 type t = {
   boardSize: int,
   body: list(Segment.t),
-  moveQueue: MutableQueue.t(direction),
+  moveQueue: MQ.t(direction),
 };
 
-let validMove = (cur: direction, next: direction) : bool =>
-  switch (cur) {
-  | Left => next != Right
-  | Right => next != Left
-  | Up => next != Down
-  | Down => next != Up
+let validMove = (~curDir: direction, ~nextDir: direction): bool =>
+  switch (curDir) {
+  | Left => nextDir != Right
+  | Right => nextDir != Left
+  | Up => nextDir != Down
+  | Down => nextDir != Up
   };
 
-let queueMove = (snake: t, nextDir: direction) => {
-  let size = MutableQueue.size(snake.moveQueue);
+let queueMove = (snake: t, ~nextDir: direction) => {
+  let size = MQ.size(snake.moveQueue);
   if (size < 3) {
-    let dir =
-      switch (MutableQueue.peek(snake.moveQueue)) {
+    let curDir =
+      switch (MQ.peek(snake.moveQueue)) {
       | Some(direction) => direction
       | None => List.headExn(snake.body).direction
       };
-    if (validMove(dir, nextDir)) {
-      MutableQueue.add(snake.moveQueue, nextDir);
+    if (validMove(~curDir, ~nextDir)) {
+      MQ.add(snake.moveQueue, nextDir);
     };
   };
 };
@@ -49,61 +37,26 @@ let make = (canvas: Canvas.t) => {
       5,
       x => {
         let x = 4. -. L.float(x);
-        Segment.make(~canvas, ~position={x, y: 0.}, ());
+        Segment.make(~position={x, y: 0.}, ());
       },
     ),
-  moveQueue: MutableQueue.make(),
+  moveQueue: MQ.make(),
   boardSize: canvas.canvasSize / canvas.cellSize,
 };
 
-let updatePosition = (segment: Segment.t, boardSize: int) => {
-  let {x, y} = segment.position;
-  let boardSize = L.float(boardSize);
-  switch (segment.direction) {
-  | Left =>
-    let x = x -. 1.;
-    let x = x < 0. ? boardSize -. 1. : x;
-    {x, y};
-  | Right =>
-    let x = x +. 1.;
-    let x = x >= boardSize ? 0. : x;
-    {x, y};
-  | Up =>
-    let y = y -. 1.;
-    let y = y < 0. ? boardSize -. 1. : y;
-    {x, y};
-  | Down =>
-    let y = y +. 1.;
-    let y = y >= boardSize ? 0. : y;
-    {x, y};
-  };
-};
-
-let approximatePosition = (segment: Segment.t, boardSize: int, dt: float) => {
-  let {x: x1, y: y1} = segment.position;
-  let {x: x2, y: y2} = updatePosition(segment, boardSize);
-  switch (segment.direction) {
-  | Left =>
-    let x1 = x1 < x2 ? x2 +. 1. : x1;
-    {x: L.lerp(x1, x2, dt), y: y1};
-  | Right =>
-    let x1 = x1 > x2 ? x2 -. 1. : x1;
-    {x: L.lerp(x1, x2, dt), y: y1};
-  | Up =>
-    let y1 = y1 < y2 ? y2 +. 1. : y1;
-    {x: x1, y: L.lerp(y1, y2, dt)};
-  | Down =>
-    let y1 = y1 > y2 ? y2 -. 1. : y1;
-    {x: x1, y: L.lerp(y1, y2, dt)};
-  };
-};
-
-let draw = (snake: t, canvas: Canvas.t, dt: float) =>
+let draw =
+    (
+      snake: t,
+      ~canvas: Canvas.t,
+      ~dt: float,
+      ~bodyCells: array(Rough.drawable),
+    ) =>
   List.forEach(snake.body, (segment: Segment.t) =>
     Canvas.paintCell(
       canvas,
-      segment.getImage(),
-      approximatePosition(segment, snake.boardSize, dt),
+      ~image=bodyCells[segment.getCellIndex()],
+      ~point=
+        Segment.approximatePosition(segment, ~boardSize=snake.boardSize, ~dt),
     )
   );
 
@@ -121,21 +74,21 @@ let isCollidingWithSelf = (snake: t) => {
 let pivotHead = (snake: t) => {
   let head = List.headExn(snake.body);
   let head =
-    switch (MutableQueue.pop(snake.moveQueue)) {
+    switch (MQ.pop(snake.moveQueue)) {
     | Some(direction) => {...head, direction, didPivot: true}
     | None => head
     };
   {...snake, body: [head, ...List.tailExn(snake.body)]};
 };
 
-let makePivot = (s1: Segment.t, s2: Segment.t) =>
-  if (s1.didPivot) {
+let makePivot = (~leader: Segment.t, ~follower: Segment.t) =>
+  if (leader.didPivot) {
     [
-      {...s1, didPivot: false},
-      {...s2, didPivot: true, direction: s1.direction},
+      {...leader, didPivot: false},
+      {...follower, didPivot: true, direction: leader.direction},
     ];
   } else {
-    [s1, s2];
+    [leader, follower];
   };
 
 let pivotBody = (snake: t) => {
@@ -143,10 +96,10 @@ let pivotBody = (snake: t) => {
     switch (l) {
     | [] => []
     | [s] => [s]
-    | [s1, s2] => makePivot(s1, s2)
+    | [s1, s2] => makePivot(~leader=s1, ~follower=s2)
     | [s, ...rest] =>
       let rest = f(rest);
-      let pivot = makePivot(s, List.headExn(rest));
+      let pivot = makePivot(~leader=s, ~follower=List.headExn(rest));
       List.concat(pivot, List.tailExn(rest));
     };
   {...snake, body: f(snake.body)};
@@ -156,11 +109,14 @@ let moveSnake = (snake: t) => {
   ...snake,
   body:
     List.map(snake.body, (segment: Segment.t) =>
-      {...segment, position: updatePosition(segment, snake.boardSize)}
+      {
+        ...segment,
+        position: Segment.updatePosition(segment, ~boardSize=snake.boardSize),
+      }
     ),
 };
 
-let grow = (snake: t, canvas: Canvas.t) => {
+let grow = (snake: t) => {
   let last = List.getExn(snake.body, List.length(snake.body) - 1);
   let position =
     switch (last.direction) {
@@ -174,7 +130,7 @@ let grow = (snake: t, canvas: Canvas.t) => {
     body:
       List.concat(
         snake.body,
-        [Segment.make(~canvas, ~position, ~direction=last.direction, ())],
+        [Segment.make(~position, ~direction=last.direction, ())],
       ),
   };
 };

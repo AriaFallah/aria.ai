@@ -1,19 +1,19 @@
 open Types;
-
 open Webapi.Dom;
-
 open Dom.Storage;
 
-open Belt;
+module List = Belt.List;
 
 [@bs.val] [@bs.scope ("window", "performance")]
-external now : unit => float = "";
+external now: unit => float = "";
 
 type t = {
+  bodyCells: array(Rough.drawable),
   canvas: Canvas.t,
   highScoreElement: Dom.element,
   scoreElement: Dom.element,
   mutable food: Canvas.Cell.t,
+  foodCells: array(Rough.drawable),
   mutable gameOver: bool,
   mutable highScore: int,
   mutable score: int,
@@ -28,7 +28,7 @@ type gameState = {
   snake: Snake.t,
 };
 
-let setScore = (game: t, score: int) => {
+let setScore = (game: t, ~score: int) => {
   game.score = score;
   let scoreString = L.string(game.score);
   Element.setInnerHTML(game.scoreElement, scoreString);
@@ -43,8 +43,8 @@ let spawnFood = (game: t) => {
   let rec loop = pos => {
     let containsPos =
       game.snake.body
-      |> List.map(_, segment => segment.position)
-      |> List.has(_, pos, (==));
+      ->List.map(segment => segment.position)
+      ->List.has(pos, (==));
     if (containsPos) {
       loop(Canvas.randomPoint(game.canvas));
     } else {
@@ -55,10 +55,20 @@ let spawnFood = (game: t) => {
   {...game.food, position};
 };
 
-let render = (game: t, dt: float) => {
+let render =
+    (
+      game: t,
+      ~dt: float,
+      ~bodyCells: array(Rough.drawable),
+      ~foodCells: array(Rough.drawable),
+    ) => {
   Canvas.drawBackground(game.canvas);
-  Canvas.paintCell(game.canvas, game.food.getImage(), game.food.position);
-  Snake.draw(game.snake, game.canvas, dt);
+  Canvas.paintCell(
+    game.canvas,
+    ~image=foodCells[game.food.getCellIndex()],
+    ~point=game.food.position,
+  );
+  Snake.draw(game.snake, ~canvas=game.canvas, ~dt, ~bodyCells);
 };
 
 let update = (game: t) => {
@@ -69,8 +79,8 @@ let update = (game: t) => {
   } else {
     let head = List.headExn(game.snake.body);
     if (head.position == game.food.position) {
-      setScore(game, game.score + 1);
-      game.snake = Snake.grow(game.snake, game.canvas);
+      setScore(game, ~score=game.score + 1);
+      game.snake = Snake.grow(game.snake);
       game.food = spawnFood(game);
     };
     game;
@@ -87,21 +97,21 @@ let run = (initialGame: t) => {
         (game, dt);
       };
     let (game, dt) = updateLoop(game, dt);
-    render(game, dt /. game.msPerUpdate);
-    if (! game.gameOver) {
+    render(
+      game,
+      ~dt=dt /. game.msPerUpdate,
+      ~bodyCells=game.bodyCells,
+      ~foodCells=game.foodCells,
+    );
+    if (!game.gameOver) {
       Webapi.requestAnimationFrame(c => gameLoop(game, c, current, dt));
     };
   };
   Webapi.requestAnimationFrame(c => gameLoop(initialGame, now(), c, 0.));
 };
 
-let newGame = (~canvas) => {
-  food:
-    Canvas.Cell.make(
-      ~canvas,
-      ~position=Canvas.randomPoint(canvas),
-      ~color="red",
-    ),
+let newGame = canvas => {
+  food: Canvas.Cell.make(~position=Canvas.randomPoint(canvas)),
   snake: Snake.make(canvas),
   score: 0,
   gameOver: false,
@@ -109,11 +119,11 @@ let newGame = (~canvas) => {
 
 let restartGameIfOver = (game: t) =>
   if (game.gameOver) {
-    let {food, snake, score, gameOver} = newGame(~canvas=game.canvas);
+    let {food, snake, score, gameOver} = newGame(game.canvas);
     game.food = food;
     game.snake = snake;
     game.gameOver = gameOver;
-    setScore(game, score);
+    setScore(game, ~score);
     run(game);
   };
 
@@ -133,9 +143,9 @@ let getDirectionFromKey = (keyName: string) =>
 let handleInput = (game: t) => {
   Element.addKeyDownEventListener(
     e => {
-      if (! KeyboardEvent.repeat(e)) {
+      if (!KeyboardEvent.repeat(e)) {
         switch (e |> KeyboardEvent.code |> getDirectionFromKey) {
-        | Some(d) => Snake.queueMove(game.snake, d)
+        | Some(d) => Snake.queueMove(game.snake, ~nextDir=d)
         | None => ()
         };
       };
@@ -148,29 +158,29 @@ let handleInput = (game: t) => {
   let upElement = document |> Document.getElementById("up") |> L.unwrap;
   let downElement = document |> Document.getElementById("down") |> L.unwrap;
   Element.addClickEventListener(
-    (_) => {
-      Snake.queueMove(game.snake, Left);
+    _ => {
+      Snake.queueMove(game.snake, ~nextDir=Left);
       restartGameIfOver(game);
     },
     leftElement,
   );
   Element.addClickEventListener(
-    (_) => {
-      Snake.queueMove(game.snake, Right);
+    _ => {
+      Snake.queueMove(game.snake, ~nextDir=Right);
       restartGameIfOver(game);
     },
     rightElement,
   );
   Element.addClickEventListener(
-    (_) => {
-      Snake.queueMove(game.snake, Up);
+    _ => {
+      Snake.queueMove(game.snake, ~nextDir=Up);
       restartGameIfOver(game);
     },
     upElement,
   );
   Element.addClickEventListener(
-    (_) => {
-      Snake.queueMove(game.snake, Down);
+    _ => {
+      Snake.queueMove(game.snake, ~nextDir=Down);
       restartGameIfOver(game);
     },
     downElement,
@@ -178,10 +188,16 @@ let handleInput = (game: t) => {
 };
 
 let make = (~canvas, ~msPerUpdate) => {
-  let {food, snake, score, gameOver} = newGame(~canvas);
+  let {food, snake, score, gameOver} = newGame(canvas);
+  let bodyCells =
+    Belt.Array.makeBy(50, _ => Canvas.makeCell(canvas, ~color="blue"));
+  let foodCells =
+    Belt.Array.makeBy(50, _ => Canvas.makeCell(canvas, ~color="red"));
   let game = {
+    bodyCells,
     canvas,
     food,
+    foodCells,
     gameOver,
     highScore:
       localStorage |> getItem("highScore") |> L.default("0") |> L.parseInt,

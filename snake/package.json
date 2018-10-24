@@ -10,8 +10,8 @@
     "webpack-dev-server": "^3.1.1"
   },
   "devDependencies": {
-    "bs-platform": "^2.2.2",
-    "bs-webapi": "^0.8.3"
+    "bs-platform": "^4.0.6",
+    "bs-webapi": "^0.13.0"
   },
   "name": "snake-reason",
   "private": true,
