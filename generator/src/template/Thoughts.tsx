@@ -49,7 +49,11 @@ export class Thoughts extends React.Component<Props> {
                   }
                 `}
               >
-                <a href={`#${date}`} css={{ flexShrink: 0, marginRight: 10 }}>
+                <a
+                  id={date}
+                  href={`#${date}`}
+                  css={{ flexShrink: 0, marginRight: 10 }}
+                >
                   [{date.split("T")[0]}]
                 </a>
                 <article
