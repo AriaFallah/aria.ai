@@ -44,17 +44,11 @@ let make = (canvas: Canvas.t) => {
   boardSize: canvas.canvasSize / canvas.cellSize,
 };
 
-let draw =
-    (
-      snake: t,
-      ~canvas: Canvas.t,
-      ~dt: float,
-      ~bodyCells: array(Rough.drawable),
-    ) =>
+let draw = (snake: t, ~canvas, ~dt, ~bodyCells) =>
   List.forEach(snake.body, (segment: Segment.t) =>
-    Canvas.paintCell(
+    Canvas.putCellImageData(
       canvas,
-      ~image=bodyCells[segment.getCellIndex()],
+      ~imageData=bodyCells[segment.getCellIndex()],
       ~point=
         Segment.approximatePosition(segment, ~boardSize=snake.boardSize, ~dt),
     )

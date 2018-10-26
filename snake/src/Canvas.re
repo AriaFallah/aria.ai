@@ -25,8 +25,7 @@ let make = (~canvasElement, ~canvasSize, ~cellSize): t => {
   };
 };
 
-let drawBackground = (canvas: t) => {
-  let {canvasSize, ctx} = canvas;
+let drawBackground = ({canvasSize, ctx}: t) => {
   let canvasSize = float(canvasSize);
   Canvas2d.setFillStyle(ctx, Canvas2d.String, "white");
   ctx |> Canvas2d.fillRect(~x=0., ~y=0., ~w=canvasSize, ~h=canvasSize);
@@ -51,16 +50,6 @@ let makeCell = (canvas: t, ~color: string) => {
         (),
       ),
   );
-};
-
-let paintCell = (canvas: t, ~image: Rough.drawable, ~point) => {
-  let {x, y} = point;
-  let {cellSize, roughCtx} = canvas;
-  let cellSize = float(cellSize);
-  canvas.ctx |> Canvas2d.save;
-  canvas.ctx |> Canvas2d.translate(~x=x *. cellSize, ~y=y *. cellSize);
-  Rough.draw(roughCtx, image);
-  canvas.ctx |> Canvas2d.restore;
 };
 
 let randomPoint = (canvas: t): point => {
@@ -95,6 +84,20 @@ let scaleCanvas = (canvas: t) => {
   canvas;
 };
 
+let getCellImageData = (canvas: t, ~image: Rough.drawable) => {
+  let {cellSize, ctx, roughCtx} = canvas;
+  let cellSize = L.float(cellSize + 3);
+  Rough.draw(roughCtx, image);
+  let imageData =
+    ctx |> Canvas2d.getImageData(~sx=0., ~sy=0., ~sw=cellSize, ~sh=cellSize);
+  Canvas2d.setFillStyle(ctx, Canvas2d.String, "white");
+  ctx |> Canvas2d.fillRect(~x=0., ~y=0., ~w=cellSize, ~h=cellSize);
+  imageData;
+};
+
+let putCellImageData = ({ctx}: t, ~imageData: ImageRe.t, ~point) =>
+  Canvas2d.putImageData(ctx, ~imageData, ~dx=point.x, ~dy=point.y, ());
+
 module Cell = {
   type t = {
     position: point,
@@ -106,7 +109,7 @@ module Cell = {
     let index = ref(L.randomInt(50));
     let getCellIndex = () => {
       calls := calls^ + 1;
-      if (calls^ == 3) {
+      if (calls^ == 4) {
         calls := 0;
         index := L.randomInt(50);
       };

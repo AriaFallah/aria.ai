@@ -4,16 +4,13 @@ open Dom.Storage;
 
 module List = Belt.List;
 
-[@bs.val] [@bs.scope ("window", "performance")]
-external now: unit => float = "";
-
 type t = {
-  bodyCells: array(Rough.drawable),
+  bodyCells: array(ImageRe.t),
   canvas: Canvas.t,
   highScoreElement: Dom.element,
   scoreElement: Dom.element,
   mutable food: Canvas.Cell.t,
-  foodCells: array(Rough.drawable),
+  foodCells: array(ImageRe.t),
   mutable gameOver: bool,
   mutable highScore: int,
   mutable score: int,
@@ -55,20 +52,15 @@ let spawnFood = (game: t) => {
   {...game.food, position};
 };
 
-let render =
-    (
-      game: t,
-      ~dt: float,
-      ~bodyCells: array(Rough.drawable),
-      ~foodCells: array(Rough.drawable),
-    ) => {
+let render = (game: t, ~dt: float) => {
+  let foodImageData = game.foodCells[game.food.getCellIndex()];
   Canvas.drawBackground(game.canvas);
-  Canvas.paintCell(
+  Canvas.putCellImageData(
     game.canvas,
-    ~image=foodCells[game.food.getCellIndex()],
+    ~imageData=foodImageData,
     ~point=game.food.position,
   );
-  Snake.draw(game.snake, ~canvas=game.canvas, ~dt, ~bodyCells);
+  Snake.draw(game.snake, ~canvas=game.canvas, ~dt, ~bodyCells=game.bodyCells);
 };
 
 let update = (game: t) => {
@@ -87,27 +79,28 @@ let update = (game: t) => {
   };
 };
 
+let rec updateLoop = (game, ~dt) =>
+  if (dt > game.msPerUpdate) {
+    updateLoop(update(game), ~dt=dt -. game.msPerUpdate);
+  } else {
+    (game, dt);
+  };
+
 let run = (initialGame: t) => {
-  let rec gameLoop = (game: t, current: float, last: float, dt: float) => {
+  let rec gameLoop = (game: t, ~current: float, ~last: float, ~dt: float) => {
     let dt = dt +. (current -. last);
-    let rec updateLoop = (game, dt) =>
-      if (dt > game.msPerUpdate) {
-        updateLoop(update(game), dt -. game.msPerUpdate);
-      } else {
-        (game, dt);
-      };
-    let (game, dt) = updateLoop(game, dt);
-    render(
-      game,
-      ~dt=dt /. game.msPerUpdate,
-      ~bodyCells=game.bodyCells,
-      ~foodCells=game.foodCells,
-    );
+    let (game, dt) = updateLoop(game, ~dt);
+    render(game, ~dt=dt /. game.msPerUpdate);
     if (!game.gameOver) {
-      Webapi.requestAnimationFrame(c => gameLoop(game, c, current, dt));
+      Webapi.requestAnimationFrame(c =>
+        gameLoop(game, ~current=c, ~last=current, ~dt)
+      );
     };
   };
-  Webapi.requestAnimationFrame(c => gameLoop(initialGame, now(), c, 0.));
+
+  Webapi.requestAnimationFrame(c =>
+    gameLoop(initialGame, ~current=c, ~last=c, ~dt=0.)
+  );
 };
 
 let newGame = canvas => {
@@ -187,12 +180,15 @@ let handleInput = (game: t) => {
   );
 };
 
+let getCellsImageData = (canvas, ~color) =>
+  Belt.Array.makeBy(50, _ => Canvas.makeCell(canvas, ~color))
+  ->Belt.Array.map(image => Canvas.getCellImageData(canvas, ~image));
+
 let make = (~canvas, ~msPerUpdate) => {
-  let {food, snake, score, gameOver} = newGame(canvas);
-  let bodyCells =
-    Belt.Array.makeBy(50, _ => Canvas.makeCell(canvas, ~color="blue"));
-  let foodCells =
-    Belt.Array.makeBy(50, _ => Canvas.makeCell(canvas, ~color="red"));
+  let {food, gameOver, score, snake} = newGame(canvas);
+  let bodyCells = getCellsImageData(canvas, ~color="blue");
+  let foodCells = getCellsImageData(canvas, ~color="red");
+
   let game = {
     bodyCells,
     canvas,
@@ -208,6 +204,7 @@ let make = (~canvas, ~msPerUpdate) => {
     snake,
     msPerUpdate,
   };
+
   Element.setInnerHTML(game.highScoreElement, L.string(game.highScore));
   handleInput(game);
   game;
