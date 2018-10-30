@@ -23,7 +23,7 @@ export class Thoughts extends React.Component<Props> {
           />
         </Helmet>
         <Global styles={PostStyles.global} />
-        <div css={{ marginBottom: 10 }}>
+        <div css={{ marginBottom: 15 }}>
           I heard there's something called twitter for this...
         </div>
         {thoughts
@@ -40,6 +40,7 @@ export class Thoughts extends React.Component<Props> {
                 css={css`
                   align-items: flex-start;
                   display: flex;
+                  margin-bottom: 15px;
 
                   @media (max-width: 500px) {
                     flex-direction: column;
