@@ -101,7 +101,7 @@ let getCellImageData = (canvas: t, ~image: Rough.drawable) => {
 
 let putCellImageData =
     ({cellSize, ctx, dpr}: t, ~imageData: ImageRe.t, ~point) => {
-  let cellSize = L.float(cellSize) *. dpr +. 3.0;
+  let cellSize = L.float(cellSize) *. dpr;
   Canvas2d.putImageData(
     ctx,
     ~imageData,
@@ -109,8 +109,8 @@ let putCellImageData =
     ~dy=point.y *. cellSize,
     ~dirtyX=0.,
     ~dirtyY=0.,
-    ~dirtyWidth=cellSize,
-    ~dirtyHeight=cellSize,
+    ~dirtyWidth=cellSize +. 3.0,
+    ~dirtyHeight=cellSize +. 3.0,
     (),
   );
 };

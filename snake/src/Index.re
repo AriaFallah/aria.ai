@@ -1,6 +1,6 @@
 open Webapi.Dom;
 
-let pageSize = () => {
+let getPageSize = () => {
   let body =
     Document.unsafeAsHtmlDocument(document) |> HtmlDocument.body |> L.unwrap;
   let clientHeight = Element.clientHeight(body);
@@ -9,7 +9,7 @@ let pageSize = () => {
 };
 
 let main = () => {
-  let size = pageSize();
+  let size = getPageSize();
   let cellSize = L.ceil(size /. 25.);
   let canvas =
     Canvas.make(
