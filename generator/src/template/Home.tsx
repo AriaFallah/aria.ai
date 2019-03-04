@@ -11,38 +11,33 @@ const socialLinks = [
   {
     link: "https://github.com/ariafallah",
     img: "/assets/icons/github.svg",
-    alt: "github logo",
+    alt: "github logo"
   },
   {
     link: "http://stackoverflow.com/users/3772221",
     img: "/assets/icons/stackexchange.svg",
-    alt: "stackoverflow logo",
+    alt: "stackoverflow logo"
   },
   {
     link: "https://linkedin.com/in/ariafallah",
     img: "/assets/icons/linkedin.svg",
-    alt: "linkedin logo",
-  },
-  {
-    link: "/assets/ariafallah_resume.pdf",
-    img: "/assets/icons/resume.svg",
-    alt: "resume logo",
+    alt: "linkedin logo"
   },
   {
     link: "https://facebook.com/m0meni",
     img: "/assets/icons/facebook.svg",
-    alt: "facebook logo",
+    alt: "facebook logo"
   },
   {
     link: "https://instagram.com/m0meni",
     img: "/assets/icons/instagram.svg",
-    alt: "instagram logo",
+    alt: "instagram logo"
   },
   {
     link: "https://twitter.com/m0meni",
     img: "/assets/icons/twitter.svg",
-    alt: "twitter logo",
-  },
+    alt: "twitter logo"
+  }
 ];
 
 const projects = [
@@ -69,7 +64,7 @@ const projects = [
       static site generator
     </a>{" "}
     built on top of React and written in TypeScript.
-  </React.Fragment>,
+  </React.Fragment>
 ];
 
 export class Home extends React.Component<Props> {
