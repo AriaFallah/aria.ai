@@ -1,4 +1,5 @@
 open Types;
+open Webapi.Dom;
 open Webapi.Canvas;
 
 type t = {
@@ -68,7 +69,6 @@ let randomPoint = (canvas: t): point => {
 };
 
 let scaleCanvas = (canvas: t) => {
-  open Webapi.Dom;
   let {canvasSize, canvasElement, ctx, dpr} = canvas;
   let canvasSizeStr = {j|$(canvasSize)px|j};
   if (dpr != 1.) {
@@ -99,8 +99,7 @@ let getCellImageData = (canvas: t, ~image: Rough.drawable) => {
   imageData;
 };
 
-let putCellImageData =
-    ({cellSize, ctx, dpr}: t, ~imageData: ImageRe.t, ~point) => {
+let putCellImageData = ({cellSize, ctx, dpr}: t, ~imageData: Image.t, ~point) => {
   let cellSize = L.float(cellSize) *. dpr;
   Canvas2d.putImageData(
     ctx,

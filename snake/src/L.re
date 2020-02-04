@@ -1,10 +1,10 @@
 exception NoneThrow(string);
 
-[@bs.val] external parseInt: string => int = "";
-[@bs.val] [@bs.scope "Math"] external random: unit => float = "";
-[@bs.val] [@bs.scope "Math"] external ceil: float => float = "";
-[@bs.val] [@bs.scope "Math"] external floor: float => float = "";
-[@bs.val] [@bs.scope "Math"] external round: float => float = "";
+[@bs.val] external parseInt: string => int = "parseInt";
+[@bs.val] [@bs.scope "Math"] external random: unit => float = "random";
+[@bs.val] [@bs.scope "Math"] external ceil: float => float = "ceil";
+[@bs.val] [@bs.scope "Math"] external floor: float => float = "floor";
+[@bs.val] [@bs.scope "Math"] external round: float => float = "round";
 
 [@bs.val] external string: 'a => string = "String";
 external float: int => float = "%identity";

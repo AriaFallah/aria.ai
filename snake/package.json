@@ -1,17 +1,15 @@
 {
   "dependencies": {
-    "html-webpack-plugin": "^3.0.6",
-    "rollup": "^0.58.0",
-    "rollup-plugin-node-resolve": "^3.2.0",
-    "rollup-plugin-uglify": "^3.0.0",
-    "roughjs": "^2.0.0",
-    "webpack": "^4.1.1",
-    "webpack-cli": "^2.0.12",
-    "webpack-dev-server": "^3.1.1"
-  },
-  "devDependencies": {
-    "bs-platform": "^4.0.6",
-    "bs-webapi": "^0.13.0"
+    "@rollup/plugin-node-resolve": "^7.1.1",
+    "bs-platform": "^7.1.0",
+    "bs-webapi": "^0.15.6",
+    "html-webpack-plugin": "^3.2.0",
+    "rollup": "^1.31.0",
+    "rollup-plugin-terser": "^5.2.0",
+    "roughjs": "^4.0.4",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.2"
   },
   "name": "snake-reason",
   "private": true,

@@ -26,16 +26,15 @@ external makeOptions:
     ~bowing: float=?,
     unit
   ) =>
-  options =
-  "";
+  options;
 
 [@bs.module "roughjs"] [@bs.scope "default"]
-external canvas: Dom.element => canvas = "";
-[@bs.get] external make: canvas => t = "generator";
+external canvas: Dom.element => canvas = "canvas";
 
-[@bs.send] external draw: (canvas, drawable) => unit = "";
+[@bs.get] external make: canvas => t = "generator";
+[@bs.send] external draw: (canvas, drawable) => unit = "draw";
 [@bs.send]
 external rectangle:
   (t, ~x: float, ~y: float, ~w: float, ~h: float, ~options: options) =>
   drawable =
-  "";
+  "rectangle";

@@ -5,12 +5,12 @@ open Dom.Storage;
 module List = Belt.List;
 
 type t = {
-  bodyCells: array(ImageRe.t),
+  bodyCells: array(Image.t),
   canvas: Canvas.t,
   highScoreElement: Dom.element,
   scoreElement: Dom.element,
   mutable food: Canvas.Cell.t,
-  foodCells: array(ImageRe.t),
+  foodCells: array(Image.t),
   mutable gameOver: bool,
   mutable highScore: int,
   mutable score: int,
