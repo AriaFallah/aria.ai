@@ -1,16 +1,44 @@
 /* @jsx jsx */
-import { Global, css, jsx } from "@emotion/core";
+import { css, jsx } from "@emotion/core";
 import * as React from "react";
 import { Helmet } from "react-helmet";
-import * as PostStyles from "./styles/Post.styles";
+import { GlobalCodeStyle } from "./GlobalCodeStyle";
 
 type Props = {
   thoughts: Thought[];
 };
 
+const styles = {
+  header: css`
+    margin-bottom: 15px;
+  `,
+  thoughtContainer: css`
+    align-items: flex-start;
+    display: flex;
+    margin-bottom: 15px;
+
+    @media (max-width: 500px) {
+      flex-direction: column;
+      a {
+        margin-bottom: 10px;
+      }
+    }
+  `,
+  thoughtDate: css`
+    flex-shrink: 0;
+    margin-right: 10px;
+  `,
+  thoughtContent: css`
+    p:first-of-type {
+      margin-top: 0;
+    }
+  `
+};
+
 export function Thoughts({ thoughts }: Props) {
   return (
     <React.Fragment>
+      <GlobalCodeStyle />
       <Helmet>
         <meta name="description" content="Aria Fallah's thoughts" />
         <title>Aria's Thoughts</title>
@@ -20,8 +48,7 @@ export function Thoughts({ thoughts }: Props) {
           href="https://fonts.googleapis.com/css?family=Fira+Mono"
         />
       </Helmet>
-      <Global styles={PostStyles.global} />
-      <div css={{ marginBottom: 15 }}>
+      <div css={styles.header}>
         I heard there's something called twitter for this...
       </div>
       {thoughts
@@ -34,34 +61,12 @@ export function Thoughts({ thoughts }: Props) {
         .map(t => {
           const date = t.frontMatter.date.toISOString();
           return (
-            <div
-              key={date}
-              css={css`
-                align-items: flex-start;
-                display: flex;
-                margin-bottom: 15px;
-
-                @media (max-width: 500px) {
-                  flex-direction: column;
-                  a {
-                    margin-bottom: 10px;
-                  }
-                }
-              `}
-            >
-              <a
-                id={date}
-                href={`#${date}`}
-                css={{ flexShrink: 0, marginRight: 10 }}
-              >
+            <div key={date} css={styles.thoughtContainer}>
+              <a id={date} href={`#${date}`} css={styles.thoughtDate}>
                 [{date.split("T")[0]}]
               </a>
               <article
-                css={css`
-                  p:first-of-type {
-                    margin-top: 0;
-                  }
-                `}
+                css={styles.thoughtContent}
                 dangerouslySetInnerHTML={{ __html: t.body }}
               />
             </div>

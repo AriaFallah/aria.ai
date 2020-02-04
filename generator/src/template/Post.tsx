@@ -1,9 +1,7 @@
-/* @jsx jsx */
-import { jsx, Global } from "@emotion/core";
 import * as React from "react";
 import { Helmet } from "react-helmet";
-import { PostHeader } from "./components/PostHeader";
-import * as Styles from "./styles/Post.styles";
+import { PostHeader } from "./PostHeader";
+import { GlobalCodeStyle } from "./GlobalCodeStyle";
 
 type Props = {
   frontMatter: FrontMatter;
@@ -13,6 +11,7 @@ type Props = {
 export function Post({ postHTML, frontMatter }: Props) {
   return (
     <React.Fragment>
+      <GlobalCodeStyle />
       <Helmet>
         <title>{frontMatter.title}</title>
         <meta name="description" content={frontMatter.description} />
@@ -22,7 +21,7 @@ export function Post({ postHTML, frontMatter }: Props) {
           href="https://fonts.googleapis.com/css?family=Fira+Mono"
         />
       </Helmet>
-      <Global styles={Styles.global} />
+
       <section>
         <PostHeader frontMatter={frontMatter} />
         <article dangerouslySetInnerHTML={postHTML} />

@@ -1,11 +1,37 @@
 /* @jsx jsx */
 
-import { jsx } from "@emotion/core";
+import { jsx, css } from "@emotion/core";
 import * as React from "react";
 import { Helmet } from "react-helmet";
-import * as Styles from "./styles/Home.styles";
 
 type Props = {};
+
+const styles = {
+  pageContainer: css`
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  `,
+  pageHeader: css`
+    font-size: 2em;
+  `,
+  socialContainer: css`
+    margin-bottom: 1em;
+  `,
+  socialLink: css`
+    border-bottom: none;
+    margin-right: 1em;
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    img {
+      width: 25px;
+    }
+  `
+};
 
 const socialLinks = [
   {
@@ -69,16 +95,16 @@ const projects = [
 
 export function Home(_: Props) {
   return (
-    <div css={Styles.pageContainer}>
+    <div css={styles.pageContainer}>
       <Helmet>
         <meta name="description" content="Aria Fallah's Personal Website" />
         <title>Aria's Website</title>
       </Helmet>
 
-      <h1 css={Styles.pageHeader}>Aria Fallah</h1>
-      <section css={Styles.socialContainer}>
+      <h1 css={styles.pageHeader}>Aria Fallah</h1>
+      <section css={styles.socialContainer}>
         {socialLinks.map(l => (
-          <a css={Styles.socialLink} key={l.alt} href={l.link}>
+          <a css={styles.socialLink} key={l.alt} href={l.link}>
             <img src={l.img} alt={l.alt} />
           </a>
         ))}

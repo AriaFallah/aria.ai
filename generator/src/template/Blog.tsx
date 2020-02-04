@@ -1,12 +1,17 @@
 /* @jsx jsx */
-import { jsx } from "@emotion/core";
+import { jsx, css } from "@emotion/core";
 import * as React from "react";
 import { Helmet } from "react-helmet";
-import { PostHeader } from "./components/PostHeader";
-import * as Styles from "./styles/Blog.styles";
+import { PostHeader } from "./PostHeader";
 
 type Props = {
   posts: Post[];
+};
+
+const styles = {
+  articlePreview: css`
+    margin-bottom: 2em;
+  `
 };
 
 export function Blog({ posts }: Props) {
@@ -27,7 +32,7 @@ export function Blog({ posts }: Props) {
           return bDate.getTime() - aDate.getTime();
         })
         .map(p => (
-          <section css={Styles.articlePreview} key={p.frontMatter.title}>
+          <section css={styles.articlePreview} key={p.frontMatter.title}>
             <PostHeader frontMatter={p.frontMatter} />
             <div>
               <article dangerouslySetInnerHTML={{ __html: p.excerpt }} />
