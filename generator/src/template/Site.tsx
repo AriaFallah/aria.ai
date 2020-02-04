@@ -2,12 +2,79 @@
 import { jsx } from "@emotion/core";
 import * as React from "react";
 import { Helmet } from "react-helmet";
-import * as Styles from "./styles/Site.styles";
+import { css } from "@emotion/core";
+
+type Props = {
+  activeTab: "home" | "blog" | "thoughts";
+};
+
+const styles = {
+  content: css`
+    max-width: 800px;
+    display: block;
+    width: 100%;
+    flex: 1 0 auto;
+    margin: 0 auto;
+  `,
+  footer: css`
+    flex-shrink: 0;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    margin-top: 25px;
+  `,
+  main: css`
+    @media (max-width: 800px) {
+      padding: 0 10px;
+    }
+  `,
+  nav: css`
+    border-bottom: 4px solid black;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1em;
+    padding: 5px 0;
+
+    @media (max-width: 800px) {
+      padding: 5px 10px;
+    }
+  `,
+  navIcon: css`
+    border-bottom: 0;
+    margin-right: 1em;
+
+    img {
+      width: 35px;
+    }
+  `,
+  navLink: css`
+    font-style: normal;
+    color: black !important;
+    border-bottom: 0;
+    margin-right: 1em;
+  `,
+  navLinkActive: css`
+    font-style: italic;
+    color: white !important;
+    background-color: black;
+    padding-left: 5px;
+    padding-right: 8px;
+  `
+};
 
 const CURRENT_YEAR = new Date().getFullYear();
 
-interface Props {
-  activeTab: "home" | "blog" | "thoughts";
+type NavLinkProps = {
+  children: React.ReactNode;
+  href: string;
+  isActive: boolean;
+};
+function NavLink({ children, href, isActive }: NavLinkProps) {
+  return (
+    <a css={[styles.navLink, isActive && styles.navLinkActive]} href={href}>
+      {children}
+    </a>
+  );
 }
 
 export class Site extends React.Component<Props> {
@@ -30,26 +97,26 @@ export class Site extends React.Component<Props> {
           />
         </Helmet>
 
-        <div css={Styles.content}>
-          <nav css={Styles.nav}>
-            <a css={Styles.navIcon} href="/">
+        <div css={styles.content}>
+          <nav css={styles.nav}>
+            <a css={styles.navIcon} href="/">
               <img src="/assets/icons/logo.svg" alt="site logo" />
             </a>
-            <Styles.NavLink active={activeTab === "home"} href="/">
+            <NavLink isActive={activeTab === "home"} href="/">
               Home
-            </Styles.NavLink>
-            <Styles.NavLink active={activeTab === "blog"} href="/blog">
+            </NavLink>
+            <NavLink isActive={activeTab === "blog"} href="/blog">
               Blog
-            </Styles.NavLink>
-            <Styles.NavLink active={activeTab === "thoughts"} href="/thoughts">
+            </NavLink>
+            <NavLink isActive={activeTab === "thoughts"} href="/thoughts">
               Thoughts
-            </Styles.NavLink>
+            </NavLink>
           </nav>
 
-          <main css={Styles.main}>{this.props.children}</main>
+          <main css={styles.main}>{this.props.children}</main>
         </div>
 
-        <footer css={Styles.footer}>
+        <footer css={styles.footer}>
           <div>
             Aria Fallah <a href="/snake.html">©</a>
           </div>

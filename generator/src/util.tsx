@@ -19,7 +19,7 @@ const MD = new MarkdownIt("default", {
       throw new Error(`${lang} is not supported by the highlighter!`);
     }
 
-    const lines = Prism.highlight(str, Prism.languages[lang])
+    const lines = Prism.highlight(str, Prism.languages[lang], lang)
       .split(/\n/)
       .slice(0, -1);
 
