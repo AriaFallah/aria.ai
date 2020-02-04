@@ -4,3 +4,4 @@ dist
 .cache
 *error.log
 stats.json
+build
