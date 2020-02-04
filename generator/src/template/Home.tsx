@@ -5,7 +5,7 @@ import * as React from "react";
 import { Helmet } from "react-helmet";
 import * as Styles from "./styles/Home.styles";
 
-interface Props {}
+type Props = {};
 
 const socialLinks = [
   {
@@ -67,49 +67,47 @@ const projects = [
   </React.Fragment>
 ];
 
-export class Home extends React.Component<Props> {
-  render() {
-    return (
-      <div css={Styles.pageContainer}>
-        <Helmet>
-          <meta name="description" content="Aria Fallah's Personal Website" />
-          <title>Aria's Website</title>
-        </Helmet>
+export function Home(_: Props) {
+  return (
+    <div css={Styles.pageContainer}>
+      <Helmet>
+        <meta name="description" content="Aria Fallah's Personal Website" />
+        <title>Aria's Website</title>
+      </Helmet>
 
-        <h1 css={Styles.pageHeader}>Aria Fallah</h1>
-        <section css={Styles.socialContainer}>
-          {socialLinks.map(l => (
-            <a css={Styles.socialLink} key={l.alt} href={l.link}>
-              <img src={l.img} alt={l.alt} />
-            </a>
-          ))}
+      <h1 css={Styles.pageHeader}>Aria Fallah</h1>
+      <section css={Styles.socialContainer}>
+        {socialLinks.map(l => (
+          <a css={Styles.socialLink} key={l.alt} href={l.link}>
+            <img src={l.img} alt={l.alt} />
+          </a>
+        ))}
+      </section>
+
+      <div>
+        <section>
+          <h2>Projects</h2>
+          <ul>
+            {projects.map((p, i) => (
+              <li key={i}>{p}</li>
+            ))}
+          </ul>
         </section>
 
-        <div>
-          <section>
-            <h2>Projects</h2>
-            <ul>
-              {projects.map((p, i) => (
-                <li key={i}>{p}</li>
-              ))}
-            </ul>
-          </section>
-
-          <section style={{ marginTop: "2em" }}>
-            <h2>Photos</h2>
-            <ul>
-              <li>
-                Like them on{" "}
-                <a href="https://www.instagram.com/m0meni/">Instagram.</a>
-              </li>
-              <li>
-                Download them from{" "}
-                <a href="https://unsplash.com/@m0meni">Unsplash.</a>
-              </li>
-            </ul>
-          </section>
-        </div>
+        <section style={{ marginTop: "2em" }}>
+          <h2>Photos</h2>
+          <ul>
+            <li>
+              Like them on{" "}
+              <a href="https://www.instagram.com/m0meni/">Instagram.</a>
+            </li>
+            <li>
+              Download them from{" "}
+              <a href="https://unsplash.com/@m0meni">Unsplash.</a>
+            </li>
+          </ul>
+        </section>
       </div>
-    );
-  }
+    </div>
+  );
 }

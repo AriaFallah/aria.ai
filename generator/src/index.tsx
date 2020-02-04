@@ -29,9 +29,11 @@ async function main() {
 
   // Create post pages
   const postFiles = fs.readdirSync(POST_SRC_DIR);
-  const posts = (await Promise.all(
-    postFiles.map(file => fs.readFile(path.join(POST_SRC_DIR, file), "utf8"))
-  )).map((p, i) => {
+  const posts = (
+    await Promise.all(
+      postFiles.map(file => fs.readFile(path.join(POST_SRC_DIR, file), "utf8"))
+    )
+  ).map((p, i) => {
     const file = postFiles[i];
     const { body, frontMatter } = extractFrontMatter(file, p);
     return {
@@ -41,11 +43,13 @@ async function main() {
   });
 
   const thoughtFiles = fs.readdirSync(THOUGHT_SRC_DIR);
-  const thoughts = (await Promise.all(
-    thoughtFiles.map(file =>
-      fs.readFile(path.join(THOUGHT_SRC_DIR, file), "utf8")
+  const thoughts = (
+    await Promise.all(
+      thoughtFiles.map(file =>
+        fs.readFile(path.join(THOUGHT_SRC_DIR, file), "utf8")
+      )
     )
-  )).map((t, i) => {
+  ).map((t, i) => {
     const file = thoughtFiles[i];
     const { body, frontMatter } = extractFrontMatter(file, t);
     return {
@@ -70,7 +74,7 @@ async function main() {
   ];
   const postPages = posts.map(p =>
     makePage(
-      <Post frontMatter={p.frontMatter} postHtml={{ __html: p.body }} />,
+      <Post frontMatter={p.frontMatter} postHTML={{ __html: p.body }} />,
       { activeTab: "blog" }
     )
   );

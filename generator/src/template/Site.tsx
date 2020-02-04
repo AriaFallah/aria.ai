@@ -6,6 +6,7 @@ import { css } from "@emotion/core";
 
 type Props = {
   activeTab: "home" | "blog" | "thoughts";
+  children: React.ReactNode;
 };
 
 const styles = {
@@ -50,7 +51,7 @@ const styles = {
   navLink: css`
     font-style: normal;
     color: black !important;
-    border-bottom: 0;
+    border-bottom: 0 !important;
     margin-right: 1em;
   `,
   navLinkActive: css`
@@ -77,52 +78,45 @@ function NavLink({ children, href, isActive }: NavLinkProps) {
   );
 }
 
-export class Site extends React.Component<Props> {
-  render() {
-    const { activeTab } = this.props;
+export function Site({ activeTab, children }: Props) {
+  return (
+    <React.Fragment>
+      <Helmet>
+        <meta name="HandheldFriendly" content="True" />
+        <meta http-equiv="cache-control" content="max-age=0" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+          name="google-site-verification"
+          content="bbTP0B3Joyt2uJViZb5qeGxHhf4TSIgntjl3fitB6Mc"
+        />
+      </Helmet>
 
-    return (
-      <React.Fragment>
-        <Helmet>
-          <meta name="HandheldFriendly" content="True" />
-          <meta http-equiv="cache-control" content="max-age=0" />
-          <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0"
-          />
-          <meta
-            name="google-site-verification"
-            content="bbTP0B3Joyt2uJViZb5qeGxHhf4TSIgntjl3fitB6Mc"
-          />
-        </Helmet>
+      <div css={styles.content}>
+        <nav css={styles.nav}>
+          <a css={styles.navIcon} href="/">
+            <img src="/assets/icons/logo.svg" alt="site logo" />
+          </a>
+          <NavLink isActive={activeTab === "home"} href="/">
+            Home
+          </NavLink>
+          <NavLink isActive={activeTab === "blog"} href="/blog">
+            Blog
+          </NavLink>
+          <NavLink isActive={activeTab === "thoughts"} href="/thoughts">
+            Thoughts
+          </NavLink>
+        </nav>
 
-        <div css={styles.content}>
-          <nav css={styles.nav}>
-            <a css={styles.navIcon} href="/">
-              <img src="/assets/icons/logo.svg" alt="site logo" />
-            </a>
-            <NavLink isActive={activeTab === "home"} href="/">
-              Home
-            </NavLink>
-            <NavLink isActive={activeTab === "blog"} href="/blog">
-              Blog
-            </NavLink>
-            <NavLink isActive={activeTab === "thoughts"} href="/thoughts">
-              Thoughts
-            </NavLink>
-          </nav>
+        <main css={styles.main}>{children}</main>
+      </div>
 
-          <main css={styles.main}>{this.props.children}</main>
+      <footer css={styles.footer}>
+        <div>
+          Aria Fallah <a href="/snake.html">©</a>
         </div>
-
-        <footer css={styles.footer}>
-          <div>
-            Aria Fallah <a href="/snake.html">©</a>
-          </div>
-          <div>All Rights Reserved - {CURRENT_YEAR}</div>
-        </footer>
-      </React.Fragment>
-    );
-  }
+        <div>All Rights Reserved - {CURRENT_YEAR}</div>
+      </footer>
+    </React.Fragment>
+  );
 }
