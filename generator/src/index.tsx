@@ -27,38 +27,43 @@ async function main() {
   fs.mkdirpSync(THOUGHT_OUT_DIR);
   fs.copySync(ASSETS_SRC_DIR, ASSETS_OUT_DIR);
 
-  // Create post pages
   const postFiles = fs.readdirSync(POST_SRC_DIR);
-  const posts = (
-    await Promise.all(
-      postFiles.map(file => fs.readFile(path.join(POST_SRC_DIR, file), "utf8"))
-    )
-  ).map((p, i) => {
-    const file = postFiles[i];
-    const { body, frontMatter } = extractFrontMatter(file, p);
-    return {
-      frontMatter,
-      ...extractExcerpt(file, renderMarkdown(body))
-    };
-  });
-
   const thoughtFiles = fs.readdirSync(THOUGHT_SRC_DIR);
-  const thoughts = (
-    await Promise.all(
-      thoughtFiles.map(file =>
-        fs.readFile(path.join(THOUGHT_SRC_DIR, file), "utf8")
-      )
-    )
-  ).map((t, i) => {
-    const file = thoughtFiles[i];
-    const { body, frontMatter } = extractFrontMatter(file, t);
-    return {
-      frontMatter,
-      body: renderMarkdown(body)
-    };
-  });
 
-  // Create output paths
+  const postsPromises = Promise.all(
+    postFiles.map(file => fs.readFile(path.join(POST_SRC_DIR, file), "utf8"))
+  ).then(posts =>
+    posts.map((p, i) => {
+      const file = postFiles[i];
+      const { body, frontMatter } = extractFrontMatter(file, p);
+      return {
+        frontMatter,
+        ...extractExcerpt(file, renderMarkdown(body))
+      };
+    })
+  );
+
+  const thoughtsPromises = Promise.all(
+    thoughtFiles.map(file =>
+      fs.readFile(path.join(THOUGHT_SRC_DIR, file), "utf8")
+    )
+  ).then(thoughts =>
+    thoughts.map((t, i) => {
+      const file = thoughtFiles[i];
+      const { body, frontMatter } = extractFrontMatter(file, t);
+      return {
+        frontMatter,
+        body: renderMarkdown(body)
+      };
+    })
+  );
+
+  // @ts-ignore Promise.all typechecking is broken
+  const [posts, thoughts]: [Post[], Thought[]] = await Promise.all([
+    postsPromises,
+    thoughtsPromises
+  ]);
+
   const outFilePaths = [
     ...posts.map(p => path.join(POST_OUT_DIR, p.frontMatter.slug + ".html")),
     path.join(BUILD_DIR, "index.html"),
@@ -66,8 +71,7 @@ async function main() {
     path.join(BUILD_DIR, "thoughts", "index.html")
   ];
 
-  // Write pages to output paths
-  const otherPages = [
+  const rootPages = [
     makePage(<Home />, { activeTab: "home" }),
     makePage(<Blog posts={posts} />, { activeTab: "blog" }),
     makePage(<Thoughts thoughts={thoughts} />, { activeTab: "thoughts" })
@@ -80,7 +84,7 @@ async function main() {
   );
 
   await Promise.all(
-    [...postPages, ...otherPages].map((page, i) =>
+    [...postPages, ...rootPages].map((page, i) =>
       fs.writeFile(outFilePaths[i], page)
     )
   );
