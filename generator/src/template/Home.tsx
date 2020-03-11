@@ -66,33 +66,6 @@ const socialLinks = [
   }
 ];
 
-const projects = [
-  <React.Fragment>
-    An extremely fast{" "}
-    <a href="https://github.com/AriaFallah/csv-parser">CSV parser</a> written in
-    C++11.
-  </React.Fragment>,
-  <React.Fragment>
-    An HTML5 canvas{" "}
-    <a href="https://github.com/AriaFallah/aria.ai/tree/master/snake">
-      snake game
-    </a>{" "}
-    written in ReasonML. <a href="/snake.html">Play here!</a>
-  </React.Fragment>,
-  <React.Fragment>
-    A comprehensive beginner's{" "}
-    <a href="https://github.com/AriaFallah/WebpackTutorial">webpack tutorial</a>{" "}
-    with over 2000 stars on github.
-  </React.Fragment>,
-  <React.Fragment>
-    A{" "}
-    <a href="https://github.com/AriaFallah/aria.ai/tree/master/generator">
-      static site generator
-    </a>{" "}
-    built on top of React and written in TypeScript.
-  </React.Fragment>
-];
-
 export function Home(_: Props) {
   return (
     <div css={styles.pageContainer}>
@@ -109,31 +82,6 @@ export function Home(_: Props) {
           </a>
         ))}
       </section>
-
-      <div>
-        <section>
-          <h2>Projects</h2>
-          <ul>
-            {projects.map((p, i) => (
-              <li key={i}>{p}</li>
-            ))}
-          </ul>
-        </section>
-
-        <section style={{ marginTop: "2em" }}>
-          <h2>Photos</h2>
-          <ul>
-            <li>
-              Like them on{" "}
-              <a href="https://www.instagram.com/m0meni/">Instagram.</a>
-            </li>
-            <li>
-              Download them from{" "}
-              <a href="https://unsplash.com/@m0meni">Unsplash.</a>
-            </li>
-          </ul>
-        </section>
-      </div>
     </div>
   );
 }
