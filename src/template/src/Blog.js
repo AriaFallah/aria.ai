@@ -1,20 +1,15 @@
-/* @jsx jsx */
-import { jsx, css } from "@emotion/core";
-import * as React from "react";
-import { Helmet } from "react-helmet";
-import { PostHeader } from "./PostHeader";
-
-type Props = {
-  posts: Post[];
-};
+const { css } = require("@emotion/core");
+const React = require("react");
+const { Helmet } = require("react-helmet");
+const { PostHeader } = require("./PostHeader");
 
 const styles = {
   articlePreview: css`
     margin-bottom: 2em;
-  `
+  `,
 };
 
-export function Blog({ posts }: Props) {
+export function Blog({ posts }) {
   return (
     <React.Fragment>
       <Helmet>
@@ -31,7 +26,7 @@ export function Blog({ posts }: Props) {
           const bDate = new Date(b.frontMatter.date);
           return bDate.getTime() - aDate.getTime();
         })
-        .map(p => (
+        .map((p) => (
           <section css={styles.articlePreview} key={p.frontMatter.title}>
             <PostHeader frontMatter={p.frontMatter} />
             <div>

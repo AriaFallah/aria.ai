@@ -1,12 +1,7 @@
-/* @jsx jsx */
-import { css, jsx } from "@emotion/core";
-import * as React from "react";
-import { Helmet } from "react-helmet";
-import { GlobalCodeStyle } from "./GlobalCodeStyle";
-
-type Props = {
-  thoughts: Thought[];
-};
+const { css } = require("@emotion/core");
+const React = require("react");
+const { Helmet } = require("react-helmet");
+const { GlobalCodeStyle } = require("./GlobalCodeStyle");
 
 const styles = {
   header: css`
@@ -32,10 +27,10 @@ const styles = {
     p:first-of-type {
       margin-top: 0;
     }
-  `
+  `,
 };
 
-export function Thoughts({ thoughts }: Props) {
+export function Thoughts({ thoughts }) {
   return (
     <React.Fragment>
       <GlobalCodeStyle />
@@ -48,7 +43,7 @@ export function Thoughts({ thoughts }: Props) {
           href="https://fonts.googleapis.com/css?family=Fira+Mono"
         />
       </Helmet>
-      <div css={styles.header}>
+      <div className={styles.header}>
         I heard there's something called twitter for this...
       </div>
       {thoughts
@@ -58,15 +53,15 @@ export function Thoughts({ thoughts }: Props) {
           const bDate = new Date(b.frontMatter.date);
           return bDate.getTime() - aDate.getTime();
         })
-        .map(t => {
+        .map((t) => {
           const date = t.frontMatter.date.toISOString();
           return (
-            <div key={date} css={styles.thoughtContainer}>
+            <div key={date} className={styles.thoughtContainer}>
               <a id={date} href={`#${date}`} css={styles.thoughtDate}>
                 [{date.split("T")[0]}]
               </a>
               <article
-                css={styles.thoughtContent}
+                className={styles.thoughtContent}
                 dangerouslySetInnerHTML={{ __html: t.body }}
               />
             </div>

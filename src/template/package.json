@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-helmet": "^6.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.6",
+    "@babel/node": "^7.8.7",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/preset-react": "^7.9.4",
+    "@emotion/babel-preset-css-prop": "^10.0.27",
+    "flow-bin": "^0.125.1"
+  },
+  "name": "generator",
+  "private": true,
+  "scripts": {
+    "build": "babel ./src -d ./dist"
+  },
+  "version": "1.0.0"
+}

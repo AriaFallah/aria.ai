@@ -1,14 +1,9 @@
-import * as React from "react";
-import { Helmet } from "react-helmet";
-import { PostHeader } from "./PostHeader";
-import { GlobalCodeStyle } from "./GlobalCodeStyle";
+const React = require("react");
+const { Helmet } = require("react-helmet");
+const { PostHeader } = require("./PostHeader");
+const { GlobalCodeStyle } = require("./GlobalCodeStyle");
 
-type Props = {
-  frontMatter: FrontMatter;
-  postHTML: { __html: string };
-};
-
-export function Post({ postHTML, frontMatter }: Props) {
+export function Post({ postHTML, frontMatter }) {
   return (
     <React.Fragment>
       <GlobalCodeStyle />

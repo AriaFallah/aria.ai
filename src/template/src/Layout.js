@@ -1,13 +1,6 @@
-/* @jsx jsx */
-import { jsx } from "@emotion/core";
-import * as React from "react";
-import { Helmet } from "react-helmet";
-import { css } from "@emotion/core";
-
-type Props = {
-  activeTab: "home" | "blog" | "thoughts";
-  children: React.ReactNode;
-};
+const { css } = require("@emotion/core");
+const React = require("react");
+const { Helmet } = require("react-helmet");
 
 const styles = {
   content: css`
@@ -50,7 +43,7 @@ const styles = {
   `,
   navLink: css`
     font-style: normal;
-    color: black !important;
+    color: black !constant;
     border-bottom: 0 !important;
     margin-right: 1em;
   `,
@@ -60,17 +53,10 @@ const styles = {
     background-color: black;
     padding-left: 5px;
     padding-right: 8px;
-  `
+  `,
 };
 
-const CURRENT_YEAR = new Date().getFullYear();
-
-type NavLinkProps = {
-  children: React.ReactNode;
-  href: string;
-  isActive: boolean;
-};
-function NavLink({ children, href, isActive }: NavLinkProps) {
+function NavLink({ children, href, isActive }) {
   return (
     <a css={[styles.navLink, isActive && styles.navLinkActive]} href={href}>
       {children}
@@ -78,7 +64,7 @@ function NavLink({ children, href, isActive }: NavLinkProps) {
   );
 }
 
-export function Site({ activeTab, children }: Props) {
+export function Layout({ activeTab, children }) {
   return (
     <React.Fragment>
       <Helmet>
@@ -115,7 +101,7 @@ export function Site({ activeTab, children }: Props) {
         <div>
           Aria Fallah <a href="/snake.html">©</a>
         </div>
-        <div>All Rights Reserved - {CURRENT_YEAR}</div>
+        <div>All Rights Reserved - {new Date().getFullYear()}</div>
       </footer>
     </React.Fragment>
   );

@@ -1,10 +1,5 @@
-/* @jsx jsx */
-import { jsx, css } from "@emotion/core";
-import * as React from "react";
-
-type Props = {
-  frontMatter: FrontMatter;
-};
+const { css } = require("@emotion/core");
+const React = require("react");
 
 const styles = {
   postHeader: css`
@@ -18,10 +13,10 @@ const styles = {
     h4 {
       margin: 0;
     }
-  `
+  `,
 };
 
-export function PostHeader({ frontMatter }: Props) {
+export function PostHeader({ frontMatter }) {
   return (
     <header css={styles.postHeader}>
       <h1>

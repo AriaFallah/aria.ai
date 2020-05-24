@@ -1,76 +1,15 @@
-import * as React from "react";
-import * as MarkdownIt from "markdown-it";
-import { minify } from "html-minifier";
-import { Helmet } from "react-helmet";
-import { renderToStaticMarkup } from "react-dom/server";
-import { Site } from "./template/Site";
-import { Prism } from "./prism";
+const React = require("react");
+const { Home } = require("./Home");
+const { Post } = require("./Post");
+const { Blog } = require("./Blog");
+const { Thoughts } = require("./Thoughts");
 
-const FRONT_MATTER_REGEX = /---([\s\S]*?)---\S*/;
-const MD = new MarkdownIt("default", {
-  html: true,
-  linkify: true,
-  highlight(str, lang) {
-    if (!str || !lang) {
-      return str;
-    }
-
-    if (!Prism.languages[lang]) {
-      throw new Error(`${lang} is not supported by the highlighter!`);
-    }
-
-    const lines = Prism.highlight(str, Prism.languages[lang], lang)
-      .split(/\n/)
-      .slice(0, -1);
-
-    return lines.length > 1
-      ? lines.map(s => `<span class="line-number">${s}</span>`).join("\n")
-      : lines.join("\n");
-  }
-});
-
-export function extractFrontMatter(
-  file: string,
-  s: string
-): { body: string; frontMatter: FrontMatter } {
-  const matches = s.match(FRONT_MATTER_REGEX);
-  if (matches === null) {
-    throw new Error(`${file} needs to have front matter`);
-  }
-  const frontMatter = JSON.parse(matches[1]);
-  frontMatter.date = new Date(frontMatter.date);
-  return {
-    body: s.replace(FRONT_MATTER_REGEX, ""),
-    frontMatter
-  };
-}
-
-export function extractExcerpt(
-  file: string,
-  s: string
-): { body: string; excerpt: string } {
-  const moreIndex = s.indexOf("<!--more-->");
-  if (moreIndex === -1) {
-    throw new Error(`${file} needs to have a <!--more--> tag`);
-  }
-
-  return {
-    body: s.replace("<!--more-->", ""),
-    excerpt: s.slice(0, moreIndex)
-  };
-}
-
-export function renderMarkdown(s: string): string {
-  return MD.render(s);
-}
-
-export function makePage(
-  pageContent: React.ReactElement<any>,
-  siteProps: any
-): string {
-  const body = renderToStaticMarkup(<Site {...siteProps}>{pageContent}</Site>);
+function makePage(pageContent, layoutProps) {
+  const body = renderToStaticMarkup(
+    <Layout {...layoutProps}>{pageContent}</Layout>
+  );
   const helmet = Helmet.renderStatic();
-  const html = `
+  return `
   <!doctype html>
   <html lang="en">
     <head>
@@ -158,6 +97,33 @@ export function makePage(
       </script>
     </body>
   </html>`;
-
-  return minify(html, { collapseWhitespace: true });
 }
+
+function processData({ posts, thoughts }) {
+  const rootPages = [
+    makePage(<Home />, { activeTab: "home" }),
+    makePage(<Blog posts={posts} />, { activeTab: "blog" }),
+    makePage(<Thoughts thoughts={thoughts} />, { activeTab: "thoughts" }),
+  ];
+
+  const postPages = posts.map((p) =>
+    makePage(
+      <Post frontMatter={p.frontMatter} postHTML={{ __html: p.body }} />,
+      { activeTab: "blog" }
+    )
+  );
+
+  return {
+    rootPages,
+    postPages,
+  };
+}
+
+let buffers = [];
+process.stdin.on("data", (data) => {
+  buffers.push(data);
+});
+process.stdin.on("end", () => {
+  const data = Buffer.concat(buffers).toString("utf8");
+  console.log(data);
+});
