@@ -1,8 +1,11 @@
 const React = require("react");
+const { Helmet } = require("react-helmet");
+const { renderToStaticMarkup } = require("react-dom/server");
 const { Home } = require("./Home");
 const { Post } = require("./Post");
 const { Blog } = require("./Blog");
 const { Thoughts } = require("./Thoughts");
+const { Layout } = require("./Layout");
 
 function makePage(pageContent, layoutProps) {
   const body = renderToStaticMarkup(
@@ -101,29 +104,41 @@ function makePage(pageContent, layoutProps) {
 
 function processData({ posts, thoughts }) {
   const rootPages = [
-    makePage(<Home />, { activeTab: "home" }),
-    makePage(<Blog posts={posts} />, { activeTab: "blog" }),
-    makePage(<Thoughts thoughts={thoughts} />, { activeTab: "thoughts" }),
+    ["index.html", makePage(<Home />, { activeTab: "home" })],
+    [
+      "blog/index.html",
+      makePage(<Blog posts={posts} />, { activeTab: "blog" }),
+    ],
+    [
+      "thoughts/index.html",
+      makePage(<Thoughts thoughts={thoughts} />, { activeTab: "thoughts" }),
+    ],
   ];
 
-  const postPages = posts.map((p) =>
+  const postPages = posts.map((p) => [
+    p.frontMatter.slug,
     makePage(
       <Post frontMatter={p.frontMatter} postHTML={{ __html: p.body }} />,
       { activeTab: "blog" }
-    )
-  );
+    ),
+  ]);
 
   return {
-    rootPages,
-    postPages,
+    root_pages: rootPages,
+    post_pages: postPages,
   };
 }
 
-let buffers = [];
-process.stdin.on("data", (data) => {
-  buffers.push(data);
-});
-process.stdin.on("end", () => {
-  const data = Buffer.concat(buffers).toString("utf8");
-  console.log(data);
+process.stdin.setEncoding("utf8");
+process.stdin.on("data", (serializedData) => {
+  const { posts, thoughts } = JSON.parse(serializedData);
+  for (const post of posts) {
+    post.frontMatter.date = new Date(post.frontMatter.date);
+  }
+  for (const thought of thoughts) {
+    thought.frontMatter.date = new Date(thought.frontMatter.date);
+  }
+
+  const output = JSON.stringify(processData({ posts, thoughts }));
+  process.stdout.write(output);
 });

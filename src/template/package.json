@@ -18,7 +18,7 @@
   "name": "generator",
   "private": true,
   "scripts": {
-    "build": "babel ./src -d ./dist"
+    "start": "babel-node ./src/index.js"
   },
   "version": "1.0.0"
 }

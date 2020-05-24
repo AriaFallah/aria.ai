@@ -43,7 +43,7 @@ export function Thoughts({ thoughts }) {
           href="https://fonts.googleapis.com/css?family=Fira+Mono"
         />
       </Helmet>
-      <div className={styles.header}>
+      <div css={styles.header}>
         I heard there's something called twitter for this...
       </div>
       {thoughts
@@ -56,12 +56,12 @@ export function Thoughts({ thoughts }) {
         .map((t) => {
           const date = t.frontMatter.date.toISOString();
           return (
-            <div key={date} className={styles.thoughtContainer}>
+            <div key={date} css={styles.thoughtContainer}>
               <a id={date} href={`#${date}`} css={styles.thoughtDate}>
                 [{date.split("T")[0]}]
               </a>
               <article
-                className={styles.thoughtContent}
+                css={styles.thoughtContent}
                 dangerouslySetInnerHTML={{ __html: t.body }}
               />
             </div>

@@ -1,2 +1,3 @@
-build_dir = "./build"
-content_dir = "./content"
+build_dir = "build"
+content_dir = "content"
+template_dir = "src/template"

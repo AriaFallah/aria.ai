@@ -43,7 +43,7 @@ const styles = {
   `,
   navLink: css`
     font-style: normal;
-    color: black !constant;
+    color: black !important;
     border-bottom: 0 !important;
     margin-right: 1em;
   `,
