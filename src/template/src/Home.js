@@ -1,10 +1,6 @@
-/* @jsx jsx */
-
-import { jsx, css } from "@emotion/core";
-import * as React from "react";
-import { Helmet } from "react-helmet";
-
-type Props = {};
+const { css } = require("@emotion/core");
+const React = require("react");
+const { Helmet } = require("react-helmet");
 
 const styles = {
   pageContainer: css`
@@ -30,43 +26,43 @@ const styles = {
     img {
       width: 25px;
     }
-  `
+  `,
 };
 
 const socialLinks = [
   {
     link: "https://github.com/ariafallah",
     img: "/assets/icons/github.svg",
-    alt: "github logo"
+    alt: "github logo",
   },
   {
     link: "http://stackoverflow.com/users/3772221",
     img: "/assets/icons/stackexchange.svg",
-    alt: "stackoverflow logo"
+    alt: "stackoverflow logo",
   },
   {
     link: "https://linkedin.com/in/ariafallah",
     img: "/assets/icons/linkedin.svg",
-    alt: "linkedin logo"
+    alt: "linkedin logo",
   },
   {
     link: "https://facebook.com/m0meni",
     img: "/assets/icons/facebook.svg",
-    alt: "facebook logo"
+    alt: "facebook logo",
   },
   {
     link: "https://instagram.com/m0meni",
     img: "/assets/icons/instagram.svg",
-    alt: "instagram logo"
+    alt: "instagram logo",
   },
   {
     link: "https://twitter.com/m0meni",
     img: "/assets/icons/twitter.svg",
-    alt: "twitter logo"
-  }
+    alt: "twitter logo",
+  },
 ];
 
-export function Home(_: Props) {
+export function Home() {
   return (
     <div css={styles.pageContainer}>
       <Helmet>
@@ -76,7 +72,7 @@ export function Home(_: Props) {
 
       <h1 css={styles.pageHeader}>Aria Fallah</h1>
       <section css={styles.socialContainer}>
-        {socialLinks.map(l => (
+        {socialLinks.map((l) => (
           <a css={styles.socialLink} key={l.alt} href={l.link}>
             <img src={l.img} alt={l.alt} />
           </a>

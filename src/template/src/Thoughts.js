@@ -1,12 +1,7 @@
-/* @jsx jsx */
-import { css, jsx } from "@emotion/core";
-import * as React from "react";
-import { Helmet } from "react-helmet";
-import { GlobalCodeStyle } from "./GlobalCodeStyle";
-
-type Props = {
-  thoughts: Thought[];
-};
+const { css } = require("@emotion/core");
+const React = require("react");
+const { Helmet } = require("react-helmet");
+const { GlobalCodeStyle } = require("./GlobalCodeStyle");
 
 const styles = {
   header: css`
@@ -32,10 +27,10 @@ const styles = {
     p:first-of-type {
       margin-top: 0;
     }
-  `
+  `,
 };
 
-export function Thoughts({ thoughts }: Props) {
+export function Thoughts({ thoughts }) {
   return (
     <React.Fragment>
       <GlobalCodeStyle />
@@ -58,7 +53,7 @@ export function Thoughts({ thoughts }: Props) {
           const bDate = new Date(b.frontMatter.date);
           return bDate.getTime() - aDate.getTime();
         })
-        .map(t => {
+        .map((t) => {
           const date = t.frontMatter.date.toISOString();
           return (
             <div key={date} css={styles.thoughtContainer}>

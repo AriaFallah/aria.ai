@@ -1,7 +1,5 @@
-/* @jsx jsx */
-import { jsx, Global, css } from "@emotion/core";
-
-type Props = {};
+const React = require("react");
+const { Global, css } = require("@emotion/core");
 
 const styles = {
   global: css`
@@ -30,9 +28,9 @@ const styles = {
       margin-right: 0.5em;
       color: #888;
     }
-  `
+  `,
 };
 
-export function GlobalCodeStyle(_: Props) {
+export function GlobalCodeStyle() {
   return <Global styles={styles.global} />;
 }
