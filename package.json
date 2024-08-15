@@ -1,0 +1,19 @@
+{
+  "private": "true",
+  "name": "aria.ai",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/markdown-remark": "^5.2.0",
+    "@astrojs/mdx": "^3.1.3",
+    "@astropub/md": "^1.0.0",
+    "astro": "^4.13.4",
+    "sharp": "^0.33.4"
+  }
+}

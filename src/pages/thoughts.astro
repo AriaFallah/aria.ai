@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../components/Layout.astro';
+
+const thoughts = await getCollection('thoughts');
+const sortedThoughts = await Promise.all(
+  thoughts
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+    .map(async (thought) => ({
+      ...thought,
+      Content: (await thought.render()).Content,
+    }))
+);
+---
+
+<Layout
+  class="thoughts"
+  activeTab="thoughts"
+  title="Aria's Thoughts"
+  description="Aria Fallah's thoughts"
+>
+  <div class="header">I heard there's something called twitter for this...</div>
+  {
+    sortedThoughts.map((thought) => {
+      const date = thought.data.date.toISOString().split('T')[0];
+      return (
+        <div class="thought-container">
+          <a id={date} href={`#${date}`} class="thought-date">
+            [{date}]
+          </a>
+          <article class="thought-content">{<thought.Content />}</article>
+        </div>
+      );
+    })
+  }
+
+  <style>
+    .thoughts {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .thought-container {
+      align-items: flex-start;
+      display: flex;
+      gap: 12px;
+    }
+    .thought-date {
+      flex-shrink: 0;
+    }
+    .thought-content {
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
+</Layout>

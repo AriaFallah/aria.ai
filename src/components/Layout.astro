@@ -1,0 +1,146 @@
+---
+import '../global.css';
+import { Image } from 'astro:assets';
+import Logo from '../icons/logo.svg';
+import FavIcon from '../icons/favicon.ico';
+
+interface Props {
+  activeTab: 'home' | 'blog' | 'thoughts';
+  title: string;
+  description: string;
+  class?: string;
+}
+
+const { activeTab, title, description, class: className } = Astro.props;
+
+const CURRENT_YEAR = new Date().getFullYear();
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="google-site-verification"
+      content="bbTP0B3Joyt2uJViZb5qeGxHhf4TSIgntjl3fitB6Mc"
+    />
+    <link rel="shortcut icon" type="image/png" href={FavIcon} />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Source+Serif+Pro"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Fira+Mono"
+    />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body>
+    <div class="content">
+      <nav>
+        <a class="nav-icon" href="/">
+          <Image src={Logo} alt="site logo" width={35} height={35} />
+        </a>
+        <a class={`nav-link ${activeTab === 'home' ? 'active' : ''}`} href="/"
+          >Home</a
+        >
+        <a
+          class={`nav-link ${activeTab === 'blog' ? 'active' : ''}`}
+          href="/blog">Blog</a
+        >
+        <a
+          class={`nav-link ${activeTab === 'thoughts' ? 'active' : ''}`}
+          href="/thoughts">Thoughts</a
+        >
+      </nav>
+
+      <main class={className}>
+        <slot />
+      </main>
+    </div>
+
+    <footer>
+      <div>
+        Aria Fallah <a href="/snake.html">©</a>
+      </div>
+      <div>All Rights Reserved - {CURRENT_YEAR}</div>
+    </footer>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script src="https://www.googletagmanager.com/gtag/js?id=UA-79031036-2">
+      // @ts-nocheck
+      if (
+        location.hostname !== 'localhost' &&
+        location.hostname !== '127.0.0.1'
+      ) {
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'UA-79031036-2');
+      }
+    </script>
+  </body>
+</html>
+
+<style>
+  .content {
+    max-width: 800px;
+    display: block;
+    width: 100%;
+    flex: 1 0 auto;
+    margin: 0 auto;
+  }
+
+  footer {
+    flex-shrink: 0;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    margin-top: 25px;
+  }
+
+  main {
+    @media (max-width: 800px) {
+      padding: 0 10px;
+    }
+  }
+
+  nav {
+    border-bottom: 4px solid black;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1em;
+    padding: 5px 0;
+
+    @media (max-width: 800px) {
+      padding: 5px 10px;
+    }
+  }
+
+  .nav-icon {
+    border-bottom: 0;
+    margin-right: 1em;
+  }
+
+  .nav-link {
+    font-style: normal;
+    color: black;
+    border-bottom: 0;
+    margin-right: 1em;
+    text-decoration: none;
+  }
+
+  .nav-link.active {
+    font-style: italic;
+    color: white;
+    background-color: black;
+    padding-left: 5px;
+    padding-right: 8px;
+  }
+</style>

@@ -1,0 +1,66 @@
+---
+import { getCollection } from 'astro:content';
+import { markdown } from '@astropub/md';
+import Layout from '../../components/Layout.astro';
+import PostHeader from '../../components/PostHeader.astro';
+
+const posts = await getCollection('blog')
+  .then((posts) =>
+    Promise.all(
+      posts.map(async (post) => {
+        const [excerpt] = post.body.split('<!--more-->');
+        return {
+          ...post,
+          excerpt: await markdown(excerpt.trim()),
+        };
+      })
+    )
+  )
+  .then((posts) =>
+    posts.sort(
+      (a, b) =>
+        new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+    )
+  );
+---
+
+<Layout
+  class="blog"
+  activeTab="blog"
+  title="Aria's Blog"
+  description="Aria Fallah's blog about lots of things"
+>
+  {
+    posts.map((post) => (
+      <section class="article-preview">
+        <PostHeader slug={post.slug} {...post.data} />
+        <div>{post.excerpt}</div>
+        <footer>
+          <a href={`/blog/${post.slug}`}>Keep reading</a>
+        </footer>
+      </section>
+    ))
+  }
+</Layout>
+
+<style>
+  .blog {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  footer {
+    margin-block-start: 16px;
+  }
+
+  h2 a {
+    border-bottom: none;
+    text-decoration: none;
+  }
+
+  h2,
+  h4 {
+    margin: 0;
+  }
+</style>

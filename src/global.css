@@ -1,0 +1,95 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  font: 100%/1.45em 'Source Serif Pro', serif;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: rgba(0, 0, 0, 0.85);
+  word-wrap: break-word;
+  font-kerning: normal;
+  background-color: #fcfcfc;
+}
+
+h1 {
+  font-size: 1.5em;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  line-height: 1.25em;
+  margin-bottom: 0.75rem;
+  font-weight: bold;
+}
+
+hr {
+  border: 1px solid #ddd;
+}
+
+a {
+  color: rgba(26, 13, 171, 0.85);
+  text-decoration: none;
+  border-bottom: 2px solid rgba(26, 13, 171, 0.85);
+}
+
+a:visited {
+  color: rgba(102, 0, 153, 0.8);
+  border-bottom: 2px solid rgba(102, 0, 153, 0.8);
+}
+
+a:active,
+a:hover {
+  outline-width: 0;
+}
+
+code {
+  font-family: 'Fira Mono', monospace !important;
+  font-size: 14px;
+}
+
+blockquote {
+  color: #777;
+  border-left: 0.25em solid #ddd;
+  padding: 0 1em;
+  margin-left: 0;
+}
+
+.astro-code {
+  background: none !important;
+}
+
+pre {
+  counter-reset: line;
+  overflow-x: auto;
+}
+
+pre code .line:last-child {
+  display: none;
+}
+
+span.line::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  padding: 0 8px;
+  margin-right: 4px;
+  color: #888;
+}
+
+article {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}

@@ -1,0 +1,74 @@
+---
+import { Image } from 'astro:assets';
+import GithubIcon from '../icons/github.svg';
+import StackExchangeIcon from '../icons/stackexchange.svg';
+import LinkedInIcon from '../icons/linkedin.svg';
+import InstagramIcon from '../icons/instagram.svg';
+import TwitterIcon from '../icons/twitter.svg';
+import Layout from '../components/Layout.astro';
+
+const socialLinks = [
+  {
+    link: 'https://github.com/ariafallah',
+    img: GithubIcon,
+    alt: 'github logo',
+  },
+  {
+    link: 'http://stackoverflow.com/users/3772221',
+    img: StackExchangeIcon,
+    alt: 'stackoverflow logo',
+  },
+  {
+    link: 'https://linkedin.com/in/ariafallah',
+    img: LinkedInIcon,
+    alt: 'linkedin logo',
+  },
+  {
+    link: 'https://instagram.com/m0meni',
+    img: InstagramIcon,
+    alt: 'instagram logo',
+  },
+  {
+    link: 'https://twitter.com/m0meni',
+    img: TwitterIcon,
+    alt: 'twitter logo',
+  },
+];
+---
+
+<Layout activeTab="home" title="Aria's Home Page" description="">
+  <div class="page-container">
+    <h1 class="page-header">Aria Fallah</h1>
+    <section class="social-container">
+      {
+        socialLinks.map((l) => (
+          <a class="social-link" href={l.link}>
+            <Image src={l.img} alt={l.alt} width={25} height={25} />
+          </a>
+        ))
+      }
+    </section>
+  </div>
+</Layout>
+
+<style>
+  .page-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+  .page-header {
+    font-size: 2em;
+  }
+  .social-container {
+    margin-bottom: 1em;
+  }
+  .social-link {
+    border-bottom: none;
+    margin-right: 1em;
+  }
+  .social-link:last-child {
+    margin-right: 0;
+  }
+</style>

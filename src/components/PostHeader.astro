@@ -1,0 +1,34 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  slug: string;
+}
+
+const { title, description, date, slug } = Astro.props;
+---
+
+<header>
+  <h2>
+    <a href={`/blog/${slug}`}>{title}</a>
+  </h2>
+  <h4>{description}</h4>
+  <p>{date.toDateString()}</p>
+</header>
+
+<style>
+  header {
+    margin-block-end: 16px;
+  }
+
+  h2 a {
+    border-bottom: none;
+    text-decoration: none;
+  }
+
+  h2,
+  h4 {
+    margin: 0;
+  }
+</style>

@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../components/Layout.astro';
+import PostHeader from '../../components/PostHeader.astro';
+
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('blog');
+  return blogEntries.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout
+  activeTab="blog"
+  title={post.data.title}
+  description={post.data.description}
+>
+  <section>
+    <PostHeader slug={post.slug} {...post.data} />
+    <article>
+      <Content />
+    </article>
+  </section>
+
+  <a href="/blog">Back to blog</a>
+</Layout>
