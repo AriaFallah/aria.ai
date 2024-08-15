@@ -95,7 +95,7 @@ console.log({} + {}); // NaN
 console.log({} + []); // 0
 console.log([] + []); // ''
 console.log({} + 2); // [object Object]2
-console.log({} + "hello"); // [object Object]hello
+console.log({} + 'hello'); // [object Object]hello
 ```
 
 I think you can imagine all the possible problems that arise from all this
@@ -274,7 +274,7 @@ console.log({} + {}); // NaN
 console.log({} + []); // 0
 console.log([] + []); // ''
 console.log({} + 2); // [object Object]2
-console.log({} + "hello"); // [object Object]hello
+console.log({} + 'hello'); // [object Object]hello
 ```
 
 Immediately **every single line** becomes a type error similar to the one below.
@@ -303,7 +303,7 @@ such as
 type Person = {
   age: number,
   name: string,
-  gender: "male" | "female"
+  gender: 'male' | 'female',
 };
 ```
 
@@ -370,7 +370,7 @@ function xyz(x: number, y: number, z: number): number {
   return x + y + z;
 }
 
-xyz(1, 2, "");
+xyz(1, 2, '');
 ```
 
 Error:
@@ -448,10 +448,10 @@ Code:
 type Person = {
   age: number,
   name: string,
-  gender: "male" | "female"
+  gender: 'male' | 'female',
 };
 
-const person: Person = { name: "joe", age: 10 };
+const person: Person = { name: 'joe', age: 10 };
 ```
 
 Error:
@@ -474,10 +474,10 @@ Code:
 type Person = {
   age: number,
   name: string,
-  gender: "male" | "female"
+  gender: 'male' | 'female',
 };
 
-const person: Person = { name: "joe", age: 10, gender: "male" };
+const person: Person = { name: 'joe', age: 10, gender: 'male' };
 console.log(person.job);
 ```
 
