@@ -44,7 +44,7 @@ const CURRENT_YEAR = new Date().getFullYear();
   <body>
     <div class="content">
       <nav>
-        <a class="nav-icon" href="/">
+        <a class="nav-icon" href="/" transition:persist>
           <Image src={Logo} alt="site logo" width={35} height={35} />
         </a>
         <a class={`nav-link ${activeTab === 'home' ? 'active' : ''}`} href="/"
