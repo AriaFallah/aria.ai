@@ -95,3 +95,7 @@ article {
   flex-direction: column;
   gap: 12px;
 }
+
+ul {
+  padding-inline-start: 24px;
+}

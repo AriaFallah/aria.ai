@@ -1,39 +1,42 @@
 ---
 import { Image } from 'astro:assets';
-import GithubIcon from '../icons/github.svg';
-import StackExchangeIcon from '../icons/stackexchange.svg';
-import LinkedInIcon from '../icons/linkedin.svg';
-import InstagramIcon from '../icons/instagram.svg';
-import TwitterIcon from '../icons/twitter.svg';
+import ProfilePic from '../images/profilepic.jpg';
 import Layout from '../components/Layout.astro';
+import { markdown } from '@astropub/md';
 
-const socialLinks = [
-  {
-    link: 'https://github.com/ariafallah',
-    img: GithubIcon,
-    alt: 'github logo',
-  },
-  {
-    link: 'http://stackoverflow.com/users/3772221',
-    img: StackExchangeIcon,
-    alt: 'stackoverflow logo',
-  },
-  {
-    link: 'https://linkedin.com/in/ariafallah',
-    img: LinkedInIcon,
-    alt: 'linkedin logo',
-  },
-  {
-    link: 'https://instagram.com/m0meni',
-    img: InstagramIcon,
-    alt: 'instagram logo',
-  },
-  {
-    link: 'https://twitter.com/m0meni',
-    img: TwitterIcon,
-    alt: 'twitter logo',
-  },
-];
+const AboutMe = await markdown(`
+Hi I'm Aria! Welcome to my website :)
+
+* I'm currently living 6-year-old me's dream of being a "computerist."
+* My hobbies are reading/watching interesting things online, programming,
+  cooking, fitness, outdoorsy stuff, and photography.
+* I currently work at Meta: I spent my first 3 years at Facebook on a startup-like
+  product team doing full-stack development in Hack/JS, the next 3 years at
+  WhatsApp on a small infrastructure/devtools team writing mostly cross-platform
+  Rust, and recently I've started working at Instagram on an infrastructure team
+  measuring/optimizing backend performance.
+
+You can find me on:
+* [Github](https://github.com/AriaFallah) where I have a few projects I'm proud of.
+  Notably my [C++ CSV parser](https://github.com/AriaFallah/csv-parser), my [snake game](https://github.com/AriaFallah/aria.ai/tree/master/snake)
+  written in [Reason](https://reasonml.github.io/) [(play here)](/snake/), an [OCaml PPX for template strings](https://github.com/AriaFallah/ppx_str)
+  and my [outdated Webpack Tutorial](https://github.com/AriaFallah/WebpackTutorial)
+  that somehow got 2200 stars and was translated into Chinese and Korean.
+* [StackOverflow](http://stackoverflow.com/users/3772221) where I've allegedly
+  "reached 2m" people with 152 questions and 137 answers.
+* [LinkedIn](https://linkedin.com/in/ariafallah), which I don't take so seriously,
+  but it is true that my real title at work is "Chief VP, Worse Engineering"
+* [Twitter](https://twitter.com/m0meni), where for now I just retweet things I
+  find interesting or funny. My ["tweets" are here](/thoughts/).
+
+Fun facts about me:
+* I sleep in a hammock every night.
+* I have driven across the entire USA east to west twice, and up and down both the
+  east/west coasts.
+* If I wasn't a software engineer, I'd probably have tried to be a doctor of some
+  sort. I am very intrigued by the medical field, and, if AI steals my job, plan B
+  is to become a physical therapist.
+`);
 ---
 
 <Layout
@@ -41,38 +44,13 @@ const socialLinks = [
   title="Aria's Home Page"
   description="Aria Fallah's Personal Website"
 >
-  <div class="page-container">
-    <h1 class="page-header">Aria Fallah</h1>
-    <section class="social-container">
-      {
-        socialLinks.map((l) => (
-          <a class="social-link" href={l.link}>
-            <Image src={l.img} alt={l.alt} width={25} height={25} />
-          </a>
-        ))
-      }
-    </section>
-  </div>
+  <Image class="profilepic" alt="Picture of Aria" src={ProfilePic} />
+  {AboutMe}
 </Layout>
 
 <style>
-  .page-container {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-  }
-  .page-header {
-    font-size: 2em;
-  }
-  .social-container {
-    margin-bottom: 1em;
-  }
-  .social-link {
-    border-bottom: none;
-    margin-right: 1em;
-  }
-  .social-link:last-child {
-    margin-right: 0;
+  .profilepic {
+    float: right;
+    display: inline-block;
   }
 </style>

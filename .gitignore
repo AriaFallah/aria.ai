@@ -6,3 +6,4 @@ dist
 *error.log
 stats.json
 build
+.DS_Store
