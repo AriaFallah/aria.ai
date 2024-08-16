@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../components/Layout.astro';
+import { format } from 'date-fns';
 
 const thoughts = await getCollection('thoughts');
 const sortedThoughts = await Promise.all(
@@ -8,6 +9,7 @@ const sortedThoughts = await Promise.all(
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
     .map(async (thought) => ({
       ...thought,
+      formattedDate: format(new Date(thought.data.date), 'yyyy-MM-dd'),
       Content: (await thought.render()).Content,
     }))
 );
@@ -22,9 +24,7 @@ const sortedThoughts = await Promise.all(
   <div class="header">I heard there's something called twitter for this...</div>
   {
     sortedThoughts.map((thought) => {
-      const date = thought.data.date.toLocaleDateString('en-CA', {
-        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      });
+      const date = thought.formattedDate;
       return (
         <div class="thought-container">
           <a id={date} href={`#${date}`} class="thought-date">
