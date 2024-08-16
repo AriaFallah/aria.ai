@@ -3,6 +3,7 @@ import '../global.css';
 import { Image } from 'astro:assets';
 import Logo from '../icons/logo.svg';
 import FavIcon from '../icons/favicon.ico';
+import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
   activeTab: 'home' | 'blog' | 'thoughts';
@@ -16,7 +17,7 @@ const { activeTab, title, description, class: className } = Astro.props;
 const CURRENT_YEAR = new Date().getFullYear();
 ---
 
-<html lang="en">
+<html lang="en" transition:animate="none">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -38,6 +39,7 @@ const CURRENT_YEAR = new Date().getFullYear();
     />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <ViewTransitions />
   </head>
   <body>
     <div class="content">
