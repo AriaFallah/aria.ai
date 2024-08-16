@@ -9,7 +9,7 @@ Hi I'm Aria! Welcome to my website :)
 
 * I'm currently living 6-year-old me's dream of being a "computerist."
 * My hobbies are reading/watching interesting things online, programming,
-  cooking, fitness, outdoorsy stuff, and photography.
+  cooking, fitness, outdoorsy stuff, teaching, and photography.
 * I currently work at Meta: I spent my first 3 years at Facebook on a startup-like
   product team doing full-stack development in Hack/JS, the next 3 years at
   WhatsApp on a small infrastructure/devtools team writing mostly cross-platform
@@ -27,32 +27,43 @@ You can find me on:
 * [LinkedIn](https://linkedin.com/in/ariafallah), which I don't take so seriously,
   but it is true that my real title at work is "Chief VP, Worse Engineering"
 * [Twitter](https://twitter.com/m0meni), where for now I just retweet things I
-  find interesting or funny. My ["tweets" are here](/thoughts/).
+  find interesting or funny. My "tweets" [are here](/thoughts/).
+
+Notable Blog Posts:
+* [Why Use Flow (2016)](https://www.aria.ai/blog/why-use-flow/)
+* [Storing Secrets Using the MacOS Keychain CLI](https://www.aria.ai/blog/storing-secrets-with-keychain/)
 
 Fun facts about me:
 * I sleep in a hammock every night.
 * I have driven across the entire USA east to west twice, and up and down both the
   east/west coasts.
 * If I wasn't a software engineer, I'd probably have tried to be a doctor of some
-  sort. I am very intrigued by the medical field, and, if AI steals my job, plan B
-  is to become a physical therapist.
+  sort. Medicine/helping people is very cool to me, and, if AI steals my job,
+  plan B is to become a physical therapist because becoming a doctor would take
+  too long.
+* I went [freediving in cenotes](https://cenotefreediving.com/) recently, and it's
+  probably the coolest thing I've ever done. I was able to go down about 23m pretty
+  comfortably after the course, and I plan to go back and try to improve.
 `);
 ---
 
 <Layout
+  class="home"
   activeTab="home"
   title="Aria's Home Page"
   description="Aria Fallah's Personal Website"
 >
   <Image class="profilepic" alt="Picture of Aria" src={ProfilePic} />
-  <article>
-    {AboutMe}
-  </article>
+  {AboutMe}
+  <style>
+    .profilepic {
+      float: right;
+      display: inline-block;
+    }
+  </style>
+  <style is:global>
+    ul {
+      margin-bottom: 12px;
+    }
+  </style>
 </Layout>
-
-<style>
-  .profilepic {
-    float: right;
-    display: inline-block;
-  }
-</style>
