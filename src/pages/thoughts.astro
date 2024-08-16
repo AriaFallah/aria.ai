@@ -33,24 +33,32 @@ const sortedThoughts = await Promise.all(
       );
     })
   }
-
-  <style>
-    .thoughts {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-    .thought-container {
-      align-items: flex-start;
-      display: flex;
-      gap: 12px;
-    }
-    .thought-date {
-      flex-shrink: 0;
-    }
-    .thought-content {
-      display: flex;
-      flex-direction: column;
-    }
-  </style>
 </Layout>
+
+<style>
+  .thoughts {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .thought-container {
+    align-items: flex-start;
+    display: flex;
+    gap: 12px;
+
+    @media (max-width: 640px) {
+      gap: 8px;
+      flex-direction: column;
+    }
+  }
+
+  .thought-date {
+    flex-shrink: 0;
+  }
+
+  .thought-content {
+    display: flex;
+    flex-direction: column;
+  }
+</style>
