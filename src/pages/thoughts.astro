@@ -22,7 +22,9 @@ const sortedThoughts = await Promise.all(
   <div class="header">I heard there's something called twitter for this...</div>
   {
     sortedThoughts.map((thought) => {
-      const date = thought.data.date.toISOString().split('T')[0];
+      const date = thought.data.date.toLocaleDateString('en-CA', {
+        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      });
       return (
         <div class="thought-container">
           <a id={date} href={`#${date}`} class="thought-date">

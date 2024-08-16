@@ -18,7 +18,7 @@ Well there is! Here's the gist of it:
 
 ```js
 // Get the input some way
-const input = document.getElementByID('username_input');
+const input = document.getElementById('username_input');
 
 function handleFocus() {
   input.style.fontSize = '16px';
@@ -70,7 +70,7 @@ everyone else except the apple elitists enjoy your tiny tiny text.
 
 JavaScript isn't even real in 2020 if you don't have `import React` at the top
 so we **must** turn this into a hook. Do you really think I use
-`document.getElementID` like some sort of savage? Behold
+`document.getElementById` like some sort of savage? Behold
 
 ```js
 function useIOSInputRef() {
