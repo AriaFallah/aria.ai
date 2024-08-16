@@ -36,7 +36,7 @@ const posts = await getCollection('blog')
         <PostHeader slug={post.slug} {...post.data} />
         <div>{post.excerpt}</div>
         <footer>
-          <a href={`/blog/${post.slug}`}>Keep reading</a>
+          <a href={`/blog/${post.slug}/`}>Keep reading</a>
         </footer>
       </section>
     ))

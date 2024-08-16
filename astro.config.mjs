@@ -1,10 +1,11 @@
 import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import markdownIntegration from '@astropub/md';
+import { visit } from 'unist-util-visit';
 
 export default defineConfig({
   markdown: {
-    remarkPlugins: [remarkExternalLinks],
+    remarkPlugins: [rewriteLinks],
     shikiConfig: {
       themes: {
         light: 'github-light',
@@ -20,25 +21,18 @@ export default defineConfig({
   },
 });
 
-function remarkExternalLinks() {
+function rewriteLinks() {
   return function (tree) {
-    for (let i = 0; i < tree.children.length; i++) {
-      const node = tree.children[i];
-      if (node.type === 'paragraph') {
-        for (let j = 0; j < node.children.length; j++) {
-          const child = node.children[j];
-          if (
-            child.type === 'link' &&
-            child.url.startsWith('http') &&
-            !child.url.includes('aria.ai')
-          ) {
-            child.data = child.data || {};
-            child.data.hProperties = child.data.hProperties || {};
-            child.data.hProperties.target = '_blank';
-            child.data.hProperties.rel = 'noreferrer';
-          }
-        }
+    visit(tree, 'link', (node) => {
+      const url = node.url;
+      if (url.startsWith('http') && !url.includes('aria.ai')) {
+        node.data = node.data || {};
+        node.data.hProperties = node.data.hProperties || {};
+        node.data.hProperties.target = '_blank';
+        node.data.hProperties.rel = 'noopener noreferrer';
+      } else if (!url.startsWith('#') && !url.endsWith('/')) {
+        node.url += '/';
       }
-    }
+    });
   };
 }

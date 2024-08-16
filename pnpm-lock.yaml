@@ -23,6 +23,9 @@ importers:
       sharp:
         specifier: ^0.33.4
         version: 0.33.4
+      unist-util-visit:
+        specifier: ^5.0.0
+        version: 5.0.0
 
 packages:
 

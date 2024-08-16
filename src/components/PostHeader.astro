@@ -11,7 +11,7 @@ const { title, description, date, slug } = Astro.props;
 
 <header>
   <h2>
-    <a href={`/blog/${slug}`}>{title}</a>
+    <a href={`/blog/${slug}/`}>{title}</a>
   </h2>
   <h4>{description}</h4>
   <p>{date.toDateString()}</p>
