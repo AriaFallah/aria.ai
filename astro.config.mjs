@@ -13,4 +13,8 @@ export default defineConfig({
   },
   integrations: [mdx(), markdownIntegration()],
   scopedStyleStrategy: 'class',
+  prefetch: {
+    defaultStrategy: 'viewport',
+    prefetchAll: true,
+  },
 });
