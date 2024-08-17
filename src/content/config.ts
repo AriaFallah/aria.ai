@@ -8,6 +8,7 @@ const blogSchema = z.object({
 
 const thoughtSchema = z.object({
   date: z.coerce.date(),
+  timezone: z.string(),
 });
 
 export const collections = {

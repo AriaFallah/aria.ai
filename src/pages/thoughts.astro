@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../components/Layout.astro';
-import { format } from 'date-fns';
+import { formatInTimeZone } from 'date-fns-tz';
 
 const thoughts = await getCollection('thoughts');
 const sortedThoughts = await Promise.all(
@@ -9,7 +9,16 @@ const sortedThoughts = await Promise.all(
     .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
     .map(async (thought) => ({
       ...thought,
-      formattedDate: format(new Date(thought.data.date), 'yyyy-MM-dd'),
+      date: formatInTimeZone(
+        thought.data.date,
+        thought.data.timezone,
+        'yyyy-MM-dd'
+      ),
+      time: formatInTimeZone(
+        thought.data.date,
+        thought.data.timezone,
+        'h:mm aa zzz'
+      ),
       Content: (await thought.render()).Content,
     }))
 );
@@ -23,14 +32,17 @@ const sortedThoughts = await Promise.all(
 >
   <div class="header">I heard there's something called twitter for this...</div>
   {
-    sortedThoughts.map((thought) => {
-      const date = thought.formattedDate;
+    sortedThoughts.map(({ date, time, Content }, i) => {
+      const thoughtNumber = String(sortedThoughts.length - i);
       return (
         <div class="thought-container">
-          <a id={date} href={`#${date}`} class="thought-date">
-            [{date}]
-          </a>
-          <article class="thought-content">{<thought.Content />}</article>
+          <div class="thought-date">
+            <a id={thoughtNumber} href={`#${thoughtNumber}`}>
+              [{date}]
+            </a>
+            <small>{time}</small>
+          </div>
+          <article class="thought-content">{<Content />}</article>
         </div>
       );
     })
@@ -56,6 +68,8 @@ const sortedThoughts = await Promise.all(
   }
 
   .thought-date {
+    display: flex;
+    flex-direction: column;
     flex-shrink: 0;
   }
 
