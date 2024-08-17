@@ -96,10 +96,6 @@ article {
   gap: 12px;
 }
 
-article p + ul {
-  margin-top: -12px;
-}
-
 ul {
   padding-inline-start: 24px;
 }

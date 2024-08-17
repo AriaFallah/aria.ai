@@ -6,7 +6,7 @@ import FavIcon from '../icons/favicon.ico';
 import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
-  activeTab: 'home' | 'blog' | 'thoughts';
+  activeTab: 'home' | 'blog' | 'thoughts' | 'links';
   title: string;
   description: string;
   class?: string;
@@ -57,6 +57,10 @@ const CURRENT_YEAR = new Date().getFullYear();
         <a
           class={`nav-link ${activeTab === 'thoughts' ? 'active' : ''}`}
           href="/thoughts/">Thoughts</a
+        >
+        <a
+          class={`nav-link ${activeTab === 'links' ? 'active' : ''}`}
+          href="/links/">Links</a
         >
       </nav>
 
