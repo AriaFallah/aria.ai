@@ -6,19 +6,21 @@ description: How I ended up sleeping in a hammock every night
 slug: i-sleep-in-a-hammock-every-night
 ---
 
-It was August 2022 and I had just spent the previous night sleeping in a crowded
-campground in Long Island. I had a tent, which was already more equipment than
-anyone living in an NYC apartment normally has, but I had little else besides my
-sleeping bag and a blanket to separate me from the hard ground overnight. I
-didn't sleep well, and my body ached. That discomfort wasn't the end of the
-world, but it planted the idea in my mind that there had to be something better.
+It was August 2022, and I had just spent the previous night sleeping in a
+crowded campground in Long Island. I had a tent, which was already more
+equipment than anyone living in an NYC apartment normally has, but I had little
+else besides my sleeping bag and a blanket to separate me from the hard ground
+overnight. I didn't sleep well, and my body ached. That discomfort wasn't the
+end of the world, but it planted the idea in my mind that there had to be
+something better.
 
-Sure I knew that I could buy some sort of pad to sleep on, but I wanted to do
-more with less. While researching, I stumbled on the idea of hammock camping. I
-loved the simplicity of it. You take a few minutes to suspend a piece of fabric
-between two trees and it magically supports you. Even though I understand how it
-works, it feels strange when you first sit in the hammock and the straps don't
-suddenly ride down the tree, sending you plummeting to the ground.
+Sure I knew the most straighforward thing was to buy some sort of pad to sleep
+on, but I wanted something different — something that allowed me to do more with
+less. While researching, I stumbled on the idea of hammock camping. I loved the
+simplicity of it. You take a few minutes to suspend a piece of fabric between
+two trees and it magically supports you. Even though I understand how it works,
+it feels strange when you first sit in the hammock and the straps don't suddenly
+ride down the tree, sending you plummeting to the ground.
 
 <!--more-->
 
