@@ -1,22 +1,24 @@
 ---
 date: 2024-08-18T17:20:26.151Z
 title: I Sleep in a Hammock Every Night
+cover: ../../images/hammocks/bedroom.jpg
 description: How I ended up sleeping in a hammock every night
 slug: i-sleep-in-a-hammock-every-night
 ---
 
-It was August 2022 and I had just gone camping in a crowded campsite in Long
-Island. I had a tent, which was already more equipment than anyone living in an
-NYC apartment normally has, but I had little else besides my sleeping bag and a
-blanket to separate me from the hard ground. Sleeping in that discomfort wasn't
-the end of the world, but it motivated me to explore more comfortable tent
-alternatives that didn't require me to buy/bring more gear like sleeping pads.
+It was August 2022 and I had just spent the previous night sleeping in a crowded
+campground in Long Island. I had a tent, which was already more equipment than
+anyone living in an NYC apartment normally has, but I had little else besides my
+sleeping bag and a blanket to separate me from the hard ground overnight. I
+didn't sleep well, and my body ached. That discomfort wasn't the end of the
+world, but it planted the idea in my mind that there had to be something better.
 
-While researching, I stumbled on the idea of hammock camping. I loved the
-simplicity of it. You take a few minutes to suspend a piece of fabric between
-two trees and it magically supports you. Even though I understand how it works,
-it feels strange when you first sit in the hammock and the straps don't suddenly
-ride down the tree, sending you plummeting to the ground.
+Sure I knew that I could buy some sort of pad to sleep on, but I wanted to do
+more with less. While researching, I stumbled on the idea of hammock camping. I
+loved the simplicity of it. You take a few minutes to suspend a piece of fabric
+between two trees and it magically supports you. Even though I understand how it
+works, it feels strange when you first sit in the hammock and the straps don't
+suddenly ride down the tree, sending you plummeting to the ground.
 
 <!--more-->
 
@@ -39,9 +41,15 @@ Mt Saint Helens and found a perfect spot to set up our camp and our hammocks. We
 slept in them relatively easily and naturally and the next morning we woke up
 feeling energized...really energized...weirdly energized. Who knows if it was
 the fresh air, the hammock, the darkness, or the surrounding beautiful nature,
-but **something** unique had happened. We replicated this same exact feeling in
-a campsite near the Olympics and another near Diablo Lake; it had happened again
-and again. I was convinced that it couldn't have been a fluke.
+but **something** unique had happened.
+
+![](../../images/hammocks/helens.jpg)
+
+We replicated this same exact feeling in a campsite near the Olympics and
+another near Diablo Lake; it had happened again and again. I was convinced that
+it couldn't have been a fluke.
+
+![](../../images/hammocks/diablo.jpg)
 
 After the trip, I could not stop thinking about how well I'd slept in the
 hammock. It took over my thoughts despite the fact that I'd invested as heavily
@@ -64,8 +72,9 @@ other tiny room in my apartment I was using as my office. The stand _barely_ fit
 with barely an inch of clearance on either side, but it worked out and actually
 looks really nice!
 
-After that, the rest is history, and I've been sleeping in the hammock ever
-since. Some takeaways:
+Now for the verdict: Did I recapture the magic I had found sleeping in the
+forests of Washington? **I really think so.** and I've been sleeping in the
+hammock ever since. Some takeaways:
 
 - The first thing people constantly ask is if my back hurts and the answer is
   no. First, it turns out you're supposed to sleep diagonally in a hammock,
@@ -76,9 +85,12 @@ since. Some takeaways:
   think that being sunken into a hammock would make it harder to leave than a
   bed, but I feel like it's something to overcome unlike the neutrality of a bed
   so I'm energized to fight my way to my feet.
+- It's a good example of how less can be more. I had the fancy big bed, and I
+  had the big room, but I was ultimately happier in the much cheaper and smaller
+  hammock setup. Moreover it's an example of not giving into sunk costs
 - A lot of the enjoyment of sleeping in the hammock is that it's uniquely my
   decision. It wasn't because anyone told me or suggested it to me. I sought it
-  out and made it happen. That brings me a lot of happiness.
+  out and made it happen. I love that and it brings me a lot of happiness.
 
 In the long term though...either I'm going to have to invent a comfortable way
 to get two people sleeping in the same hammock or accept that my hammock days

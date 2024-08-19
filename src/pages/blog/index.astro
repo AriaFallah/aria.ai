@@ -33,8 +33,8 @@ const posts = await getCollection('blog')
   {
     posts.map((post) => (
       <section class="article-preview">
-        <PostHeader slug={post.slug} {...post.data} />
-        <div>{post.excerpt}</div>
+        <PostHeader {...post.data} cover={undefined} slug={post.slug} />
+        <article>{post.excerpt}</article>
         <footer>
           <a href={`/blog/${post.slug}/`}>Keep reading</a>
         </footer>

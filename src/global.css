@@ -6,7 +6,8 @@
 }
 
 html {
-  font: 100%/1.45em 'Source Serif Pro', serif;
+  font: 16px 'Source Serif Pro', serif;
+  line-height: 1.4em;
   height: 100%;
 }
 
@@ -98,4 +99,15 @@ article {
 
 ul {
   padding-inline-start: 24px;
+}
+
+header img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+article img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
 }
