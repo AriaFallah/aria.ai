@@ -8,7 +8,15 @@ const posts = await getCollection('blog')
   .then((posts) =>
     Promise.all(
       posts.map(async (post) => {
-        const [excerpt] = post.body.split('<!--more-->');
+        let excerpt: string;
+        if (post.body.indexOf('{/* more */}') !== -1) {
+          [excerpt] = post.body.split('{/* more */}');
+        } else if (post.body.indexOf('<!--more-->') !== -1) {
+          [excerpt] = post.body.split('<!--more-->');
+        } else {
+          throw new Error('Blog post needs "more" comment');
+        }
+
         return {
           ...post,
           excerpt: await markdown(excerpt.trim()),

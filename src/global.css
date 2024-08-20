@@ -101,6 +101,10 @@ ul {
   padding-inline-start: 24px;
 }
 
+img {
+  height: auto;
+}
+
 header img {
   width: 100%;
   height: auto;

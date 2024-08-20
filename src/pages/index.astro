@@ -1,6 +1,5 @@
 ---
 import { Image } from 'astro:assets';
-import ProfilePic from '../images/profilepic.jpg';
 import Layout from '../components/Layout.astro';
 import { markdown } from '@astropub/md';
 
@@ -53,17 +52,25 @@ Fun facts about me:
   title="Aria's Home Page"
   description="Aria Fallah's Personal Website"
 >
-  <Image class="profilepic" alt="Picture of Aria" src={ProfilePic} />
+  <Image
+    class="profilepic"
+    alt="Picture of Aria"
+    src="https://pub-4c968c1e5299430eafe672b417232afa.r2.dev/profilepic.jpeg"
+    format="avif"
+    width={200}
+    inferSize
+  />
   {AboutMe}
-  <style>
-    .profilepic {
-      float: right;
-      display: inline-block;
-    }
-  </style>
-  <style is:global>
-    ul {
-      margin-bottom: 12px;
-    }
-  </style>
 </Layout>
+
+<style>
+  .profilepic {
+    float: right;
+    display: inline-block;
+  }
+</style>
+<style is:global>
+  ul {
+    margin-bottom: 12px;
+  }
+</style>

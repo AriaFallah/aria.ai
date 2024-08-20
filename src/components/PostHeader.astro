@@ -1,13 +1,12 @@
 ---
-import type { ImageMetadata } from 'astro';
-import { Image } from 'astro:assets';
+import BlogImage from '../components/BlogImage.astro';
 
 interface Props {
   title: string;
   description: string;
   date: Date;
   slug: string;
-  cover?: ImageMetadata;
+  cover?: string;
 }
 
 const { title, description, date, slug, cover = null } = Astro.props;
@@ -19,7 +18,7 @@ const { title, description, date, slug, cover = null } = Astro.props;
   </h2>
   <h4>{description}</h4>
   <p>{date.toDateString()}</p>
-  {cover != null && <Image alt="" src={cover} />}
+  {cover != null && <BlogImage alt="" src={cover} />}
 </header>
 
 <style>

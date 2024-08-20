@@ -1,0 +1,22 @@
+---
+import type { ComponentProps } from 'astro/types';
+import { Image } from 'astro:assets';
+
+type ImageProps = ComponentProps<typeof Image>;
+interface Props {
+  src: ImageProps['src'];
+  alt: ImageProps['alt'];
+}
+
+const props = Astro.props;
+---
+
+<Image
+  {...props}
+  widths={[800, 1600]}
+  sizes="(max-width: 360px) 800px, (max-width: 720px) 1600px"
+  format="avif"
+  quality={75}
+  width={1600}
+  height={1200}
+/>

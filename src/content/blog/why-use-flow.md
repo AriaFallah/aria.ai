@@ -7,9 +7,9 @@ slug: why-use-flow
 title: Why Use Flow?
 ---
 
-[Flow](https://flowtype.org) is a static type checker for JavaScript open
-sourced by Facebook. It helps you deal with many of the pain points of
-JavaScript and write better, easier to reason about code.
+[Flow](https://flow.org) is a static type checker for JavaScript open sourced by
+Facebook. It helps you deal with many of the pain points of JavaScript and write
+better, easier to reason about code.
 
 <!--more-->
 

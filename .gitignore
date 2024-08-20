@@ -7,3 +7,4 @@ dist
 stats.json
 build
 .DS_Store
+.netlify

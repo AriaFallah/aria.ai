@@ -2,7 +2,9 @@ import { defineConfig } from 'astro/config';
 import mdx from '@astrojs/mdx';
 import markdownIntegration from '@astropub/md';
 import { visit } from 'unist-util-visit';
+import netlify from '@astrojs/netlify';
 
+// https://astro.build/config
 export default defineConfig({
   markdown: {
     remarkPlugins: [rewriteLinks],
@@ -18,6 +20,9 @@ export default defineConfig({
   prefetch: {
     defaultStrategy: 'viewport',
     prefetchAll: true,
+  },
+  image: {
+    domains: ['pub-4c968c1e5299430eafe672b417232afa.r2.dev'],
   },
 });
 
