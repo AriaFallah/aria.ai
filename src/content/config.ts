@@ -8,6 +8,7 @@ export const collections = {
       description: z.string(),
       date: z.coerce.date(),
       cover: z.string().optional(),
+      timezone: z.string(),
     }),
   }),
   thoughts: defineCollection({

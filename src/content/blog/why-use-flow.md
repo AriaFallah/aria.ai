@@ -1,5 +1,6 @@
 ---
 date: 2016-09-13T18:00:00-05:00
+timezone: America/New_York
 description:
   An introduction to and explanation of the benefits of static typing in
   JavaScript

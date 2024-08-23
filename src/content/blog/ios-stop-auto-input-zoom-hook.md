@@ -1,5 +1,6 @@
 ---
 date: 2020-11-30T05:03:51.141Z
+timezone: America/Los_Angeles
 title: Stopping iOS input zoom with a handy React hook
 description: Have your small font size cake and eat it too
 slug: ios-stop-auto-input-zoom-hook

@@ -1,5 +1,6 @@
 ---
 date: 2024-08-23T01:18:38.163Z
+timezone: America/New_York
 title: Generosity In Software
 description: A culture of giving and the high returns of kindness
 slug: generosity-in-software

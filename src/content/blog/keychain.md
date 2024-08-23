@@ -1,5 +1,6 @@
 ---
 date: 2017-03-19T16:00:00-05:00
+timezone: America/New_York
 description: Using the keychain to remove plaintext secrets from your scripts
 slug: storing-secrets-with-keychain
 title: Storing Secrets Using the MacOS Keychain CLI

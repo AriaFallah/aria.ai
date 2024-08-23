@@ -1,5 +1,6 @@
 ---
 date: 2016-09-13T14:00:00-05:00
+timezone: America/New_York
 title: Hello World
 description: My first blog post
 slug: hello-world
