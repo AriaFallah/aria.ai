@@ -17,7 +17,7 @@ thoroughly.
 I basically copied everything he said to make
 [my own csv parser](https://github.com/AriaFallah/csv-parser), which I suppose I
 can write a very overdue blog post about later. But what I want to talk about
-here was how incredible it was that he put poured that amount of effort into
+here was how incredible it was that he poured that amount of effort into
 something that only one person would ever see. Even later, when I felt kinda bad
 for taking up his time and offered to pay for his advice, he was very kind and
 just asked me to donate to a cause I care for.
@@ -44,8 +44,9 @@ make changes
 and, I assume is being used by others for things I can't even imagine (lol for
 real because after writing this I discovered,
 [a tool for a Digimon game's files](https://github.com/SydMontague/DSCSTools),
-is using it). And even if other people never used it, it's been very personally
-influential as it seems I still can't shut up about it after all this time 😅.
+is using it). And even if none of the above things happened, it's been very
+personally meaningful, and I still can't shut up about it after all this time
+😅.
 
 Also, to that end of paying things forward, I figure that maybe those messages
 would be much more useful to the world had I not been afraid to publicly ask on
